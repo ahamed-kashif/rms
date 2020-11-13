@@ -26,12 +26,12 @@ class InvestorController extends Controller
 
             $title = 'Investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('libs.investor.index');
+            $breacrumbs['investors'] = route('investor.index');
 
             if ($request->has('featured')) {
                 $investor = $investor->where('is_featured', 1);
             }
-            return view('libs.investor.index')->with([
+            return view('investor.index')->with([
                 'title' => $title,
                 'breadcrumbs' => $breacrumbs,
                 'investor' => $investor
@@ -53,9 +53,9 @@ class InvestorController extends Controller
 
             $title = 'Create Investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investor'] = route('libs.investor.index');
-            $breacrumbs['create'] = route('libs.investor.create');
-            return view('libs.investor.create');
+            $breacrumbs['investor'] = route('investor.index');
+            $breacrumbs['create'] = route('investor.create');
+            return view('investor.create');
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
@@ -94,7 +94,7 @@ class InvestorController extends Controller
         try{
             $investor->save();
 
-            return redirect(route('libs.investor.index'))->with('success','successfully stored');
+            return redirect(route('investor.index'))->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -114,15 +114,15 @@ class InvestorController extends Controller
 
             $title = 'Show Investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('libs.investor.index');
-            $breacrumbs[$investor->name] = route('libs.investor.show', $investor->id);
+            $breacrumbs['investors'] = route('investor.index');
+            $breacrumbs[$investor->name] = route('investor.show', $investor->id);
 
             if(is_numeric($id)){
-                $investor = Contractor::find($id);
+                $investor = Investor::find($id);
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
-                return view('libs.investor.show')->with([
+                return view('investor.show')->with([
                     'investor' => $investor
                 ]);
             }else{
@@ -147,14 +147,14 @@ class InvestorController extends Controller
 
             $title = 'Edit Investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('libs.investor.index');
+            $breacrumbs['investors'] = route('investor.index');
 
             if(is_numeric($id)){
                 $investor = Investor::find($id);
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
-                return view('libs.investor.edit')->with([
+                return view('investor.edit')->with([
                     'investor' => $investor
                 ]);
             }else{
@@ -179,7 +179,7 @@ class InvestorController extends Controller
 
             $title = 'Update Investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('libs.investor.index');
+            $breacrumbs['investors'] = route('investor.index');
 
             if(is_numeric($id)){
                 $investor = investor::find($id);
@@ -209,7 +209,7 @@ class InvestorController extends Controller
                 try{
                     $investor->save();
 
-                    return redirect(route('libs.investor.index'))->with('success','successfully updated!');
+                    return redirect(route('investor.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
@@ -231,7 +231,7 @@ class InvestorController extends Controller
         if(auth()->user()->can('delete investor')){
             $title = 'Delete Investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('libs.investor.index');
+            $breacrumbs['investors'] = route('investor.index');
 
             if(is_numeric($id)){
                 $investor = Investor::find($id);
@@ -241,7 +241,7 @@ class InvestorController extends Controller
                 try{
 
                     $investor->delete();
-                    return redirect(route('libs.investor.index'))->with('success','successfully deleted!');
+                    return redirect(route('investor.index'))->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }
