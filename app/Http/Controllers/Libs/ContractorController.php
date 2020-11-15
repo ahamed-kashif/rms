@@ -26,12 +26,12 @@ class ContractorController extends Controller
 
             $title = 'Contractor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('libs.contractor.index');
+            $breacrumbs['contractors'] = route('contractor.index');
 
             if($request->has('featured')){
                 $contractor = $contractor->where('is_featured',1);
             }
-            return view('libs.contractor.index')->with([
+            return view('contractor.index')->with([
                 'title' => $title,
                 'breadcrumbs'=> $breacrumbs,
                 'contractor' => $contractor
@@ -54,9 +54,9 @@ class ContractorController extends Controller
 
             $title = 'Create Contractor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('libs.contractor.index');
-            $breacrumbs['create'] = route('libs.contractor.create');
-            return view('libs.contractor.create');
+            $breacrumbs['contractors'] = route('contractor.index');
+            $breacrumbs['create'] = route('contractor.create');
+            return view('contractor.create');
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
@@ -97,7 +97,7 @@ class ContractorController extends Controller
         try{
             $contractor->save();
 
-            return redirect(route('libs.contractor.index'))->with('success','successfully stored');
+            return redirect(route('contractor.index'))->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -117,15 +117,15 @@ class ContractorController extends Controller
 
             $title = 'Show Contractor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('libs.contractor.index');
-            $breacrumbs[$contractor->name] = route('libs.contractor.show', $contractor->id);
+            $breacrumbs['contractors'] = route('contractor.index');
+            $breacrumbs[$contractor->name] = route('contractor.show', $contractor->id);
 
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
                 if($contractor == null){
                     return redirect()->back()->with('error','contractor not exists!');
                 }
-                return view('libs.contractor.show')->with([
+                return view('contractor.show')->with([
                     'contractor' => $contractor
                 ]);
             }else{
@@ -150,14 +150,14 @@ class ContractorController extends Controller
 
             $title = 'Edit Contractor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('libs.contractor.index');
+            $breacrumbs['contractors'] = route('contractor.index');
 
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
                 if($contractor == null){
                     return redirect()->back()->with('error','contractor not exists!');
                 }
-                return view('libs.contractor.edit')->with([
+                return view('contractor.edit')->with([
                     'contractor' => $contractor
                 ]);
             }else{
@@ -182,7 +182,7 @@ class ContractorController extends Controller
 
             $title = 'Update Contractor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('libs.contractor.index');
+            $breacrumbs['contractors'] = route('contractor.index');
 
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
@@ -212,7 +212,7 @@ class ContractorController extends Controller
                 try{
                     $contractor->save();
 
-                    return redirect(route('libs.contractor.index'))->with('success','successfully updated!');
+                    return redirect(route('contractor.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
@@ -234,7 +234,7 @@ class ContractorController extends Controller
         if(auth()->user()->can('delete contractor')){
             $title = 'Delete Contractor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('libs.contractor.index');
+            $breacrumbs['contractors'] = route('contractor.index');
 
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
@@ -244,7 +244,7 @@ class ContractorController extends Controller
                 try{
 
                     $contractor->delete();
-                    return redirect(route('libs.contractor.index'))->with('success','successfully deleted!');
+                    return redirect(route('contractor.index'))->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }
