@@ -22,19 +22,17 @@ class ContractorController extends Controller
     public function index(Request $request)
     {
         if(auth()->user()->can('index contractor')){
-            $contractor = Contractor::active()->get();
+            $contractors = Contractor::active()->get();
 
             $title = 'Contractor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('contractor.index');
+            $breacrumbs['Contacts'] = "#";
+            $breacrumbs['Contractors'] = route('contractor.index');
 
-            if($request->has('featured')){
-                $contractor = $contractor->where('is_featured',1);
-            }
-            return view('contractor.index')->with([
+
+            return view('libs.contractor.index')->with([
                 'title' => $title,
                 'breadcrumbs'=> $breacrumbs,
-                'contractor' => $contractor
+                'contractors' => $contractors
             ]);
         }else{
             return redirect()->route('home')->with('error','unauthorized access!');
@@ -56,7 +54,7 @@ class ContractorController extends Controller
             $breacrumbs['libs'] = "#";
             $breacrumbs['contractors'] = route('contractor.index');
             $breacrumbs['create'] = route('contractor.create');
-            return view('contractor.create');
+            return view('libs.contractor.create');
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
@@ -97,7 +95,7 @@ class ContractorController extends Controller
         try{
             $contractor->save();
 
-            return redirect(route('contractor.index'))->with('success','successfully stored');
+            return redirect(route('libs.contractor.index'))->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -125,7 +123,7 @@ class ContractorController extends Controller
                 if($contractor == null){
                     return redirect()->back()->with('error','contractor not exists!');
                 }
-                return view('contractor.show')->with([
+                return view('libs.contractor.show')->with([
                     'contractor' => $contractor
                 ]);
             }else{
@@ -157,7 +155,7 @@ class ContractorController extends Controller
                 if($contractor == null){
                     return redirect()->back()->with('error','contractor not exists!');
                 }
-                return view('contractor.edit')->with([
+                return view('libs.contractor.edit')->with([
                     'contractor' => $contractor
                 ]);
             }else{
@@ -212,7 +210,7 @@ class ContractorController extends Controller
                 try{
                     $contractor->save();
 
-                    return redirect(route('contractor.index'))->with('success','successfully updated!');
+                    return redirect(route('libs.contractor.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
@@ -232,10 +230,6 @@ class ContractorController extends Controller
     public function destroy($id)
     {
         if(auth()->user()->can('delete contractor')){
-            $title = 'Delete Contractor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('contractor.index');
-
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
                 if($contractor == null){
@@ -244,7 +238,7 @@ class ContractorController extends Controller
                 try{
 
                     $contractor->delete();
-                    return redirect(route('contractor.index'))->with('success','successfully deleted!');
+                    return redirect()->route('contractor.index')->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }

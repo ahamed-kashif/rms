@@ -3,13 +3,8 @@
 <head>
 
     <meta charset="utf-8" />
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {{--    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />--}}
 {{--    <meta content="Themesbrand" name="author" />--}}
@@ -39,9 +34,9 @@
 <script src="{{asset('libs/metismenu/metisMenu.min.js')}}"></script>
 <script src="{{asset('libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{asset('libs/node-waves/waves.min.js')}}"></script>
-
-<script src="{{asset('js/skote.js')}}"></script>
-<script src="{{asset('js/app.js')}}"></script>
 @yield('js')
+<script src="{{asset('js/skote.js')}}"></script>
+{{--<script src="{{asset('js/app.js')}}"></script>--}}
+
 </body>
 </html>

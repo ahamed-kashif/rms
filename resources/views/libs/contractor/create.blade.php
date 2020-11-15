@@ -1,12 +1,12 @@
 @extends('layouts.page')
 @section('page-title')
-    Create Contractor
+    @include('components.page-title')
 @endsection
 
 
 @section('content')
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
     <form action="{{route('contractor.store')}}" method="post" class="w3-container">
         @csrf
