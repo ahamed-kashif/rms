@@ -13,13 +13,12 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
-
                     <!-- start page title -->
                     @yield('page-title')
                     <!-- end page title -->
+                    @include('inc.alert')
                     <div class="checkout-tabs">
                         <div class="row">
                             <div class="col-lg-12">
