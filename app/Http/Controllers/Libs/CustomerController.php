@@ -1,12 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Libs;
 
-use App\Models\Engineer;
+
+use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EngineerController extends Controller
+class CustomerController extends Controller
 {
     public function __construct()
     {
@@ -20,18 +20,18 @@ class EngineerController extends Controller
      */
     public function index(Request $request)
     {
-        if(auth()->user()->can('index engineer')){
-            $engineers = Engineer::all();
+        if(auth()->user()->can('index customer')){
+            $customers = Customer::all();
 
-            $title = 'Engineers';
+            $title = 'Customers';
             $breacrumbs['Contacts'] = "#";
-            $breacrumbs['Engineer'] = 'javaScript:void();';
+            $breacrumbs['Customer'] = 'javaScript:void();';
 
 
-            return view('libs.engineer.index')->with([
+            return view('libs.customer.index')->with([
                 'title' => $title,
                 'breadcrumbs'=> $breacrumbs,
-                'engineers' => $engineers
+                'customers' => $customers
             ]);
         }else{
             return redirect()->route('home')->with('error','unauthorized access!');
@@ -46,14 +46,14 @@ class EngineerController extends Controller
     public function create()
     {
 
-        if(auth()->user()->can('create engineer')){
-            $engineers = Engineer::all();
+        if(auth()->user()->can('create customer')){
+            $customer = Customer::all();
 
-            $title = 'Add Engineer';
+            $title = 'Add Customer';
             $breadcrumbs['contacts'] = "#";
-            $breadcrumbs['engineers'] = route('engineer.index');
+            $breadcrumbs['customers'] = route('customer.index');
             $breadcrumbs['add'] = 'javaScript:void();';
-            return view('libs.engineer.create')->with([
+            return view('libs.customer.create')->with([
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs
             ]);
@@ -75,23 +75,24 @@ class EngineerController extends Controller
         $request->validate([
             'name' => 'required|max:20',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:engineers',
-            'nid' => 'max:30|nullable'
+            'email' => 'email|unique:contractors',
+            'nid' => 'max:30|nullable',
+            'project_id' => 'unique:customers'
 
         ]);
 
-        $engineer = new Engineer();
+        $customer = new Customer();
 
-        $engineer->name = $request->input('name');
-        $engineer->phone_number = $request->input('phone_number');
-        $engineer->email = $request->input('email');
-        $engineer->nid = $request->input('nid');
-        $engineer->address = $request->input('address');
+        $customer->name = $request->input('name');
+        $customer->phone_number = $request->input('phone_number');
+        $customer->email = $request->input('email');
+        $customer->nid = $request->input('nid');
+        $customer->address = $request->input('address');
+        $customer->project_id = $request->input('project_id');
 
 
-        $engineer->is_active = $request->has('is_active');
         try{
-            $engineer->save();
+            $customer->save();
 
             return redirect()->back()->with('success','successfully stored');
         }catch (\Exception $e){
@@ -107,22 +108,22 @@ class EngineerController extends Controller
      */
     public function show($id)
     {
-        $engineer = Engineer::find($id);
+        $customer = Customer::find($id);
 
-        if(auth()->user()->can('show engineer')){
+        if(auth()->user()->can('show customer')){
 
-            $title = 'Show Engineer';
+            $title = 'Show Customer';
             $breadcrumbs['contact'] = "#";
-            $breadcrumbs['engineers'] = route('engineer.index');
-            $breadcrumbs[$engineer->name] = 'javaScript:void();';
+            $breadcrumbs['customers'] = route('customer.index');
+            $breadcrumbs[$customer->name] = 'javaScript:void();';
 
             if(is_numeric($id)){
-                $engineer = Engineer::find($id);
-                if($engineer == null){
-                    return redirect()->back()->with('error','Engineer not exists!');
+                $customer = Customer::find($id);
+                if($customer == null){
+                    return redirect()->back()->with('error','Customer not exists!');
                 }
-                return view('libs.engineer.show')->with([
-                    'engineer' => $engineer,
+                return view('libs.customer.show')->with([
+                    'customer' => $customer,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs
                 ]);
@@ -142,23 +143,23 @@ class EngineerController extends Controller
      */
     public function edit($id)
     {
-        $engineer = Engineer::find($id);
+        $customer = Customer::find($id);
 
-        if(auth()->user()->can('edit contractor')){
+        if(auth()->user()->can('edit customer')){
 
-            $title = 'Edit '.$engineer->name;
+            $title = 'Edit '.$customer->name;
             $breadcrumbs['contact'] = "#";
-            $breadcrumbs['engineers'] = route('engineer.index');
-            $breadcrumbs[$engineer->name] = route('engineer.show',$engineer->id);
+            $breadcrumbs['customers'] = route('customer.index');
+            $breadcrumbs[$customer->name] = route('customer.show',$customer->id);
             $breadcrumbs['edit'] = 'javaScript:void();';
 
             if(is_numeric($id)){
-                $engineer = Engineer::find($id);
-                if($engineer == null){
-                    return redirect()->back()->with('error','engineer not exists!');
+                $customer = Customer::find($id);
+                if($customer == null){
+                    return redirect()->back()->with('error','customer not exists!');
                 }
-                return view('libs.engineer.edit')->with([
-                    'engineer' => $engineer,
+                return view('libs.customer.edit')->with([
+                    'customer' => $customer,
                     'title' => $title,
                     'breadcrumbs' => $breadcrumbs
                 ]);
@@ -181,34 +182,35 @@ class EngineerController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request->all());
-        if(auth()->user()->can('update engineer')){
+        if(auth()->user()->can('update customer')){
 
-            $title = 'Update Engineer';
+            $title = 'Update Customer';
             $breadcrumbs['libs'] = "#";
-            $breadcrumbs['engineers'] = route('engineer.index');
+            $breadcrumbs['customers'] = route('customer.index');
 
             if(is_numeric($id)){
-                $engineer = Engineer::find($id);
-                if($engineer == null){
-                    return redirect()->back()->with('error','engineer not exists!');
+                $customer = Customer::find($id);
+                if($customer == null){
+                    return redirect()->back()->with('error','customer not exists!');
                 }
                 $request->validate([
                     'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
                     'email' => 'email',
-                    'nid' => 'max:30|nullable'
+                    'nid' => 'max:30|nullable',
+                    'project_id' => 'unique:customers'
 
                 ]);
 
-                $engineer->name = $request->input('name');
-                $engineer->phone_number = $request->input('phone_number');
-                $engineer->email = $request->input('email');
-                $engineer->nid = $request->input('nid');
-                $engineer->address = $request->input('address');
+                $customer->name = $request->input('name');
+                $customer->phone_number = $request->input('phone_number');
+                $customer->email = $request->input('email');
+                $customer->nid = $request->input('nid');
+                $customer->address = $request->input('address');
+                $customer->project_id = $request->input('project_id');
 
-                $engineer->is_active = $request->has('is_active');
                 try{
-                    $engineer->save();
+                    $customer->save();
 
                     return redirect()->back()->with('success','successfully updated!');
                 }catch (\Exception $e){
@@ -229,16 +231,16 @@ class EngineerController extends Controller
      */
     public function destroy($id)
     {
-        if(auth()->user()->can('delete engineer')){
+        if(auth()->user()->can('delete customer')){
             if(is_numeric($id)){
-                $engineer = Engineer::find($id);
-                if($engineer == null){
-                    return redirect()->back()->with('error','engineer not exists!');
+                $customer = Customer::find($id);
+                if($customer == null){
+                    return redirect()->back()->with('error','customer not exists!');
                 }
                 try{
 
-                    $engineer->delete();
-                    return redirect()->route('engineer.index')->with('success','successfully deleted!');
+                    $customer->delete();
+                    return redirect()->route('customer.index')->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }

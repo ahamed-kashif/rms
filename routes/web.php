@@ -26,6 +26,7 @@ Route::prefix('contacts')->group(function(){
     Route::resource('contractor','Libs\ContractorController');
     Route::resource('supplier','Libs\SupplierController');
     Route::resource('engineer','Libs\EngineerController');
+    Route::resource('customer','Libs\CustomerController');
     //TODO:write investors,suppliers and engineers routes down here
 
 });
