@@ -46,6 +46,15 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('contractor.index')}}" key="t-contractor">Contractors</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('supplier.index')}}" key="t-contractor">Suppliers</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('engineer.index')}}" key="t-contractor">Engineers</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('customer.index')}}" key="t-contractor">Customers</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
