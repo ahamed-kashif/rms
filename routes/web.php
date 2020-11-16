@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('libs')->group(function(){
+Route::prefix('contacts')->group(function(){
     //contractor route
     Route::resource('contractor','Libs\ContractorController');
 });
