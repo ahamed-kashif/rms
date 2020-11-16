@@ -13,13 +13,12 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
-
                     <!-- start page title -->
                     @yield('page-title')
                     <!-- end page title -->
+                    @include('inc.alert')
                     <div class="checkout-tabs">
                         <div class="row">
                             <div class="col-lg-12">
@@ -59,20 +58,20 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    <div class="right-bar">
-        <div data-simplebar class="h-100">
-            <div class="rightbar-title px-3 py-4">
-                <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                    <i class="mdi mdi-close noti-icon"></i>
-                </a>
-                <h5 class="m-0">Settings</h5>
-            </div>
+{{--    <div class="right-bar">--}}
+{{--        <div data-simplebar class="h-100">--}}
+{{--            <div class="rightbar-title px-3 py-4">--}}
+{{--                <a href="javascript:void(0);" class="right-bar-toggle float-right">--}}
+{{--                    <i class="mdi mdi-close noti-icon"></i>--}}
+{{--                </a>--}}
+{{--                <h5 class="m-0">Settings</h5>--}}
+{{--            </div>--}}
 
-            <!-- Settings -->
-            @include('partials.settings')
+{{--            <!-- Settings -->--}}
+{{--            @include('partials.settings')--}}
 
-        </div> <!-- end slimscroll-menu-->
-    </div>
+{{--        </div> <!-- end slimscroll-menu-->--}}
+{{--    </div>--}}
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
