@@ -45,6 +45,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('contractor.index')}}" key="t-contractor">Contractors</a></li>
+                        <li><a href="{{route('investor.index')}}" key="t-contractor">Investors</a></li>
                     </ul>
                 </li>
             </ul>

@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Investor;
+use App\Models\Investor;
 use Faker\Generator as Faker;
 
 $factory->define(Investor::class, function (Faker $faker) {

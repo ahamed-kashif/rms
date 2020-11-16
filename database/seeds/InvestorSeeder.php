@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Investor;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class InvestorSeeder extends Seeder
 {
@@ -21,6 +24,6 @@ class InvestorSeeder extends Seeder
         Permission::create(['name' => 'api_get investor']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
         Role::findByName('admin')->givePermissionTo(Permission::all());
-        factory(Contractor::class, 100)->create();
+        factory(Investor::class, 100)->create();
     }
 }

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Libs;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contractor;
 use App\Models\Investor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class InvestorController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -21,25 +21,24 @@ class InvestorController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->user()->can('index investor')) {
-            $investor = Investor::active()->get();
+        if(auth()->user()->can('index investor')){
+            $investor = Investor::all();
 
-            $title = 'Investor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('investor.index');
+            $title = 'investor';
+            $breacrumbs['Contacts'] = "#";
+            $breacrumbs['investor'] = 'javaScript:void();';
 
-            if ($request->has('featured')) {
-                $investor = $investor->where('is_featured', 1);
-            }
-            return view('investor.index')->with([
+
+            return view('libs.investor.index')->with([
                 'title' => $title,
-                'breadcrumbs' => $breacrumbs,
+                'breadcrumbs'=> $breacrumbs,
                 'investor' => $investor
             ]);
         }else{
             return redirect()->route('home')->with('error','unauthorized access!');
         }
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -51,14 +50,18 @@ class InvestorController extends Controller
         if(auth()->user()->can('create investor')){
             $investor = Investor::all();
 
-            $title = 'Create Investor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['investor'] = route('investor.index');
-            $breacrumbs['create'] = route('investor.create');
-            return view('investor.create');
+            $title = 'Add investor';
+            $breadcrumbs['contacts'] = "#";
+            $breadcrumbs['investor'] = route('investor.index');
+            $breadcrumbs['add'] = 'javaScript:void();';
+            return view('libs.investor.create')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs
+            ]);
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
+
     }
 
     /**
@@ -67,34 +70,29 @@ class InvestorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20|unique:contractors',
+            'name' => 'required|max:20',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:contractors',
-            'nid' => 'max:30'
+            'email' => 'email|unique:investors',
+            'nid' => 'max:30|nullable'
 
         ]);
 
         $investor = new Investor;
 
-        $investor->name = $request->name;
-        $investor->phone_number = $request->phone_number;
-        $investor->email = $request->email;
-        $investor->nid = $request->nid;
-        $investor->address = $request->address;
-
-        if($request->has('description')){
-            $investor->description = $request->description;
-        }
+        $investor->name = $request->input('name');
+        $investor->phone_number = $request->input('phone_number');
+        $investor->email = $request->input('email');
+        $investor->nid = $request->input('nid');
+        $investor->address = $request->input('address');
         $investor->is_active = $request->has('is_active');
-        $investor->is_featured = $request->has('is_featured');
-
         try{
             $investor->save();
 
-            return redirect(route('investor.index'))->with('success','successfully stored');
+            return redirect()->back()->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -103,7 +101,7 @@ class InvestorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Investor  $investor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -112,18 +110,20 @@ class InvestorController extends Controller
 
         if(auth()->user()->can('show investor')){
 
-            $title = 'Show Investor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('investor.index');
-            $breacrumbs[$investor->name] = route('investor.show', $investor->id);
+            $title = 'Show investor';
+            $breadcrumbs['contact'] = "#";
+            $breadcrumbs['investor'] = route('investor.index');
+            $breadcrumbs[$investor->name] = 'javaScript:void();';
 
             if(is_numeric($id)){
                 $investor = Investor::find($id);
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
-                return view('investor.show')->with([
-                    'investor' => $investor
+                return view('libs.investor.show')->with([
+                    'investor' => $investor,
+                    'title' => $title,
+                    'breadcrumbs'=> $breadcrumbs
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -136,7 +136,7 @@ class InvestorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Investor  $investor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -145,17 +145,21 @@ class InvestorController extends Controller
 
         if(auth()->user()->can('edit investor')){
 
-            $title = 'Edit Investor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('investor.index');
+            $title = 'Edit '.$investor->name;
+            $breadcrumbs['contact'] = "#";
+            $breadcrumbs['investor'] = route('investor.index');
+            $breadcrumbs[$investor->name] = route('investor.show',$investor->id);
+            $breadcrumbs['edit'] = 'javaScript:void();';
 
             if(is_numeric($id)){
                 $investor = Investor::find($id);
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
-                return view('investor.edit')->with([
-                    'investor' => $investor
+                return view('libs.investor.edit')->with([
+                    'investor' => $investor,
+                    'title' => $title,
+                    'breadcrumbs' => $breadcrumbs
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -170,46 +174,41 @@ class InvestorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Investor  $investor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         if(auth()->user()->can('update investor')){
 
-            $title = 'Update Investor';
+            $title = 'Update investor';
             $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('investor.index');
+            $breacrumbs['investor'] = route('investor.index');
 
             if(is_numeric($id)){
-                $investor = investor::find($id);
+                $investor = Investor::find($id);
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
                 $request->validate([
-                    'name' => 'required|max:20|unique:investors',
+                    'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email|unique:investors',
-                    'nid' => 'max:30'
+                    'email' => 'email',
+                    'nid' => 'max:30|nullable'
 
                 ]);
 
-                $investor->name = $request->name;
-                $investor->phone_number = $request->phone_number;
-                $investor->email = $request->email;
-                $investor->nid = $request->nid;
-                $investor->address = $request->address;
-
-                if($request->has('description')){
-                    $investor->description = $request->description;
-                }
+                $investor->name = $request->input('name');
+                $investor->phone_number = $request->input('phone_number');
+                $investor->email = $request->input('email');
+                $investor->nid = $request->input('nid');
+                $investor->address = $request->input('address');
                 $investor->is_active = $request->has('is_active');
-                $investor->is_featured = $request->has('is_featured');
-
                 try{
                     $investor->save();
 
-                    return redirect(route('investor.index'))->with('success','successfully updated!');
+                    return redirect()->back()->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
@@ -223,16 +222,12 @@ class InvestorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Investor  $investor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         if(auth()->user()->can('delete investor')){
-            $title = 'Delete Investor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['investors'] = route('investor.index');
-
             if(is_numeric($id)){
                 $investor = Investor::find($id);
                 if($investor == null){
@@ -241,7 +236,7 @@ class InvestorController extends Controller
                 try{
 
                     $investor->delete();
-                    return redirect(route('investor.index'))->with('success','successfully deleted!');
+                    return redirect()->route('investor.index')->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }
