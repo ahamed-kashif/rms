@@ -40,10 +40,6 @@
             <textarea class="form-control" id="address" name="address" placeholder="optional"></textarea>
         </div>
         <div class="form-group">
-            <label for="material">Material</label>
-            <textarea class="form-control" id="material" name="material" placeholder="material"></textarea>
-        </div>
-        <div class="form-group">
             <label>If you want make active this constructor for projects, <code>check the button below</code>.</label>
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="is_active" name="is_active">

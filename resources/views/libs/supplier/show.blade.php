@@ -5,19 +5,19 @@
 @section('content')
     <div class="row">
         <h3 class="card-title">
-            {{$suppliers->name}}
-            <span class="badge {{$suppliers->is_active ? 'badge-success' : 'badge-secondary'}}">
-                        {{$suppliers->is_active ? 'active' : 'inactive'}}
+            {{$supplier->name}}
+            <span class="badge {{$supplier->is_active ? 'badge-success' : 'badge-secondary'}}">
+                        {{$supplier->is_active ? 'active' : 'inactive'}}
             </span>
 
         </h3>
         <div class="ml-auto">
             <div>
                 <div class="btn-group mb-3" role="group">
-                    <form action="{{route('supplier.destroy',$suppliers->id)}}" method="post">
+                    <form action="{{route('supplier.destroy',$supplier->id)}}" method="post">
                         @csrf
                         @method('delete')
-                        <a class="btn btn-outline-primary w-xs" href="{{route('supplier.edit',$suppliers->id)}}">
+                        <a class="btn btn-outline-primary w-xs" href="{{route('supplier.edit',$supplier->id)}}">
                             <i class="fa fa-edit"></i>
                             <span class="text-alias"> Edit</span></a>
                         <button class="btn btn-danger w-xs" type="submit" onclick="return confirm('Are you sure you want to Delete?')">
@@ -35,22 +35,19 @@
         <div class="col-md-5 col-lg-5">
             <ol class="list-unstyled">
                 <li>
-                    <b>Name</b><p><a href="tel:{{$suppliers->name}}">{{$suppliers->name}}</a></p>
+                    <b>Name</b><p><a href="tel:{{$supplier->name}}">{{$supplier->name}}</a></p>
                 </li>
                 <li>
-                    <b>Contact Number</b><p><a href="tel:{{$suppliers->phone}}">{{$suppliers->phone}}</a></p>
+                    <b>Contact Number</b><p><a href="tel:{{$supplier->phone}}">{{$supplier->phone}}</a></p>
                 </li>
                 <li>
-                    <b>Email Address</b><p><a href="email:{{$suppliers->email}}">{{$suppliers->email}}</a></p>
+                    <b>Email Address</b><p><a href="email:{{$supplier->email}}">{{$supplier->email}}</a></p>
                 </li>
                 <li>
-                    <b>National ID (NID)</b><p>{{$suppliers->nid}}</p>
+                    <b>National ID (NID)</b><p>{{$supplier->nid}}</p>
                 </li>
                 <li>
-                    <b>Address</b><p>{{$suppliers->address}}</p>
-                </li>
-                <li>
-                    <b>Address</b><p>{{$suppliers->material}}</p>
+                    <b>Address</b><p>{{$supplier->address}}</p>
                 </li>
             </ol>
         </div>

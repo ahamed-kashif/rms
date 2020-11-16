@@ -56,23 +56,19 @@
                     <tr>
                         <th class="title">Active<small>(n)</small></th>
                         <th>Project</th>
-                        <th>Contracted for</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td><span class="badge badge-pill badge-success text-light font-size-15 p-2">active</span> </td>
                         <td>Demo</td>
-                        <td>Demo</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>nill</td>
-                        <td>nill</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>nill</td>
                         <td>nill</td>
                     </tr>
                     </tbody>
