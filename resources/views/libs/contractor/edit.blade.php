@@ -1,60 +1,54 @@
 @extends('layouts.page')
 @section('page-title')
-    Edit Investor
+    @include('components.page-title')
 @endsection
 @section('content')
-    <div class="card-body">
+    <h4 class="card-title mb-4">{{isset($contractor) ? $contractor->name : ''}}</h4>
 
-        <form action="{{route('investor.update',$investor->id)}}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{$investor->name}}">
+    <form action="{{route('contractor.update', $contractor->id)}}" method="post">
+        @csrf
+        @method('put')
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Name<code>*</code></label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Ex: Ashikur Rahman" required value="{{(isset($contractor)? $contractor->name : '')}}">
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" value="{{$investor->phone}}">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Email" name="email" value="{{$investor->email}}">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Address" name="address" value="{{$investor->address}}">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
+            <div class="col-md-6">
+                <div class="form-group">
                     <label for="nid">NID</label>
-                    <input type="text" class="form-control" id="nid" placeholder="NID" name="nid" value="{{$investor->nid}}">
+                    <input type="text" class="form-control" id="nid" name="nid" placeholder="optional" value="{{(isset($contractor)? $contractor->nid : '')}}">
                 </div>
             </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{$investor->is_active ? 'checked' : ''}}>
-                        <label class="form-check-label" for="is_active">
-                            Active
-                        </label>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone_number">Contact Number<code>*</code></label>
+                    <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Ex: 01xxxxxxxxxx" required value="{{(isset($contractor)? $contractor->phone_number : '')}}">
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">SUBMIT</button>
-
-        </form>
-    </div>
-
-
-
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="formrow-password-input">Email (optional)</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Ex: example@example.com (optional)" value="{{(isset($contractor)? $contractor->email : '')}}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" name="address" placeholder="optional">{{isset($contractor) ? $contractor->address : ''}}</textarea>
+        </div>
+        <div class="form-group">
+            <label>If you want make active this constructor for projects, <code>check the button below</code>.</label>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  name="is_active" id="is_active" {{(isset($contractor)? ($contractor->is_active ? 'checked' : '') : '')}}>
+                <label class="custom-control-label" for="is_active">Active</label>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Save</button>
+        </div>
+    </form>
 @endsection
