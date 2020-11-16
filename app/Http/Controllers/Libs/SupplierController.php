@@ -55,16 +55,12 @@ class SupplierController extends Controller
 
     public function store(Request $request){
 
-
-
         $request->validate([
             'name' => 'required',
             'phone' => 'unique:suppliers|required',
-            'email' => 'required|unique:suppliers',
-            'address' => 'required|max:25',
-            'nid' => 'required|max:25',
-            'material' => 'required'
-
+            'email' => 'nullable|email|unique:suppliers',
+            'address' => 'nullable|max:25',
+            'nid' => 'nullable|max:25',
         ]);
 
 
@@ -107,7 +103,7 @@ class SupplierController extends Controller
                     return redirect()->back()->with('error','Supplier not exists!');
                 }
                 return view('libs.supplier.show')->with([
-                    'suppliers' => $supplier,
+                    'supplier' => $supplier,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs
                 ]);
@@ -142,7 +138,7 @@ class SupplierController extends Controller
                 }
 
                 return view('libs.supplier.edit')->with([
-                    'suppliers' => $supplier,
+                    'supplier' => $supplier,
                     'title' => $title,
                     'breadcrumbs' => $breadcrumbs
                 ]);
@@ -171,15 +167,14 @@ class SupplierController extends Controller
 
                 }
 
-//                $request->validate([
-//                    'name' => 'required',
-//                    'phone' => 'unique:suppliers|required',
-//                    'email' => 'required|unique:suppliers',
-//                    'address' => 'required|max:25',
-//                    'nid' => 'required|max:25',
-//                    'material' => 'required'
-//
-//                ]);
+                $request->validate([
+                    'name' => 'required',
+                    'phone' => 'required',
+                    'email' => 'nullable|email',
+                    'address' => 'nullable|max:25',
+                    'nid' => 'nullable|max:25',
+
+                ]);
 
 
                 $supplier->name = $request->name;
