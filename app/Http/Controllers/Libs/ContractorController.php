@@ -22,11 +22,11 @@ class ContractorController extends Controller
     public function index(Request $request)
     {
         if(auth()->user()->can('index contractor')){
-            $contractors = Contractor::active()->get();
+            $contractors = Contractor::all();
 
             $title = 'Contractor';
             $breacrumbs['Contacts'] = "#";
-            $breacrumbs['Contractors'] = route('contractor.index');
+            $breacrumbs['Contractors'] = 'javaScript:void();';
 
 
             return view('libs.contractor.index')->with([
@@ -50,11 +50,14 @@ class ContractorController extends Controller
         if(auth()->user()->can('create contractor')){
             $contractor = Contractor::all();
 
-            $title = 'Create Contractor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('contractor.index');
-            $breacrumbs['create'] = route('contractor.create');
-            return view('libs.contractor.create');
+            $title = 'Add Contractor';
+            $breadcrumbs['contacts'] = "#";
+            $breadcrumbs['contractors'] = route('contractor.index');
+            $breadcrumbs['add'] = 'javaScript:void();';
+            return view('libs.contractor.create')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs
+            ]);
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
@@ -71,31 +74,29 @@ class ContractorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20|unique:contractors',
+            'name' => 'required|max:20',
             'phone_number' => 'required|max:20',
             'email' => 'email|unique:contractors',
-            'nid' => 'max:30'
+            'nid' => 'max:30|nullable'
 
         ]);
 
         $contractor = new Contractor;
 
-        $contractor->name = $request->name;
-        $contractor->phone_number = $request->phone_number;
-        $contractor->email = $request->email;
-        $contractor->nid = $request->nid;
-        $contractor->address = $request->address;
+        $contractor->name = $request->input('name');
+        $contractor->phone_number = $request->input('phone_number');
+        $contractor->email = $request->input('email');
+        $contractor->nid = $request->input('nid');
+        $contractor->address = $request->input('address');
 
         if($request->has('description')){
             $contractor->description = $request->description;
         }
         $contractor->is_active = $request->has('is_active');
-        $contractor->is_featured = $request->has('is_featured');
-
         try{
             $contractor->save();
 
-            return redirect(route('libs.contractor.index'))->with('success','successfully stored');
+            return redirect()->back()->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -114,9 +115,9 @@ class ContractorController extends Controller
         if(auth()->user()->can('show contractor')){
 
             $title = 'Show Contractor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('contractor.index');
-            $breacrumbs[$contractor->name] = route('contractor.show', $contractor->id);
+            $breadcrumbs['contact'] = "#";
+            $breadcrumbs['contractors'] = route('contractor.index');
+            $breadcrumbs[$contractor->name] = 'javaScript:void();';
 
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
@@ -124,7 +125,9 @@ class ContractorController extends Controller
                     return redirect()->back()->with('error','contractor not exists!');
                 }
                 return view('libs.contractor.show')->with([
-                    'contractor' => $contractor
+                    'contractor' => $contractor,
+                    'title' => $title,
+                    'breadcrumbs'=> $breadcrumbs
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -146,9 +149,11 @@ class ContractorController extends Controller
 
         if(auth()->user()->can('edit contractor')){
 
-            $title = 'Edit Contractor';
-            $breacrumbs['libs'] = "#";
-            $breacrumbs['contractors'] = route('contractor.index');
+            $title = 'Edit '.$contractor->name;
+            $breadcrumbs['contact'] = "#";
+            $breadcrumbs['contractors'] = route('contractor.index');
+            $breadcrumbs[$contractor->name] = route('contractor.show',$contractor->id);
+            $breadcrumbs['edit'] = 'javaScript:void();';
 
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
@@ -156,7 +161,9 @@ class ContractorController extends Controller
                     return redirect()->back()->with('error','contractor not exists!');
                 }
                 return view('libs.contractor.edit')->with([
-                    'contractor' => $contractor
+                    'contractor' => $contractor,
+                    'title' => $title,
+                    'breadcrumbs' => $breadcrumbs
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -176,6 +183,7 @@ class ContractorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         if(auth()->user()->can('update contractor')){
 
             $title = 'Update Contractor';
@@ -188,29 +196,24 @@ class ContractorController extends Controller
                     return redirect()->back()->with('error','contractor not exists!');
                 }
                 $request->validate([
-                    'name' => 'required|max:20|unique:contractors',
+                    'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email|unique:contractors',
-                    'nid' => 'max:30'
+                    'email' => 'email',
+                    'nid' => 'max:30|nullable'
 
                 ]);
 
-                $contractor->name = $request->name;
-                $contractor->phone_number = $request->phone_number;
-                $contractor->email = $request->email;
-                $contractor->nid = $request->nid;
-                $contractor->address = $request->address;
+                $contractor->name = $request->input('name');
+                $contractor->phone_number = $request->input('phone_number');
+                $contractor->email = $request->input('email');
+                $contractor->nid = $request->input('nid');
+                $contractor->address = $request->input('address');
 
-                if($request->has('description')){
-                    $contractor->description = $request->description;
-                }
                 $contractor->is_active = $request->has('is_active');
-                $contractor->is_featured = $request->has('is_featured');
-
                 try{
                     $contractor->save();
 
-                    return redirect(route('libs.contractor.index'))->with('success','successfully updated!');
+                    return redirect()->back()->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
