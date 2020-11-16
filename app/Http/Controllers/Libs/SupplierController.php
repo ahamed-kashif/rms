@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Libs;
+
+use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,8 +22,9 @@ class SupplierController extends Controller
             $supplier = Supplier::all();
             $title = 'Supplier List';
             $breadcrumbs['contacts'] = '#';
-            $breadcrumbs['supplier'] = route('supplier.index');
-            return view('supplier.index')->with([
+            $breadcrumbs['supplier'] = 'javaScript:void();';
+
+            return view('libs.supplier.index')->with([
                 'suppliers' => $supplier,
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs
@@ -35,8 +38,14 @@ class SupplierController extends Controller
     public function create()
     {
         if(auth()->user()->can('create supplier')){
-
-            return view('supplier.create');
+            $title = 'Add Supplier';
+            $breadcrumbs['contacts'] = "#";
+            $breadcrumbs['suppliers'] = route('supplier.index');
+            $breadcrumbs['add'] = 'javaScript:void();';
+            return view('libs.supplier.create')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs
+            ]);
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
@@ -82,14 +91,25 @@ class SupplierController extends Controller
 
     public function show($id)
     {
+
+        $supplier = Supplier::find($id);
+
         if(auth()->user()->can('show supplier')){
+
+            $title = 'Show Supplier';
+            $breadcrumbs['contact'] = "#";
+            $breadcrumbs['suppliers'] = route('supplier.index');
+            $breadcrumbs[$supplier->name] = 'javaScript:void();';
+
             if(is_numeric($id)){
                 $supplier = Supplier::find($id);
                 if($supplier == null){
                     return redirect()->back()->with('error','Supplier not exists!');
                 }
-                return view('supplier.show')->with([
-                    'suppliers' => $supplier
+                return view('libs.supplier.show')->with([
+                    'suppliers' => $supplier,
+                    'title' => $title,
+                    'breadcrumbs'=> $breadcrumbs
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -97,17 +117,34 @@ class SupplierController extends Controller
         }
         return redirect('home')->with('error','Unauthorized Access!');
     }
+
+
     public function edit($id)
     {
+
+        $supplier = Supplier::find($id);
+
         if(auth()->user()->can('edit supplier')){
+
+            $title = 'Edit '.$supplier->name;
+            $breadcrumbs['contact'] = "#";
+            $breadcrumbs['suppliers'] = route('supplier.index');
+            $breadcrumbs[$supplier->name] = route('supplier.show',$supplier->id);
+            $breadcrumbs['edit'] = 'javaScript:void();';
+
+
+
+
             if(is_numeric($id)){
                 $supplier = Supplier::find($id);
                 if($supplier == null){
                     return redirect()->back()->with('error','Supplier not exists!');
                 }
 
-                return view('supplier.edit')->with([
-                    'suppliers' => $supplier
+                return view('libs.supplier.edit')->with([
+                    'suppliers' => $supplier,
+                    'title' => $title,
+                    'breadcrumbs' => $breadcrumbs
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -120,6 +157,11 @@ class SupplierController extends Controller
     {
 
         if(auth()->user()->can('update supplier')){
+
+            $title = 'Update Supplier';
+            $breadcrumbs['libs'] = "#";
+            $breadcrumbs['suppliers'] = route('supplier.index');
+
             if(is_numeric($id)){
                 $supplier = Supplier::find($id);
 
@@ -150,7 +192,7 @@ class SupplierController extends Controller
 
                 try{
                     $supplier->save();
-                    return redirect(route('supplier.index'))->with('success','successfully updated!');
+                    return redirect()->back()->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
