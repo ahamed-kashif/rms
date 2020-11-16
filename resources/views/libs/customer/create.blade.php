@@ -39,11 +39,6 @@
             <label for="address">Address</label>
             <textarea class="form-control" id="address" name="address" placeholder="optional"></textarea>
         </div>
-        <div class="form-group">
-            <label for="project_id">Project ID</label>
-            <textarea class="form-control" id="project_id" name="project_id" placeholder="optional"></textarea>
-        </div>
-
         <div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Save</button>
         </div>

@@ -27,7 +27,6 @@
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Project_ID</th>
             <th>Action</th>
         </tr>
 
@@ -38,7 +37,6 @@
                 <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->name}}</a></td>
                 <td>{{$customer->phone_number}}</td>
                 <td>{{$customer->email}}</td>
-                <td>{{$customer->project_id}}</td>
                 <td>
                     <div class="dropdown align-content-center">
                         <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>

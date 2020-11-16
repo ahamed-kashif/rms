@@ -20,7 +20,6 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('nid')->nullable();
             $table->string('address')->nullable();
-            $table->string('project_id')->nullable();
             $table->timestamps();
         });
     }

@@ -12,6 +12,5 @@ $factory->define(Customer::class, function (Faker $faker) {
         'email' => $faker->email,
         'nid' => $faker->uuid,
         'address' => $faker->address,
-        'address' => $faker->uuid,
     ];
 });

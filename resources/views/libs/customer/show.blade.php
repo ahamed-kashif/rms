@@ -25,18 +25,6 @@
 
                 </div>
             </div>
-            {{--            <div class="btn btn-group-sm">--}}
-            {{--                <a class="btn btn-outline-primary" href="{{route('contractor.edit',$contractor->id)}}"><i class="fa fa-edit"></i><span class="text-alias"> Edit</span></a>--}}
-            {{--                <form action="{{route('contractor.destroy',$contractor->id)}}" method="post">--}}
-            {{--                    @csrf--}}
-            {{--                    @method('delete')--}}
-            {{--                    <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Are you sure you want to Delete?')">--}}
-            {{--                        <i class="fas fa-trash-alt"></i>--}}
-            {{--                        <span class="text-alias"> Delete</span>--}}
-            {{--                    </button>--}}
-            {{--                </form>--}}
-
-            {{--            </div>--}}
         </div>
     </div>
     <hr>
@@ -55,9 +43,6 @@
                 <li>
                     <b>Address</b><p>{{$customer->address}}</p>
                 </li>
-                <li>
-                    <b>Project_ID</b><p>{{$customer->project_id}}</p>
-                </li>
             </ol>
         </div>
         <div class="col-md-7 col-lg-7 border-pink">
@@ -68,7 +53,7 @@
                     <tr>
                         <th class="title">Active<small>(n)</small></th>
                         <th>Project</th>
-                        <th>Contracted for</th>
+                        <th>Product</th>
                     </tr>
                     </thead>
                     <tbody>
