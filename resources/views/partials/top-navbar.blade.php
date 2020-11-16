@@ -44,15 +44,15 @@
                 </button>
             </div>
 
-            @include('inc.notification')
+{{--            @include('inc.notification')--}}
 
             @include('inc.profile-tab')
 
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="bx bx-cog bx-spin"></i>
-                </button>
-            </div>
+{{--            <div class="dropdown d-inline-block">--}}
+{{--                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">--}}
+{{--                    <i class="bx bx-cog bx-spin"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
         </div>
     </div>
