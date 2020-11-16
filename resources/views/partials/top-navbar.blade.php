@@ -14,10 +14,10 @@
 
                 <a href="/" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{{asset('images/logo-light.svg')}}" alt="" height="22">
+                                    <img src="{{asset('images/fsrelbd1.png')}}" alt="" height="22">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('images/logo-light.png')}}" alt="" height="19">
+                                    <img src="{{asset('images/fsrelbd1.png')}}" alt="" height="19">
                                 </span>
                 </a>
             </div>
@@ -44,15 +44,15 @@
                 </button>
             </div>
 
-            @include('inc.notification')
+{{--            @include('inc.notification')--}}
 
             @include('inc.profile-tab')
 
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="bx bx-cog bx-spin"></i>
-                </button>
-            </div>
+{{--            <div class="dropdown d-inline-block">--}}
+{{--                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">--}}
+{{--                    <i class="bx bx-cog bx-spin"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
         </div>
     </div>

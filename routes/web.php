@@ -21,7 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('supplier','SupplierController');
+Route::prefix('contacts')->group(function(){
+    //contractor route
+    Route::resource('contractor','Libs\ContractorController');
+    //TODO:write investors,suppliers and engineers routes down here
+});
