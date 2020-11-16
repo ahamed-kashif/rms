@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @section('page-title')
-Index
+    @include('components.page-title')
 @endsection
 @section('content')
     <a href="{{route('supplier.create')}}">Create</a>

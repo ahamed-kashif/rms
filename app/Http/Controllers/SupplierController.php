@@ -18,8 +18,13 @@ class SupplierController extends Controller
     {
         if (auth()->user()->can('index supplier')) {
             $supplier = Supplier::all();
+            $title = 'Supplier List';
+            $breadcrumbs['contacts'] = '#';
+            $breadcrumbs['supplier'] = route('supplier.index');
             return view('supplier.index')->with([
-                'suppliers' => $supplier
+                'suppliers' => $supplier,
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs
             ]);
         }else{
             return redirect('home')->with('error','Unauthorized Access');
