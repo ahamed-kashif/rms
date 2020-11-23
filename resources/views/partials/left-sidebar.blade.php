@@ -30,6 +30,15 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-customize"></i>
+                        <span key="t-projects">Project Resources</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('material.index')}}" key="t-p-grid">Materials</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-receipt"></i>
                         <span key="t-invoices">Invoices</span>
                     </a>
