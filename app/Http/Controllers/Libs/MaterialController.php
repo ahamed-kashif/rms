@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Libs;
 use App\Http\Controllers\Controller;
 use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MaterialController extends Controller
 {
@@ -23,11 +24,12 @@ class MaterialController extends Controller
         if(auth()->user()->can('index material')){
             $materials  = Material::all();
             $title = 'Material';
-            $breadcrumbs['materials'] = route('material.index');
+            $breadcrumbs['project resources'] = 'javaScript:void;';
+            $breadcrumbs['materials'] = 'javaScript:void;';
             return view('libs.material.index')->with([
                 'materials' => $materials,
                 'title' => $title,
-                'breadcrumbs'
+                'breadcrumbs' => $breadcrumbs
             ]);
         }
         return redirect()->route('home')->with('error','Unauthorized Access!');
@@ -41,6 +43,7 @@ class MaterialController extends Controller
     public function create()
     {
         $title = 'New Material';
+        $breadcrumbs['project resources'] = 'javaScript:void;';
         $breadcrumbs['materials'] = route('material.index');
         $breadcrumbs['new material'] = 'javaScript:void();';
         if(auth()->user()->can('create material')){
@@ -90,6 +93,7 @@ class MaterialController extends Controller
     {
         $material = Material::find($id);
         $title = $material->title;
+        $breadcrumbs['project resources'] = 'javaScript:void;';
         $breadcrumbs['materials'] = route('material.index');
         $breadcrumbs[$material->title] = 'javaScript:void();';
         $breadcrumbs['edit'] = 'javaScript:void();';
@@ -131,7 +135,7 @@ class MaterialController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function destroy($id)
     {
