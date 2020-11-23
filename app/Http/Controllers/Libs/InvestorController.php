@@ -25,13 +25,13 @@ class InvestorController extends Controller
             $investor = Investor::all();
 
             $title = 'investor';
-            $breacrumbs['Contacts'] = "#";
-            $breacrumbs['investor'] = 'javaScript:void();';
+            $breadcrumbs['Contacts'] = "#";
+            $breadcrumbs['investor'] = 'javaScript:void();';
 
 
             return view('libs.investor.index')->with([
                 'title' => $title,
-                'breadcrumbs'=> $breacrumbs,
+                'breadcrumbs'=> $breadcrumbs,
                 'investor' => $investor
             ]);
         }else{
