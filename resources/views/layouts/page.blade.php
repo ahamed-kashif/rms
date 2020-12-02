@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css')
     @yield('page-css')
+    @stack('custom-css')
 @endsection
 @section('body')
     <!-- Begin page -->
@@ -41,7 +42,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © maroon.lab.
+                            <script>document.write(new Date().getFullYear())</script> © FSREL.
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-right d-none d-sm-block">
@@ -79,4 +80,5 @@
 @endsection
 @section('js')
     @yield('page-js')
+    @stack('custom-js')
 @endsection

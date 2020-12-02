@@ -33,3 +33,7 @@ Route::prefix('contacts')->group(function(){
 Route::prefix('project-resource')->group(function (){
     Route::resource('material', 'Libs\MaterialController');
 });
+Route::resource('project','ProjectController');
+Route::prefix('ajax')->group(function(){
+    Route::put('update-project-status/{id}','AjaxController@update_project_status')->name('ajax.update.project.status');
+});

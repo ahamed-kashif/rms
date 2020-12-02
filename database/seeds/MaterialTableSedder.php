@@ -23,6 +23,6 @@ class MaterialTableSedder extends Seeder
         Permission::create(['name' => 'api_get material']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
         Role::findByName('admin')->givePermissionTo(Permission::all());
-        factory(Material::class, 100)->create();
+        factory(Material::class, 10)->create();
     }
 }
