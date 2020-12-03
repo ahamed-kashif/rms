@@ -1,9 +1,9 @@
-<form action="{{route('ajax.update.project.status',$project->id)}}" method="post" id="update_status">
+<form action="{{route('ajax.update.project.status',$project->id)}}" method="post" id="update_status" class="pl-2">
     @csrf
     @method('PUT')
     <label for="project_status">Update Project Status</label>
     <div class="row">
-        <div class="col-9">
+        <div class="col-8">
             <div class="form-group">
                 <select id="project_status" class="form-control mb-3">
                     <option value="pending" {{isset($project) && $project->status == 'pending'? 'checked' : ''}}>Pending</option>
@@ -14,8 +14,11 @@
                 </select>
             </div>
         </div>
-        <div class="col-3">
-            <a href="javascript:void(0)" class="btn btn-primary status">update</a>
+        <div class="col-4">
+            <div class="row">
+                <a href="javascript:void(0)" class="mb-1 btn btn-sm btn-primary waves-effect btn-label waves-light status py-2"><i class="mdi mdi-update label-icon"></i> update</a>
+{{--                <a href="javascript:void(0)" class="btn btn-primary status">update</a>--}}
+            </div>
         </div>
     </div>
 </form>

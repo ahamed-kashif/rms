@@ -37,3 +37,8 @@ Route::resource('project','ProjectController');
 Route::prefix('ajax')->group(function(){
     Route::put('update-project-status/{id}','AjaxController@update_project_status')->name('ajax.update.project.status');
 });
+Route::prefix('project/{id}/resource')->group(function (){
+    Route::get('upload','ResourceController@upload')->middleware('auth')->name('resource.create');
+    Route::post('upload','ResourceController@update')->name('resource.update');
+    Route::get('download/{uuid}','ResourceController@download')->middleware('auth')->name('resource.download');
+});

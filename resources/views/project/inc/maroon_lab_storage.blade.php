@@ -1,132 +1,41 @@
 <div class="table-responsive">
     <table class="table table-nowrap table-centered table-hover mb-0 paginatable">
         <tbody>
-        <tr class="item">
+        @if($project->getMedia()->count() > 0)
+            @foreach($project->getMedia() as $media)
+            <tr class="item">
+                <td style="width: 45px;">
+                    <div class="avatar-sm">
+                        <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
+                            <i class="bx bxs-file-doc"></i>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <h5 class="font-size-14 mb-1"><a href="javascript:void(0)" class="text-dark">{{$media->name}}</a></h5>
+                    <small>Size : 3.25 MB</small>
+                </td>
+                <td>
+                    <div class="text-center">
+                        <a href="{{route('resource.download',['id' => $project->id, 'uuid' => $media->uuid])}}" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        @else
+        <tr>
             <td style="width: 45px;">
                 <div class="avatar-sm">
                     <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
+                        <i class="mdi mdi-delete-empty"></i>
                     </span>
                 </div>
             </td>
             <td>
-                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">Skote Landing.Zip</a></h5>
-                <small>Size : 3.25 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
+                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{$project->name}}'s drive is Empty!</a></h5>
             </td>
         </tr>
-        <tr class="item">
-            <td>
-                <div class="avatar-sm">
-                    <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">Skote Admin.Zip</a></h5>
-                <small>Size : 3.15 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr class="item">
-            <td>
-                <div class="avatar-sm">
-                    <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">Skote Logo.Zip</a></h5>
-                <small>Size : 2.02 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr class="item">
-            <td>
-                <div class="avatar-sm">
-                    <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <h5 class="font-size-14"><a href="#" class="text-dark">Veltrix admin.Zip</a></h5>
-                <small>Size : 2.25 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr class="item">
-            <td>
-                <div class="avatar-sm">
-                    <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <h5 class="font-size-14"><a href="#" class="text-dark">Veltrix admin.Zip</a></h5>
-                <small>Size : 2.25 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr class="item">
-            <td>
-                <div class="avatar-sm">
-                    <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <h5 class="font-size-14"><a href="#" class="text-dark">Veltrix admin.Zip</a></h5>
-                <small>Size : 2.25 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr class="item">
-            <td>
-                <div class="avatar-sm">
-                    <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
-                        <i class="bx bxs-file-doc"></i>
-                    </span>
-                </div>
-            </td>
-            <td>
-                <h5 class="font-size-14"><a href="#" class="text-dark">Veltrix admin.Zip</a></h5>
-                <small>Size : 2.25 MB</small>
-            </td>
-            <td>
-                <div class="text-center">
-                    <a href="#" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
-                </div>
-            </td>
-        </tr>
+        @endif
         </tbody>
     </table>
 </div>
