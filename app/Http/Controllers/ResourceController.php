@@ -24,7 +24,8 @@ class ResourceController extends Controller
             return view('project_resource.index')->with([
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs,
-                'medias' => $medias
+                'medias' => $medias,
+                'project' => $project
             ]);
         }
         return redirect()->route('home')->with('error', 'Unauthorized Access!');
@@ -50,22 +51,6 @@ class ResourceController extends Controller
     }
 
 
-
-    public function update(Request $request, $id)
-    {
-        $project = Project::find($id);
-
-        $project->addMultipleMediaFromRequest(['file'])
-            ->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection();
-            });
-
-        return ['data'=>'success'];
-    }
-
-
-
-
     public function download($id,$uuid)
     {
         $media = Media::findByUuid($uuid);
@@ -73,17 +58,25 @@ class ResourceController extends Controller
     }
 
 
-
-
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function destroy($id)
+    public function destroy($id,$uuid)
     {
-        //
+        $user = Auth::user();
+        if($user->can('update project')){
+            $media = Media::findByUuid($uuid);
+            try{
+                $media->delete();
+                return redirect()->back()->with('success','File has been deleted!');
+            }catch (\Exception $e){
+                return redirect()->back()->withErrors($e->getMessage());
+            }
+        }else{
+            return redirect()->route('home')->with('error','Unauthorized Access!');
+        }
     }
 }

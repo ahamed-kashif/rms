@@ -8,10 +8,6 @@ use App\Models\Project;
 
 class AjaxController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
 
     public function update_project_status($id, Request $request){
         $project = Project::find($id);
@@ -31,8 +27,51 @@ class AjaxController extends Controller
             }
         }else{
             $response['code'] = 401;
-            $response['data'] = $project;
-            $response['message'] = 'Unauthorized Acces!';
+            $response['data'] = null;
+            $response['message'] = 'Unauthorized Access!';
+        }
+        return $response;
+    }
+    public function upload_file_to_server(Request $request, $id)
+    {
+
+        $project = Project::find($id);
+        try{
+            $project->addMultipleMediaFromRequest(['file'])
+                ->each(function ($fileAdder) use ($project) {
+                    $fileAdder->toMediaCollection();
+                });
+            $media = $project->getMedia();
+            $response['code'] = 200;
+            $response['data'] = $media;
+            $response['message'] = 'successfully uploaded!';
+        }catch (\Exception $e){
+            $response['code'] = $e->getCode();
+            $response['data'] = null;
+            $response['message'] = $e->getMessage();
+        }
+
+       return $response;
+    }
+    public function delete_project_resource_by_name(Request $request, $id){
+        $media = Project::find($id)->getMediaByName($request->input('file'));
+        $user = Auth::user();
+        $response = [];
+        if($user->can('update project')){
+            try{
+                $media->delete();
+                $response['code'] = 200;
+                $response['data'] = $media;
+                $response['message'] = 'Deleted '.$media->file_name.' successfully!';
+            }catch (\Exception $e){
+                $response['code'] = $e->getCode();
+                $response['data'] = $media;
+                $response['message'] = $e->getMessage();
+            }
+        }else{
+            $response['code'] = 401;
+            $response['data'] = null;
+            $response['message'] = 'Unauthorized Access!';
         }
         return $response;
     }

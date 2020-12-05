@@ -6,11 +6,11 @@
         <div class="col-8">
             <div class="form-group">
                 <select id="project_status" class="form-control mb-3">
-                    <option value="pending" {{isset($project) && $project->status == 'pending'? 'checked' : ''}}>Pending</option>
-                    <option value="under construction" {{isset($project) && $project->status == 'under construction'? 'checked' : ''}}>Under Construction</option>
-                    <option value="completed" {{isset($project) && $project->status == 'completed'? 'checked' : ''}}>Completed</option>
-                    <option value="delayed" {{isset($project) && $project->status == 'delayed'? 'checked' : ''}}>Delayed</option>
-                    <option value="cancelled" {{isset($project) && $project->status == 'cancelled'? 'checked' : ''}}>Cancelled</option>
+                    <option value="pending" {{isset($project) && $project->status == 'pending'? 'selected' : ''}}>Pending</option>
+                    <option value="under construction" {{isset($project) && $project->status == 'under construction'? 'selected' : ''}}>Under Construction</option>
+                    <option value="completed" {{isset($project) && $project->status == 'completed'? 'selected' : ''}}>Completed</option>
+                    <option value="delayed" {{isset($project) && $project->status == 'delayed'? 'selected' : ''}}>Delayed</option>
+                    <option value="cancelled" {{isset($project) && $project->status == 'cancelled'? 'selected' : ''}}>Cancelled</option>
                 </select>
             </div>
         </div>
