@@ -16,5 +16,26 @@ class Project extends Model implements HasMedia
         $media = $medias->where('file_name',$file_name)->first();
         return $media;
     }
+
+    public function contractors(){
+        return $this->morphedByMany(Contractor::class,'contactable','project_contacts','contact_id','contactable_id')
+                    ->withPivot('purpose')
+                    ->withTimestamps();
+    }
+    public function suppliers(){
+        return $this->morphedByMany(Supplier::class,'contactable','project_contacts','contact_id','contactable_id')
+                    ->withPivot('purpose')
+                    ->withTimestamps();
+    }
+    public function engineers(){
+        return $this->morphedByMany(Engineer::class,'contactable','project_contacts','contact_id','contactable_id')
+                    ->withPivot('purpose')
+                    ->withTimestamps();
+    }
+    public function investors(){
+        return $this->morphedByMany(Investor::class,'contactable','project_contacts','contact_id','contactable_id')
+                    ->withPivot('purpose')
+                    ->withTimestamps();
+    }
 }
 
