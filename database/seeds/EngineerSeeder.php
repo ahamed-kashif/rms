@@ -26,6 +26,6 @@ class EngineerSeeder extends Seeder
         Permission::create(['name' => 'api_get engineer']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
         Role::findByName('admin')->givePermissionTo(Permission::all());
-        factory(Engineer::class, 100)->create();
+        factory(Engineer::class, 10)->create();
     }
 }

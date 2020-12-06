@@ -4,12 +4,15 @@
 
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @auth
+        <meta name="api-token" content="{{ auth()->user()->api_token }}">
+    @endauth
     <title>{{ isset($title) ? $title : config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {{--    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />--}}
 {{--    <meta content="Themesbrand" name="author" />--}}
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('images/rms.svg')}}">
 
     <!-- Bootstrap Css -->
     <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />

@@ -4,21 +4,21 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <a href="/" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="{{asset('images/logo.svg')}}" alt="" height="22">
-                                </span>
+                    <span class="logo-sm">
+                        <img src="{{asset('/images/rms.svg')}}" alt="" height="22">
+                    </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('images/logo-dark.png')}}" alt="" height="17">
-                                </span>
+                        <img src="{{asset('images/rms.svg')}}" alt="" height="17">
+                    </span>
                 </a>
 
                 <a href="/" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="{{asset('images/fsrelbd1.png')}}" alt="" height="22">
-                                </span>
+                    <span class="logo-sm">
+                        <img src="{{asset('images/rms_full.svg')}}" alt="" height="22">
+                    </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('images/fsrelbd1.png')}}" alt="" height="19">
-                                </span>
+                        <img src="{{asset('images/rms_full.svg')}}" alt="" height="19">
+                    </span>
                 </a>
             </div>
             <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">

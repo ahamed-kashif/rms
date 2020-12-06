@@ -23,8 +23,8 @@
                         <span key="t-projects">Projects</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#" key="t-p-grid">Create Project</a></li>
-                        <li><a href="#" key="t-p-list">Project List</a></li>
+                        <li><a href="{{route('project.create')}}" key="t-p-grid">Create Project</a></li>
+                        <li><a href="{{route('project.index')}}" key="t-p-list">Project List</a></li>
                         <li><a href="#" key="t-p-overview">Summary</a></li>
                     </ul>
                 </li>
@@ -43,6 +43,7 @@
                         <span key="t-invoices">Invoices</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#" key="t-invoice-list">Create Invoice</a></li>
                         <li><a href="#" key="t-invoice-list">Invoice List</a></li>
                         <li><a href="#" key="t-invoice-detail">Invoice Detail</a></li>
                     </ul>
