@@ -33,9 +33,14 @@ Route::prefix('project-resource')->group(function (){
     Route::resource('material', 'Libs\MaterialController');
 });
 Route::resource('project','ProjectController');
-Route::prefix('project/{id}/resource')->group(function (){
-    Route::get('/','ResourceController@index')->middleware('auth')->name('resource.index');
-    Route::get('upload','ResourceController@upload')->middleware('auth')->name('resource.create');
-    Route::get('download/{uuid}','ResourceController@download')->middleware('auth')->name('resource.download');
-    Route::delete('destroy/{uuid}','ResourceController@destroy')->middleware('auth')->name('resource.destroy');
+Route::prefix('project/{id}')->group(function (){
+    Route::prefix('/resource')->group(function (){
+        Route::get('/','ResourceController@index')->middleware('auth')->name('resource.index');
+        Route::get('upload','ResourceController@upload')->middleware('auth')->name('resource.create');
+        Route::get('download/{uuid}','ResourceController@download')->middleware('auth')->name('resource.download');
+        Route::delete('destroy/{uuid}','ResourceController@destroy')->middleware('auth')->name('resource.destroy');
+    });
+   Route::get('/contractors','ProjectContactsController@contractors_view')->name('project.contractors.view');
+   Route::post('/contractors','ProjectContactsController@add_contractor')->name('project.contractor.add');
+   Route::post('/contractors/new','ProjectContactsController@add_new_contractor')->name('project.contractor.add.new');
 });

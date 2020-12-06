@@ -59,7 +59,7 @@
                             <h4 class="card-title mb-4">Contractor</h4>
                         </div>
                         <div class="col-2">
-                            <a href="{{route('contractor.create')}}" class="ml-auto btn btn-sm btn-secondary rounded-circle" title="Add contractor"><i class="fas fa-user-plus font-size-10"></i></a>
+                            <a href="{{route('project.contractors.view',$project->id)}}" class="ml-auto btn btn-sm btn-secondary rounded-circle" title="Add contractor"><i class="fas fa-user-plus font-size-10"></i></a>
                         </div>
                     </div>
                     @include('project.inc.contact')
