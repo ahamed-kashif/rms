@@ -11,7 +11,7 @@
                 <div class="form-group p-3">
                     <label for="contractor">Contractor</label>
                     <select id="contractor" name="contractor" class="form-control select2">
-                        <option>Select a Contractor</option>
+                        <option value="">Select a Contractor</option>
                         @foreach($contractors as $contractor)
                             <option value="{{$contractor->id}}">{{$contractor->name}}</option>
                         @endforeach
@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label for="new_contractor_type">Contractor Type</label>
                             <select id="new_contractor_type" name="contractor_type" class="form-control select2">
-                                <option>Select a Contractor Type</option>
+                                <option value="">Select a Contractor Type</option>
                                 @foreach($materials as $material)
                                     <option value="{{$material->title}}">{{$material->title}}</option>
                                 @endforeach

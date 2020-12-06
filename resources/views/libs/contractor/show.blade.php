@@ -63,32 +63,28 @@
         <div class="col-md-7 col-lg-7 border-pink">
             <div class="align-content-end">
                 <h5>Assigned Projects</h5>
+                @if($contractor->projects()->count() >= 1)
                 <table class="table table-bordered align-content-center">
                     <thead>
                     <tr>
-                        <th class="title">Active<small>(n)</small></th>
+                        <th class="title">Project Status</th>
                         <th>Project</th>
                         <th>Contracted for</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($contractor->projects()->get() as $project)
                     <tr>
-                        <td><span class="badge badge-pill badge-success text-light font-size-15 p-2">active</span> </td>
-                        <td>Demo</td>
-                        <td>Demo</td>
+                        <td>@include('project.inc.status')</td>
+                        <td>{{$project->name}}</td>
+                        <td>{{$project->pivot->purpose}}</td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
+                @else
+                <h6>No projects assigned!</h6>
+                @endif
             </div>
         </div>
     </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contractor;
+use App\Models\Engineer;
 use App\Models\Material;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
@@ -110,60 +112,195 @@ class ProjectContactsController extends Controller
             return redirect()->back()->with('error', 'Unauthorized Access!');
         }
     }
-
     /**
-     * Store a newly created resource in storage.
+     * add supplier to project.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param int $id,
+     * @return mixed
      */
-    public function store(Request $request)
+    public function suppliers_view($id){
+        $user = Auth::user();
+        $project = Project::find($id);
+        $suppliers = Supplier::all();
+        $materials = Material::all();
+        if($user->can('update project')){
+            $title = $project->name.'\'s suppliers';
+            $breadcrumbs['projects'] = route('project.index');
+            $breadcrumbs[$project->name] = route('project.show',$project->id);
+            $breadcrumbs['suppliers'] = 'javascript:void(0)';
+            return view('project_contact.supplier')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'project' => $project,
+                'suppliers' => $suppliers,
+                'materials' => $materials
+            ]);
+        }
+    }
+    /**
+     * add contractor to project.
+     *
+     * @param int $id,
+     * @param Request $request,
+     * @return mixed
+     */
+    public function add_supplier($id, Request $request)
     {
-        //
+        $request->validate([
+            'supplier' => 'required',
+            'supplier_type' => 'required'
+        ]);
+        $user = Auth::user();
+        $project = Project::find($id);
+        $supplier = Supplier::find($request->input('supplier'));
+        if($user->can('update project')){
+            if($supplier != null){
+                try{
+                    $project->suppliers()->attach($supplier->id,['purpose' => $request->input('supplier_type')]);
+                    return redirect()->back()->with('success','supplier Added successfully.');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e->getMessage());
+                }
+            }else{
+                return redirect()->back()->with('error','supplier does not exists!');
+            }
+        }else{
+            return redirect()->route('home')->with('error','Unauthorized Access!');
+        }
+
     }
 
+    public function add_new_supplier($id, Request $request){
+        $request->validate([
+            'supplier_name' => 'required',
+            'supplier_phone' => 'required',
+            'supplier_type' => 'required'
+        ]);
+        $user = Auth::user();
+        $project = Project::find($id);
+        $supplier = new Supplier;
+        if($user->can('create supplier')){
+            try{
+                $supplier->name = $request->input('supplier_name');
+                $supplier->phone_number = $request->input('supplier_phone');
+                $supplier->save();
+            }catch(\Exception $e){
+                return redirect()->back()->withErrors($e->getMessage());
+            }
+
+
+            if($user->can('update project')){
+                if($supplier != null){
+                    try{
+                        $project->suppliers()->attach($supplier->id,['purpose' => $request->input('supplier_type')]);
+                        return redirect()->back()->with('success','supplier Added successfully.');
+                    }catch (\Exception $e){
+                        return redirect()->back()->withErrors($e->getMessage());
+                    }
+                }else{
+                    return redirect()->back()->with('error','supplier does not exists!');
+                }
+            }else{
+                return redirect()->route('home')->with('error','Unauthorized Access!');
+            }
+        }else{
+            return redirect()->back()->with('error', 'Unauthorized Access!');
+        }
+    }
     /**
-     * Display the specified resource.
+     * add supplier to project.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id,
+     * @return mixed
      */
-    public function show($id)
+    public function engineers_view($id){
+        $user = Auth::user();
+        $project = Project::find($id);
+        $engineers = Engineer::all();
+        $materials = Material::all();
+        if($user->can('update project')){
+            $title = $project->name.'\'s engineers';
+            $breadcrumbs['projects'] = route('project.index');
+            $breadcrumbs[$project->name] = route('project.show',$project->id);
+            $breadcrumbs['engineers'] = 'javascript:void(0)';
+            return view('project_contact.engineer')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'project' => $project,
+                'engineers' => $engineers,
+                'materials' => $materials
+            ]);
+        }
+    }
+    /**
+     * add engineer to project.
+     *
+     * @param int $id,
+     * @param Request $request,
+     * @return mixed
+     */
+    public function add_engineer($id, Request $request)
     {
-        //
+        $request->validate([
+            'engineer' => 'required',
+            'engineer_type' => 'required'
+        ]);
+        $user = Auth::user();
+        $project = Project::find($id);
+        $engineer = Engineer::find($request->input('engineer'));
+        if($user->can('update project')){
+            if($engineer != null){
+                try{
+                    $project->engineers()->attach($engineer->id,['purpose' => $request->input('engineer_type')]);
+                    return redirect()->back()->with('success','Engineer Added successfully.');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e->getMessage());
+                }
+            }else{
+                return redirect()->back()->with('error','Engineer does not exists!');
+            }
+        }else{
+            return redirect()->route('home')->with('error','Unauthorized Access!');
+        }
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function add_new_engineer($id, Request $request){
+        $request->validate([
+            'engineer_name' => 'required',
+            'engineer_phone' => 'required',
+            'engineer_type' => 'required'
+        ]);
+        $user = Auth::user();
+        $project = Project::find($id);
+        $engineer = new Engineer;
+        if($user->can('create engineer')){
+            try{
+                $engineer->name = $request->input('engineer_name');
+                $engineer->phone_number = $request->input('engineer_phone');
+                $engineer->save();
+            }catch(\Exception $e){
+                return redirect()->back()->withErrors($e->getMessage());
+            }
+
+
+            if($user->can('update project')){
+                if($engineer != null){
+                    try{
+                        $project->engineers()->attach($engineer->id,['purpose' => $request->input('engineer_type')]);
+                        return redirect()->back()->with('success','Engineer Added successfully.');
+                    }catch (\Exception $e){
+                        return redirect()->back()->withErrors($e->getMessage());
+                    }
+                }else{
+                    return redirect()->back()->with('error','engineer does not exists!');
+                }
+            }else{
+                return redirect()->route('home')->with('error','Unauthorized Access!');
+            }
+        }else{
+            return redirect()->back()->with('error', 'Unauthorized Access!');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -43,4 +43,11 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/contractors','ProjectContactsController@contractors_view')->name('project.contractors.view');
    Route::post('/contractors','ProjectContactsController@add_contractor')->name('project.contractor.add');
    Route::post('/contractors/new','ProjectContactsController@add_new_contractor')->name('project.contractor.add.new');
+   Route::get('/suppliers','ProjectContactsController@suppliers_view')->name('project.suppliers.view');
+   Route::post('/suppliers','ProjectContactsController@add_supplier')->name('project.supplier.add');
+   Route::post('/suppliers/new','ProjectContactsController@add_new_supplier')->name('project.supplier.add.new');
+   Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
+   Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
+   Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
+
 });
