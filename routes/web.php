@@ -49,5 +49,12 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
    Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
    Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
-
+});
+/****Invoice Routes****/
+Route::prefix('invoice')->group(function(){
+    Route::get('create','InvoiceController@create')->name('invoice.create');
+    Route::post('initial-stage','InvoiceController@initial_stage')->name('invoice.initial');
+    Route::get('/payment-method/add','InvoiceController@payment_form')->name('invoice.payment.method');
+    Route::post('/payment-method/update','InvoiceController@payment_update')->name('invoice.payment.method.update');
+    Route::get('/purpose/add','InvoiceController@add_purpose')->name('invoice.purpose.add');
 });
