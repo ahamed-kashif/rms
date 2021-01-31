@@ -49,5 +49,5 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
    Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
    Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
-
+   Route::resource("flat",'FlatController');
 });

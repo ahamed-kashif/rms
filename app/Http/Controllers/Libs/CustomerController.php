@@ -73,23 +73,41 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20',
+            'full_name' => 'required|max:20',
+            'father_or_husband_name' => 'max:20',
+            'mother_name' => 'max:20',
+            'occupation' => 'nullable|max:20',
+            'date_of_birth'=>'required',
+            'nationality'=>'nullable',
             'phone_number' => 'required|max:20',
             'email' => 'email|unique:contractors',
             'nid' => 'max:30|nullable',
-            'project_id' => 'unique:customers'
-
+            'nominee_name' => 'required|max:20',
+            'present_address' => 'required|string',
+            'permanent_address' => 'required|string',
+            'reference_person_name' => 'required|max:20'
         ]);
 
         $customer = new Customer();
 
-        $customer->name = $request->input('name');
-        $customer->phone_number = $request->input('phone_number');
+        $customer->full_name = $request->input('full_name');
+        $customer->father_or_husband_name = $request->input('father_or_husband_name');
+        $customer->mother_name = $request->input('mother_name');
+        $customer->occupation = $request->input('occupation');
+        $customer->date_of_birth = $request->input('date_of_birth');
+        $customer->nationality = $request->input('nationality');
+        $customer->phone = $request->input('phone');
         $customer->email = $request->input('email');
         $customer->nid = $request->input('nid');
-        $customer->address = $request->input('address');
+        $customer->nominee_name = $request->input('nominee_name');
+        $customer->present_address = $request->input('present_address');
+        $customer->permanent_address = $request->input('permanent_address');
+        $customer->reference_person_name = $request->input('reference_person_name');
         $customer->project_id = $request->input('project_id');
-
+        $customer->flat_number = $request->input('flat_number');
+        $customer->is_avail_loan = $request->input('is_avail_loan');
+        $customer->installment_amount = $request->input('installment_amount');
+        $customer->booking_amount = $request->input('booking_amount');
 
         try{
             $customer->save();
@@ -194,20 +212,43 @@ class CustomerController extends Controller
                     return redirect()->back()->with('error','customer not exists!');
                 }
                 $request->validate([
-                    'name' => 'required|max:20',
+                    'full_name' => 'required|max:20',
+                    'father_or_husband_name' => 'max:20',
+                    'mother_name' => 'max:20',
+                    'occupation' => 'nullable|max:20',
+                    'date_of_birth'=>'required',
+                    'nationality'=>'nullable',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email',
+                    'email' => 'email|unique:contractors',
                     'nid' => 'max:30|nullable',
-                    'project_id' => 'unique:customers'
+                    'nominee_name' => 'required|max:20',
+                    'present_address' => 'required|string',
+                    'permanent_address' => 'required|string',
+                    'reference_person_name' => 'required|max:20',
+                    'project_id' => 'required',
+                    'flat_number' =>'required',
+                    'booking_amount'=>'required'
 
                 ]);
 
-                $customer->name = $request->input('name');
-                $customer->phone_number = $request->input('phone_number');
+                $customer->full_name = $request->input('full_name');
+                $customer->father_or_husband_name = $request->input('father_or_husband_name');
+                $customer->mother_name = $request->input('mother_name');
+                $customer->occupation = $request->input('occupation');
+                $customer->date_of_birth = $request->input('date_of_birth');
+                $customer->nationality = $request->input('nationality');
+                $customer->phone = $request->input('phone');
                 $customer->email = $request->input('email');
                 $customer->nid = $request->input('nid');
-                $customer->address = $request->input('address');
+                $customer->nominee_name = $request->input('nominee_name');
+                $customer->present_address = $request->input('present_address');
+                $customer->permanent_address = $request->input('permanent_address');
+                $customer->reference_person_name = $request->input('reference_person_name');
                 $customer->project_id = $request->input('project_id');
+                $customer->flat_number = $request->input('flat_number');
+                $customer->is_avail_loan = $request->input('is_avail_loan');
+                $customer->installment_amount = $request->input('installment_amount');
+                $customer->booking_amount = $request->input('booking_amount');
 
                 try{
                     $customer->save();
