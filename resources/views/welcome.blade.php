@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="{{asset('landing_page/img/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('landing_page/css/plugins.css')}}" />
     <link rel="stylesheet" href="{{asset('landing_page/css/style.css')}}" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144098545-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -379,26 +378,24 @@
                 <div class="row">
                     <div class="col-md-7 owl-carousel owl-theme">
                         <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/img/clients/1.png')}}" alt=""></a>
+                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo1.png')}}" alt=""></a>
                         </div>
                         <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/img/clients/2.png')}}" alt=""></a>
+                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo2.png')}}" alt=""></a>
                         </div>
                         <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/img/clients/3.png')}}" alt=""></a>
+                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo3.png')}}" alt=""></a>
                         </div>
                         <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_ptage/img/clients/4.png')}}" alt=""></a>
+                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo4.png')}}" alt=""></a>
                         </div>
                         <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/img/clients/5.png')}}" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/img/clients/6.png')}}" alt=""></a>
+                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo5.png')}}" alt=""></a>
                         </div>
                     </div>
                 </div>
             </div>
+
         </section>
         <!-- Footer -->
         <footer class="main-footer dark">
