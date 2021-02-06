@@ -75,4 +75,26 @@ class AjaxController extends Controller
         }
         return $response;
     }
+
+    public function project_list(){
+        $user = Auth::user();
+        $response = [];
+        $projects = Project::all();
+        if($user->can('update project')){
+            try{
+                $response['code'] = 200;
+                $response['data'] = $projects;
+                $response['message'] = 'project list is successfully fetched';
+            }catch (\Exception $e){
+                $response['code'] = $e->getCode();
+                $response['data'] = $e->getTrace();
+                $response['message'] = $e->getMessage();
+            }
+        }else{
+            $response['code'] = 401;
+            $response['data'] = null;
+            $response['message'] = 'Unauthorized Access!';
+        }
+        return $response;
+    }
 }

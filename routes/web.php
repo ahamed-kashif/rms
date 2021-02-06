@@ -56,5 +56,7 @@ Route::prefix('invoice')->group(function(){
     Route::post('initial-stage','InvoiceController@initial_stage')->name('invoice.initial');
     Route::get('/payment-method/add','InvoiceController@payment_form')->name('invoice.payment.method');
     Route::post('/payment-method/update','InvoiceController@payment_update')->name('invoice.payment.method.update');
-    Route::get('/purpose/add','InvoiceController@add_purpose')->name('invoice.purpose.add');
+    Route::get('/account-head/add','InvoiceController@account_head')->name('invoice.account-head.create');
+    Route::post('/account-head/update','InvoiceController@account_head_update')->name('invoice.account-head.update');
+    Route::get('/person/add','InvoiceController@add_person')->name('invoice.person.add');
 });
