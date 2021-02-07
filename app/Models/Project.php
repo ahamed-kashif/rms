@@ -37,5 +37,10 @@ class Project extends Model implements HasMedia
                     ->withPivot('purpose')
                     ->withTimestamps();
     }
+    public function customers(){
+        return $this->morphedByMany(Investor::class,'contactable','project_contacts','contact_id','contactable_id')
+                    ->withPivot('purpose')
+                    ->withTimestamps();
+    }
 }
 

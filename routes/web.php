@@ -59,4 +59,7 @@ Route::prefix('invoice')->group(function(){
     Route::get('/account-head/add','InvoiceController@account_head')->name('invoice.account-head.create');
     Route::post('/account-head/update','InvoiceController@account_head_update')->name('invoice.account-head.update');
     Route::get('/person/add','InvoiceController@add_person')->name('invoice.person.add');
+    Route::post('/person/update','InvoiceController@person_update')->name('invoice.person.update');
+    Route::get('/amount/add/{id}','InvoiceController@add_amount')->name('invoice.amount.add');
+    Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
 });

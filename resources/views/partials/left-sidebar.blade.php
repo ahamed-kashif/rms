@@ -43,7 +43,7 @@
                         <span key="t-invoices">Invoices</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#" key="t-invoice-list">Create Invoice</a></li>
+                        <li><a href="{{route('invoice.create')}}" key="t-invoice-list">Create Invoice</a></li>
                         <li><a href="#" key="t-invoice-list">Invoice List</a></li>
                         <li><a href="#" key="t-invoice-detail">Invoice Detail</a></li>
                     </ul>

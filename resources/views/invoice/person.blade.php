@@ -10,10 +10,11 @@
 @endsection
 @section('content')
     <div class="p-5">
-        <form action="#" method="post" id="contractor_form">
+        <form action="{{route('invoice.person.update')}}" method="post" id="contractor_form">
             @csrf
             <button type="button" id="contractor_btn" onclick="show_contractor()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Contractor</button>
             <div class="form-group contractor">
+                @if(count($contractors) > 0)
                 <label for="contractor_id" class="control-label">Select a Contractor...</label>
                 <select class="form-control select2" name="contractor_id" id="contractor_id">
                     <option>......</option>
@@ -21,13 +22,18 @@
                         <option value="{{$contractor->id}}">{{$contractor->name}}</option>
                     @endforeach
                 </select>
+                @else
+                    <span>There is <code>no contractor</code> added to project. Add <a href="{{route('project.contractor.add',$invoice->project_id)}}">new contractor</a>.</span>
+                @endif
+
             </div>
         </form>
-        <form action="{{route('invoice.account-head.update')}}" method="post" id="supplier_form">
+        <form action="{{route('invoice.person.update')}}" method="post" id="supplier_form">
             @csrf
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="supplier_btn" onclick="show_supplier()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Supplier</button>
             <div class="form-group supplier">
+                @if(count($suppliers) > 0)
                 <label for="supplier_id" class="control-label">Select an Supplier Project...</label>
                 <select class="form-control select2" name="supplier_id" id="supplier_id">
                     <option>......</option>
@@ -35,13 +41,17 @@
                         <option value="{{$supplier->id}}">{{$supplier->name}}</option>
                     @endforeach
                 </select>
+                @else
+                    <span>There is <code>no supplier</code> added to project. Add <a href="{{route('project.supplier.add',$invoice->project_id)}}">new supplier</a>.</span>
+                @endif
             </div>
         </form>
-        <form action="{{route('invoice.account-head.update')}}" method="post" id="engineer_form">
+        <form action="{{route('invoice.person.update')}}" method="post" id="engineer_form">
             @csrf
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="engineer_btn" onclick="show_engineer()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Engineer</button>
             <div class="form-group engineer">
+                @if(count($engineers) > 0)
                 <label for="project_id" class="control-label">Select an Engineer Project...</label>
                 <select class="form-control select2" name="project_id" id="other_project_id">
                     <option>......</option>
@@ -49,13 +59,17 @@
                         <option value="{{$engineer->id}}">{{$engineer->name}}</option>
                     @endforeach
                 </select>
+                @else
+                    <span>There is <code>no engineer</code> added to project. Add <a href="{{route('project.engineer.add',$invoice->project_id)}}">new engineer</a>.</span>
+                @endif
             </div>
         </form>
-        <form action="{{route('invoice.account-head.update')}}" method="post" id="customer_form">
+        <form action="{{route('invoice.person.update')}}" method="post" id="customer_form">
             @csrf
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="customer_btn" onclick="show_customer()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Customer</button>
             <div class="form-group customer">
+                @if(count($customers) > 0)
                 <label for="customer_id" class="control-label">Select an Customer Project...</label>
                 <select class="form-control select2" name="customer_id" id="customer_id">
                     <option>......</option>
@@ -63,13 +77,17 @@
                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                     @endforeach
                 </select>
+                @else
+                    <span>There is <code>no customer</code> added to project. Add <a href="#">new customer</a>.</span>
+                @endif
             </div>
         </form>
-        <form action="{{route('invoice.account-head.update')}}" method="post" id="investor_form">
+        <form action="{{route('invoice.person.update')}}" method="post" id="investor_form">
             @csrf
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="investor_btn" onclick="show_investor()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Investor</button>
             <div class="form-group investors">
+                @if(count($investors) > 0)
                 <label for="investor_id" class="control-label">Select an Investor Project...</label>
                 <select class="form-control select2" name="investor_id" id="investor_id">
                     <option>......</option>
@@ -77,9 +95,12 @@
                         <option value="{{$investor->id}}">{{$investor->name}}</option>
                     @endforeach
                 </select>
+                @else
+                    <span>There is <code>no supplier</code> added to project. Add <a href="{{route('project.supplier.add',$invoice->project_id)}}">new supplier</a>.</span>
+                @endif
             </div>
         </form>
-        <form action="{{route('invoice.account-head.update')}}" method="post" id="other_form">
+        <form action="{{route('invoice.person.update')}}" method="post" id="other_form">
             @csrf
             <input type="hidden" name="is_other" value="1" />
             <button type="button" id="other_btn" onclick="show_other()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Office/Other</button>
@@ -115,16 +136,32 @@
         let othBtn = $('#other_btn')
         let customer = $('#customer_form')
         let cusBtn = $('#customer_btn')
-
         $(document).ready(function () {
-
-
             $('.contractor').hide();
             $('.engineer').hide();
             $('.supplier').hide();
             $('.customer').hide();
             $('.investors').hide();
             $('.other').hide();
+
+            $('.contractor').on('change', function () {
+                contractor.submit();
+            });
+            $('.supplier').on('change', function () {
+                supplier.submit();
+            });
+            $('.engineer').on('change', function () {
+                engineer.submit();
+            });
+            $('.customer').on('change', function () {
+                customer.submit();
+            });
+            $('.investors').on('change', function () {
+                investor.submit();
+            });
+            $('.other').on('change', function () {
+                other.submit();
+            });
 
         });
 
