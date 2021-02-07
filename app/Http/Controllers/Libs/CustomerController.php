@@ -90,6 +90,7 @@ class CustomerController extends Controller
             'present_address' => 'required|string',
             'permanent_address' => 'required|string',
             'reference_person_name' => 'required|max:20',
+            'project_id' => 'required'
         ]);
 
         $customer = new Customer();
