@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <h3 class="card-title">
-            {{$customer->name}}
+            {{$customer->full_name}}
 
         </h3>
         <div class="ml-auto">
@@ -41,7 +41,7 @@
                     <b>National ID (NID)</b><p>{{$customer->nid}}</p>
                 </li>
                 <li>
-                    <b>Address</b><p>{{$customer->address}}</p>
+                    <b>Address</b><p>{{$customer->present_address}}</p>
                 </li>
             </ol>
         </div>

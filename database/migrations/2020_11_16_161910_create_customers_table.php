@@ -28,14 +28,20 @@ class CreateCustomersTable extends Migration
             $table->string('present_address');
             $table->string('permanent_address');
             $table->string('reference_person_name');
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->string('flat_number');
-            $table->boolean('is_avail_loan');
-            $table->boolean('is_installable');
+            $table->boolean('is_avail_loan')->default(false);
+            $table->boolean('is_installable')->default(false);
             $table->float('installment_amount');
-            $table->text('installment_duration') ->unsigned();
+            $table->integer('installment_duration') ->unsigned();
             $table->float('booking_amount');
             $table->timestamps();
+
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('projects')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

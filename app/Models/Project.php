@@ -37,5 +37,9 @@ class Project extends Model implements HasMedia
                     ->withPivot('purpose')
                     ->withTimestamps();
     }
+
+    public function customers(){
+        return $this->hasMany(Customer::class,'id');
+    }
 }
 
