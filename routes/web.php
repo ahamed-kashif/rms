@@ -52,6 +52,7 @@ Route::prefix('project/{id}')->group(function (){
 });
 /****Invoice Routes****/
 Route::prefix('invoice')->group(function(){
+    Route::get('/','InvoiceController@index')->name('invoice.index');
     Route::get('create','InvoiceController@create')->name('invoice.create');
     Route::get('show/{id}','InvoiceController@show')->name('invoice.show');
     Route::post('initial-stage','InvoiceController@initial_stage')->name('invoice.initial');

@@ -23,14 +23,31 @@ class InvoiceController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the invoices.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index()
     {
-        $invoices = Invoice::all()->orderBy('updated_at','desc');
-        return $invoices;
+        if (Auth::user()->can('index invoice')){
+            $title = 'Invoices';
+            $breadcrumbs['invoices'] = '#';
+            $invoices = Invoice::all()->sortByDesc('created_at');
+            $relations = [
+                'App\Models\Contractor' => 'contractor',
+                'App\Models\Supplier' => 'supplier',
+                'App\Models\Engineer' => 'engineer',
+                'App\Models\Investor' => 'investor',
+                'App\Models\Customer' => 'customer',
+                ];
+            return view('invoice.index')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'invoices' => $invoices,
+                'relations' => $relations
+            ]);
+        }
+        return redirect()->route('home')->with(['error','Unauthorized Access!']);
     }
     /**
      * show check in and out form
