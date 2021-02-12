@@ -6,11 +6,11 @@ use App\Helpers\InvoiceSession;
 use App\Models\Contractor;
 use App\Models\Customer;
 use App\Models\Engineer;
+use App\Models\Supplier;
 use App\Models\Investor;
 use App\Models\Invoice;
 use App\Models\PaymentMethod;
 use App\Models\Project;
-use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::all()->orderBy('updated_at','desc');
+        return $invoices;
     }
     /**
      * show check in and out form
@@ -234,6 +235,43 @@ class InvoiceController extends Controller
                 session()->forget('invoice');
                 return redirect()->route('invoice.amount.add',$invoice->id);
             }
+            //dd('ay');
+            elseif($request->has('engineer_id')){
+                //dd($request->input('engineer_id'));
+                $engineer = Engineer::find($request->input('engineer_id'));
+                $engineer->invoice()->save($invoice);
+                session()->forget('invoice');
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
+            elseif($request->has('supplier_id')){
+                $supplier = Supplier::find($request->input('supplier_id'));
+                $supplier->invoice()->save($invoice);
+                session()->forget('invoice');
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
+            elseif($request->has('customer_id')){
+                $customer = Customer::find($request->input('customer_id'));
+                $customer->invoice()->save($invoice);
+                session()->forget('invoice');
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
+            elseif($request->has('investor_id')){
+                $investor = Investor::find($request->input('investor_id'));
+                $investor->invoice()->save($invoice);
+                session()->forget('invoice');
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
+            elseif($request->has('engineer_id')){
+                $engineer = Engineer::find($request->input('engineer_id'));
+                $engineer->invoice()->save($invoice);
+                session()->forget('invoice');
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
+            elseif($request->has('other')){
+                $invoice->is_office_expense = 1;
+                $invoice->save();
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
         }
 
     }
@@ -262,7 +300,28 @@ class InvoiceController extends Controller
         $invoice->amount = $request->input('amount');
         $invoice->description = $request->input('description');
         $invoice->update();
-        return $invoice;
+        return redirect()->route('invoice.show', $invoice->id)->with('success','Invoice is successfully created...');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function show($id){
+        if (Auth::user()->can('show invoice')){
+            $invoice = Invoice::find($id);
+            $title = 'Invoice No.   '.$invoice->invoice_no;
+            $breadcrumbs['invoices'] = "#";
+            $breadcrumbs[$invoice->invoice_no] = "#";
+            return view('invoice.show')->with([
+                'invoice' => $invoice,
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs
+            ]);
+        }
+        return redirect()->route('home')->with('error','Unauthorized Access!');
     }
 
     /**
@@ -276,16 +335,6 @@ class InvoiceController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

@@ -53,7 +53,7 @@
             <div class="form-group engineer">
                 @if(count($engineers) > 0)
                 <label for="project_id" class="control-label">Select an Engineer Project...</label>
-                <select class="form-control select2" name="project_id" id="other_project_id">
+                <select class="form-control select2" name="engineer_id" id="engineer_id">
                     <option>......</option>
                     @foreach($engineers as $engineer)
                         <option value="{{$engineer->id}}">{{$engineer->name}}</option>
