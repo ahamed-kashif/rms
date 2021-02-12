@@ -46,22 +46,21 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($customer_id)
     {
-
-        if(auth()->user()->can('create flat')){
+        if(is_numeric($customer_id)) {
+            $customer = Customer::find($customer_id);
+            $project_id = $customer->project_id;
             $title = 'Add Flat';
             $breadcrumbs['contacts'] = "#";
-            $breadcrumbs['flat'] = route('flat.index');
+            //$breadcrumbs['customers'] = route('flat.index');
             $breadcrumbs['add'] = 'javaScript:void();';
-            $projects = Project::all();
-            return view('flat.create')->with([
+            return view('libs.flat.create')->with([
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs,
-                'projects' => $projects
+                'project_id' => $project_id,
+                'customer_id' => $customer_id
             ]);
-        }else{
-            return redirect('home')->with('error','Unauthorized Access');
         }
 
     }

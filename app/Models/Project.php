@@ -41,5 +41,12 @@ class Project extends Model implements HasMedia
     public function customers(){
         return $this->hasMany(Customer::class,'id');
     }
+
+    public function flat(){
+        return $this->hasMany(Flat::class,'project_id');
+    }
+
+
+
 }
 

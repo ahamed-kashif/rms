@@ -28,6 +28,7 @@ Route::prefix('contacts')->group(function(){
     Route::resource('engineer','Libs\EngineerController');
     Route::resource('customer','Libs\CustomerController');
     Route::resource('investor','Libs\InvestorController');
+
 });
 Route::prefix('project-resource')->group(function (){
     Route::resource('material', 'Libs\MaterialController');
@@ -49,5 +50,5 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
    Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
    Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
-   Route::resource("flat",'FlatController');
+   Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
 });

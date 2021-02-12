@@ -109,19 +109,24 @@ class CustomerController extends Controller
         $customer->permanent_address = $request->input('permanent_address');
         $customer->reference_person_name = $request->input('reference_person_name');
         $customer->project_id = $request->project_id;
-        $customer->flat_number = $request->input('flat_number');
-        $customer->is_avail_loan = $request->has('is_avail_loan');
-        $customer->is_installable = $request->has('is_installable');
-        $customer->installment_amount = $request->input('installment_amount');
-        $customer->installment_duration = $request->input('installment_duration');
-        $customer->booking_amount = $request->input('booking_amount');
+//        $customer->flat_number = $request->input('flat_number');
+//        $customer->is_avail_loan = $request->has('is_avail_loan');
+//        $customer->is_installable = $request->has('is_installable');
+//        $customer->installment_amount = $request->input('installment_amount');
+//        $customer->installment_duration = $request->input('installment_duration');
+//        $customer->booking_amount = $request->input('booking_amount');
 
 
         //dd($customer);
         try{
+            //return redirect()->route(‘flat.creat’, ‘customer_id’ => $customer->id);
+
             $customer->save();
 
-            return redirect()->back()->with('success','successfully stored');
+//             dd($customer->id,$customer->project_id);
+            return redirect()->route('flat.create', ['customer_id'=> $customer->id]);
+
+
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -254,18 +259,19 @@ class CustomerController extends Controller
                 $customer->permanent_address = $request->input('permanent_address');
                 $customer->reference_person_name = $request->input('reference_person_name');
                 $customer->project_id = $request->project_id;
-                $customer->flat_number = $request->input('flat_number');
-                $customer->is_avail_loan = $request->has('is_avail_loan');
-                $customer->is_installable = $request->has('is_installable');
-                $customer->installment_amount = $request->input('installment_amount');
-                $customer->installment_duration = $request->input('installment_duration');
-                $customer->booking_amount = $request->input('booking_amount');
+//                $customer->flat_number = $request->input('flat_number');
+//                $customer->is_avail_loan = $request->has('is_avail_loan');
+//                $customer->is_installable = $request->has('is_installable');
+//                $customer->installment_amount = $request->input('installment_amount');
+//                $customer->installment_duration = $request->input('installment_duration');
+//                $customer->booking_amount = $request->input('booking_amount');
 
 
                 try{
                     $customer->save();
 
-                    return redirect()->back()->with('success','successfully updated!');
+
+
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }

@@ -133,63 +133,63 @@
         </div>
 
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-check font-size-14">
-                    <input class="form-check-input" type="checkbox"  name="is_avail_loan" id="is_avail_loan" value="1" >
-                    <label class="form-check-label" for="is_avail_loan">Loan Available</label>
-                </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-check font-size-14">--}}
+{{--                    <input class="form-check-input" type="checkbox"  name="is_avail_loan" id="is_avail_loan" value="1" >--}}
+{{--                    <label class="form-check-label" for="is_avail_loan">Loan Available</label>--}}
+{{--                </div>--}}
 
-            </div>
-        </div>
-        <br>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <br>--}}
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="flat_number">Flat Number <code>*</code></label>
-                    <input type="text" class="form-control" id="flat_number" name="flat_number" placeholder="EX: 1122" required>
-                </div>
-            </div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="flat_number">Flat Number <code>*</code></label>--}}
+{{--                    <input type="text" class="form-control" id="flat_number" name="flat_number" placeholder="EX: 1122" required>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <br>
+{{--        <br>--}}
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-check font-size-14">
-                    <input class="form-check-input" type="checkbox"  name="is_installable" id="is_installable" value="1" >
-                    <label class="form-check-label" for="is_installable">Installable</label>
-                </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-check font-size-14">--}}
+{{--                    <input class="form-check-input" type="checkbox"  name="is_installable" id="is_installable" value="1" >--}}
+{{--                    <label class="form-check-label" for="is_installable">Installable</label>--}}
+{{--                </div>--}}
 
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="installment_duration">Installment Duration <code>*</code></label>
-                    <input type="text" class="form-control" id="installment_duration" name="installment_duration" placeholder="EX: 4 months" required>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="installment_amount">Installment Amount <code>*</code></label>
-                    <input type="text" class="form-control" id="installment_amount" name="installment_amount" placeholder="EX: 4000 tk" required>
-                </div>
-            </div>
-        </div>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <br>--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="installment_duration">Installment Duration <code>*</code></label>--}}
+{{--                    <input type="text" class="form-control" id="installment_duration" name="installment_duration" placeholder="EX: 4 months" required>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="installment_amount">Installment Amount <code>*</code></label>--}}
+{{--                    <input type="text" class="form-control" id="installment_amount" name="installment_amount" placeholder="EX: 4000 tk" required>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="booking_amount">Booking Amount <code>*</code></label>
-                    <input type="text" class="form-control" id="booking_amount" name="booking_amount" placeholder="Ex: 10000 tk" required>
-                </div>
-            </div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="booking_amount">Booking Amount <code>*</code></label>--}}
+{{--                    <input type="text" class="form-control" id="booking_amount" name="booking_amount" placeholder="Ex: 10000 tk" required>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
         <div>
