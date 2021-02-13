@@ -65,3 +65,4 @@ Route::prefix('invoice')->group(function(){
     Route::get('/amount/add/{id}','InvoiceController@add_amount')->name('invoice.amount.add');
     Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
 });
+Route::get('/accounts','AccountController@index')->name('account.index');

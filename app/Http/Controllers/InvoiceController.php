@@ -12,6 +12,7 @@ use App\Models\Invoice;
 use App\Models\PaymentMethod;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -59,8 +60,10 @@ class InvoiceController extends Controller
         $user = Auth::user();
         $invoice = Invoice::orderBy('updated_at','desc')->first();
         //dd($invoice);
-        if($invoice->amount == null){
-            return redirect()->route('invoice.amount.add',$invoice->id);
+        if(!empty($invoice)){
+            if($invoice->amount == null){
+                return redirect()->route('invoice.amount.add',$invoice->id);
+            }
         }
         if($user->can('create invoice')){
             if(session()->has('invoice')){
@@ -84,7 +87,8 @@ class InvoiceController extends Controller
         $serial =0;
         $invoice = new Invoice;
         if(Invoice::all()->count() > 0){
-            $serial = $latestInvoice->serial;
+            $serial = Invoice::all()->count()+1;
+            var_dump($serial);
         }
         $serial++;
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
@@ -246,49 +250,56 @@ class InvoiceController extends Controller
         if(session()->has('invoice')){
             $record = session()->get('invoice');
             $invoice = $record['invoice'];
-            if($request->has('contractor_id')){
-                $contractor = Contractor::find($request->input('contractor_id'));
-                $contractor->invoice()->save($invoice);
-                session()->forget('invoice');
-                return redirect()->route('invoice.amount.add',$invoice->id);
+            try{
+                if($request->has('contractor_id')){
+                    $contractor = Contractor::find($request->input('contractor_id'));
+                    $contractor->invoice()->save($invoice);
+                    session()->forget('invoice');
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+                //dd('ay');
+                elseif($request->has('engineer_id')){
+                    //dd($request->input('engineer_id'));
+                    $engineer = Engineer::find($request->input('engineer_id'));
+                    $engineer->invoice()->save($invoice);
+                    session()->forget('invoice');
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+                elseif($request->has('supplier_id')){
+                    $supplier = Supplier::find($request->input('supplier_id'));
+                    $supplier->invoice()->save($invoice);
+                    session()->forget('invoice');
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+                elseif($request->has('customer_id')){
+                    $customer = Customer::find($request->input('customer_id'));
+                    $customer->invoice()->save($invoice);
+                    session()->forget('invoice');
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+                elseif($request->has('investor_id')){
+                    $investor = Investor::find($request->input('investor_id'));
+                    $investor->invoice()->save($invoice);
+                    session()->forget('invoice');
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+                elseif($request->has('engineer_id')){
+                    $engineer = Engineer::find($request->input('engineer_id'));
+                    $engineer->invoice()->save($invoice);
+                    session()->forget('invoice');
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+                elseif($request->has('other')){
+                    $invoice->is_office_expense = 1;
+                    $invoice->save();
+                    return redirect()->route('invoice.amount.add',$invoice->id);
+                }
+
+                Artisan::call('account:generate');
+            }catch (\Exception $e){
+                return redirect()->route('invoice.create')->with('error',$e->getMessage());
             }
-            //dd('ay');
-            elseif($request->has('engineer_id')){
-                //dd($request->input('engineer_id'));
-                $engineer = Engineer::find($request->input('engineer_id'));
-                $engineer->invoice()->save($invoice);
-                session()->forget('invoice');
-                return redirect()->route('invoice.amount.add',$invoice->id);
-            }
-            elseif($request->has('supplier_id')){
-                $supplier = Supplier::find($request->input('supplier_id'));
-                $supplier->invoice()->save($invoice);
-                session()->forget('invoice');
-                return redirect()->route('invoice.amount.add',$invoice->id);
-            }
-            elseif($request->has('customer_id')){
-                $customer = Customer::find($request->input('customer_id'));
-                $customer->invoice()->save($invoice);
-                session()->forget('invoice');
-                return redirect()->route('invoice.amount.add',$invoice->id);
-            }
-            elseif($request->has('investor_id')){
-                $investor = Investor::find($request->input('investor_id'));
-                $investor->invoice()->save($invoice);
-                session()->forget('invoice');
-                return redirect()->route('invoice.amount.add',$invoice->id);
-            }
-            elseif($request->has('engineer_id')){
-                $engineer = Engineer::find($request->input('engineer_id'));
-                $engineer->invoice()->save($invoice);
-                session()->forget('invoice');
-                return redirect()->route('invoice.amount.add',$invoice->id);
-            }
-            elseif($request->has('other')){
-                $invoice->is_office_expense = 1;
-                $invoice->save();
-                return redirect()->route('invoice.amount.add',$invoice->id);
-            }
+
         }
 
     }

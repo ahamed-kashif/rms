@@ -27,6 +27,8 @@ class CreateInvoicesTable extends Migration
             $table->string('description')->nullable();
             $table->unsignedBigInteger('payment_method_id')->nullable();
             $table->timestamps();
+            $table->boolean('is_checked')->default(0);
+            $table->integer('balance_id')->unsigned()->nullable();
 
             $table->foreign('project_id')
                 ->references('id')

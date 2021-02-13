@@ -35,6 +35,7 @@
                                 </a>
                             </div>
                             <div class="justify-content-center">
+                                @include('inc.alert')
                             @yield('content')
 
                         </div>

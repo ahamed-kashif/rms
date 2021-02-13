@@ -6,7 +6,7 @@
     <br><br>
     <div class="invoice-title">
         <div class="text-right">
-            <h4 class="float-right font-size-16"><span class="justify-content-end">Invoice No. </span><br>#<span class="font-weight-bolder font-size-24">{{$invoice->invoice_no}}</span></h4>
+            <h4 class="float-right font-size-16"><span class="justify-content-end"><u>Invoice No. </u></span><br>#<span class="font-weight-bolder font-size-24">{{$invoice->invoice_no}}</span></h4>
         </div>
         <div class="mb-4">
             <img src="{{asset('images/rms.svg')}}" alt="fsrel" height="150"/>
@@ -19,12 +19,12 @@
             <address class="">
                 <br>
                 <br>
-                <strong class="font-size-18">First security real estate limited</strong><br>
-                Address-House 7, Road 3, F block, Banasree,<br>
+                <strong class="font-size-24">First security real estate limited</strong><br>
+                <strong class="font-size-16">Address-House 7, Road 3, F block, Banasree,<br>
                 Rampura, Dhaka-1219, Bangladesh.<br>
                 Mobile: +8801799399592<br>
                 Email: support@fsrel.com<br>
-                Website: www. fsrel.com<br>
+                Website: www. fsrel.com<br></strong>
             </address>
         </div>
     </div>
@@ -88,7 +88,7 @@
             @if($invoice->is_checkin)
                 <span class="font-size-14"><u><b>Receiver Signature</b></u></span>
             @else
-                <span class="font-size-14">Taka paid by <b>{{auth()->user()->name}}</b></span>
+                <span class="font-size-14"><u><b>Payee Signature</b></u></span>
             @endif
         </div>
         <div class="col-md-6">

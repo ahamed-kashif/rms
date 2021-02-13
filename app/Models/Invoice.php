@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+    public $timestamps = true;
+    protected $dateFormat = 'd-m-Y';
     public function person(){
         return $this->morphTo(__FUNCTION__,'person_type','person_id');
     }
@@ -14,5 +16,11 @@ class Invoice extends Model
     }
     public function project(){
         return $this->belongsTo(Project::class,'project_id','id');
+    }
+    public function scopeNotChecked($q){
+        return $q->where('is_checked','=',0);
+    }
+    public function balance(){
+        return $this->belongsTo(Balance::class,'balance_id','id');
     }
 }
