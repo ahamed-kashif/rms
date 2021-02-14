@@ -87,8 +87,8 @@ class InvoiceController extends Controller
         $serial =0;
         $invoice = new Invoice;
         if(Invoice::all()->count() > 0){
-            $serial = Invoice::all()->count()+1;
-            var_dump($serial);
+            $serial = Invoice::all()->count();
+            //dd($serial);
         }
         $serial++;
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
@@ -295,7 +295,6 @@ class InvoiceController extends Controller
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
 
-                Artisan::call('account:generate');
             }catch (\Exception $e){
                 return redirect()->route('invoice.create')->with('error',$e->getMessage());
             }
@@ -328,6 +327,7 @@ class InvoiceController extends Controller
         $invoice->amount = $request->input('amount');
         $invoice->description = $request->input('description');
         $invoice->update();
+        Artisan::call('account:generate');
         return redirect()->route('invoice.show', $invoice->id)->with('success','Invoice is successfully created...');
     }
 

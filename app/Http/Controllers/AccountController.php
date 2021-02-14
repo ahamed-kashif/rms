@@ -25,15 +25,11 @@ class AccountController extends Controller
     {
         $accounts = [];
         //dd($invoices->first()->balance);
-        if(count(Invoice::where('is_checked','=',0)->get()) >= 1){
-            Artisan::call('account:generate');
-        }
+
+        Artisan::call('account:generate');
+
 
         $contractors = Contractor::all();
-        $suppliers = Supplier::all();
-        $engineers = Engineer::all();
-        $investors = Investor::all();
-        $customers = Customer::all();
         $projects = Project::all();
         $payment_methods = PaymentMethod::all();
 
@@ -55,10 +51,6 @@ class AccountController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'balances' => $balances,
             'contractors' => $contractors,
-            'suppliers' => $suppliers,
-            'engineers' => $engineers,
-            'investors' => $investors,
-            'customers' => $customers,
             'payment_methods' => $payment_methods,
             'projects' => $projects
         ]);
