@@ -20,8 +20,8 @@ class CreateFlatsTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->integer('project_id')->unsigned();
             $table->string('flat_number');
-            $table->boolean('is_avail_loan');
-            $table->boolean('is_installable');
+            $table->boolean('is_avail_loan')->default(false);
+            $table->boolean('is_installable')->default(false);
             $table->float('installment_amount');
             $table->text('installment_duration')->unsigned();
             $table->float('booking_amount');
@@ -48,6 +48,6 @@ class CreateFlatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flat');
+        Schema::dropIfExists('flats');
     }
 }

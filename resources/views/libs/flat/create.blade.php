@@ -5,8 +5,10 @@
 @section('content')
     <h4 class="card-title mb-4">New Flat</h4>
 
-    <form action="" method="post">
+    <form action="{{route('flat.store',$customer_id)}}" method="post">
         @csrf
+        <input type="hidden" id="customer_id" name="customer_id" value="{{$customer_id}}">
+        <input type="hidden" id="project_id" name="project_id" value="{{$project_id}}">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Libs;
-
+use App\Models\Flat;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Models\Project;
+
 use Illuminate\Http\Request;
 
 class FlatController extends Controller
@@ -29,10 +29,10 @@ class FlatController extends Controller
             $breacrumbs['Flat'] = 'javaScript:void();';
 
 
-            return view('flat.index')->with([
+            return view('libs.flat.index')->with([
                 'title' => $title,
                 'breadcrumbs'=> $breacrumbs,
-                'flat' => $flat
+                'flats' => $flat
 
 
             ]);
@@ -48,9 +48,11 @@ class FlatController extends Controller
      */
     public function create($customer_id)
     {
+        if(auth()->user()->can('create flat')){
         if(is_numeric($customer_id)) {
             $customer = Customer::find($customer_id);
             $project_id = $customer->project_id;
+
             $title = 'Add Flat';
             $breadcrumbs['contacts'] = "#";
             //$breadcrumbs['customers'] = route('flat.index');
@@ -61,6 +63,9 @@ class FlatController extends Controller
                 'project_id' => $project_id,
                 'customer_id' => $customer_id
             ]);
+        }}
+        else{
+            return redirect('home')->with('error','Unauthorized Access');
         }
 
     }
@@ -85,14 +90,24 @@ class FlatController extends Controller
 
         $flat = new Flat();
 
-        $flat->project_id = $request->input('project_id');
+        $flat->project_id = $request->project_id;
+        $flat->customer_id = $request->customer_id;
+
+        $flat->flat_title = $request->input('flat_title');
+        $flat->is_avail_loan = $request->has('is_avail_loan');
         $flat->flat_number = $request->input('flat_number');
-        $flat->is_avail_loan = $request->input('is_avail_loan');
-        $flat->is_installable = $request->input('is_installable');
-        $flat->installment_amount = $request->input('installment_amount');
+        $flat->is_installable = $request->has('is_installable');
         $flat->installment_duration = $request->input('installment_duration');
-        $flat->utility = $request->input('utility');
-        $flat->car_parking = $request->input('car_parking');
+        $flat->installment_amount = $request->input('installment_amount');
+        $flat->booking_amount = $request->input('booking_amount');
+        $flat->flat_amount = $request->input('flat_amount');
+        $flat->flat_utility = $request->input('flat_utility');
+        $flat->flat_car_parking = $request->input('flat_car_parking');
+        $flat->flat_total_received = $request->input('flat_total_received');
+        $flat->flat_initial_received = $request->input('flat_initial_received');
+        $flat->flat_balance = $request->input('flat_balance');
+
+
 
         try{
             $flat->save();
@@ -125,7 +140,7 @@ class FlatController extends Controller
                 if($flat == null){
                     return redirect()->back()->with('error','Flat not exists!');
                 }
-                return view('libs.customer.show')->with([
+                return view('libs.flat.show')->with([
                     'flat' => $flat,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs
@@ -159,7 +174,7 @@ class FlatController extends Controller
             if(is_numeric($id)){
                 $flat = Flat::find($id);
                 if($flat == null){
-                    return redirect()->back()->with('error','customer not exists!');
+                    return redirect()->back()->with('error','flat not exists!');
                 }
                 return view('libs.flat.edit')->with([
                     'flat' => $flat,
@@ -194,25 +209,25 @@ class FlatController extends Controller
             if(is_numeric($id)){
                 $flat = Flat::find($id);
                 if($flat == null){
-                    return redirect()->back()->with('error','customer not exists!');
+                    return redirect()->back()->with('error','flat not exists!');
                 }
-                $request->validate([
-                    'flat_number' =>'min:2|required',
-                    'installment_amount' => 'required',
-                    'installment_duration' => 'required',
-                    'booking_amount'=>'required'
+                $flat->project_id = $request->project_id;
+                $flat->customer_id = $request->customer_id;
 
-                ]);
-
-                $flat->project_id = $request->input('project_id');
+                $flat->flat_title = $request->input('flat_title');
+                $flat->is_avail_loan = $request->has('is_avail_loan');
                 $flat->flat_number = $request->input('flat_number');
-                $flat->is_avail_loan = $request->input('is_avail_loan');
-                $flat->is_installable = $request->input('is_installable');
-                $flat->installment_amount = $request->input('installment_amount');
+                $flat->is_installable = $request->has('is_installable');
                 $flat->installment_duration = $request->input('installment_duration');
+                $flat->installment_amount = $request->input('installment_amount');
                 $flat->booking_amount = $request->input('booking_amount');
-                $flat->utility = $request->input('utilityr');
-                $flat->car_parking = $request->input('car_parking');
+                $flat->flat_amount = $request->input('flat_amount');
+                $flat->flat_utility = $request->input('flat_utility');
+                $flat->flat_car_parking = $request->input('flat_car_parking');
+                $flat->flat_total_received = $request->input('flat_total_received');
+                $flat->flat_initial_received = $request->input('flat_initial_received');
+                $flat->flat_balance = $request->input('flat_balance');
+
 
                 try{
                     $flat->save();

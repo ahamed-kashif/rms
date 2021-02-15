@@ -122,9 +122,9 @@ class CustomerController extends Controller
             //return redirect()->route(‘flat.creat’, ‘customer_id’ => $customer->id);
 
             $customer->save();
+            //dd($customer->id);
 
-//             dd($customer->id,$customer->project_id);
-            return redirect()->route('flat.create', ['customer_id'=> $customer->id]);
+            return redirect()->route('flat.create', $customer->id);
 
 
         }catch (\Exception $e){
@@ -187,7 +187,7 @@ class CustomerController extends Controller
 
             if(is_numeric($id)){
                 $customer = Customer::find($id);
-                $project = Project::all();
+
                 if($customer == null){
                     return redirect()->back()->with('error','customer not exists!');
                 }
@@ -195,7 +195,7 @@ class CustomerController extends Controller
                     'customer' => $customer,
                     'title' => $title,
                     'breadcrumbs' => $breadcrumbs,
-                    'projects' => $project
+
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -227,24 +227,10 @@ class CustomerController extends Controller
                 if($customer == null){
                     return redirect()->back()->with('error','customer not exists!');
                 }
-                $request->validate([
-                    'full_name' => 'required|max:20',
-                    'father_or_husband_name' => 'max:20',
-                    'mother_name' => 'max:20',
-                    'occupation' => 'nullable|max:20',
-                    'date_of_birth'=>'required',
-                    'nationality'=>'nullable',
-                    'phone' => 'required|min:11',
-                    'email' => 'email|unique:contractors',
-                    'nid' => 'max:30|nullable',
-                    'nominee_name' => 'required|max:20',
-                    'present_address' => 'required|string',
-                    'permanent_address' => 'required|string',
-                    'reference_person_name' => 'required|max:20',
-                ]);
 
-                $customer = new Customer();
 
+
+                $customer->project_id = $request->project_id;
                 $customer->full_name = $request->input('full_name');
                 $customer->father_or_husband_name = $request->input('father_or_husband_name');
                 $customer->mother_name = $request->input('mother_name');
@@ -258,7 +244,7 @@ class CustomerController extends Controller
                 $customer->present_address = $request->input('present_address');
                 $customer->permanent_address = $request->input('permanent_address');
                 $customer->reference_person_name = $request->input('reference_person_name');
-                $customer->project_id = $request->project_id;
+
 //                $customer->flat_number = $request->input('flat_number');
 //                $customer->is_avail_loan = $request->has('is_avail_loan');
 //                $customer->is_installable = $request->has('is_installable');
@@ -269,7 +255,7 @@ class CustomerController extends Controller
 
                 try{
                     $customer->save();
-
+                    return redirect()->back()->with('success','successfully updated');
 
 
                 }catch (\Exception $e){

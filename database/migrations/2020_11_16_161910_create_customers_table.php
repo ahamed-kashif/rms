@@ -23,8 +23,8 @@ class CreateCustomersTable extends Migration
             $table->string('occupation')->nullable();
             $table->date('date_of_birth');
             $table->string('nationality');
-            $table->string('phone_number')->unique();
-            $table->string('email')->unique()->nullable();
+            $table->string('phone_number');
+            $table->string('email')->nullable();
             $table->string('nid')->nullable();
             $table->string('nominee_name');
             $table->string('present_address');

@@ -50,5 +50,11 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
    Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
    Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
-   Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
 });
+Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
+Route::post('/customers/{customer_id}/flat/store','Libs\FlatController@store')->name('flat.store');
+Route::get('/flat/','Libs\FlatController@index')->name('flat.index');
+Route::get('/flat/{id}','Libs\FlatController@show')->name('flat.show');
+Route::get('/flat/edit/{id}','Libs\FlatController@edit')->name('flat.edit');
+Route::post('/{id}','Libs\FlatController@update')->name('flat.update');
+Route::delete('/{id}','Libs\FlatController@destroy')->name('flat.destroy');
