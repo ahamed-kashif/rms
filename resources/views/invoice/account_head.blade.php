@@ -31,7 +31,7 @@
                 <label for="project_id" class="control-label">Select an Investor Project...</label>
                 <select class="form-control select2" name="project_id" id="other_project_id">
                     <option>......</option>
-                    @foreach($projects as $project)
+                    @foreach($otherProjects as $project)
                         <option value="{{$project->id}}">{{$project->name}}</option>
                     @endforeach
                 </select>

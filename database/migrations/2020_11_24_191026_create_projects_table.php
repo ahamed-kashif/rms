@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('area')->unique();
+            $table->boolean('is_investor_project')->default(0);
             $table->string('description')->nullable();
             $table->string('address')->nullable();
             $table->date('start_date');

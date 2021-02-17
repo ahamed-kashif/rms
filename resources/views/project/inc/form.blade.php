@@ -58,6 +58,12 @@
             <input id="engineer_budget" name="engineer_budget" type="number" placeholder="Enter Engineer Budget..." class="form-control" value="{{isset($project) ? $project->engineer_budget : ''}}">
         </div>
     </div>
+    <div class="form-group row mt-5 ml-3">
+        <div class="custom-control custom-switch custom-switch-lg mb-3" dir="rtl">
+            <input type="checkbox" class="custom-control-input" name="is_investor_project" id="customSwitchsizelg" {{isset($project) && $project->is_investor_project ? 'checked' : ''}} value="{{isset($project) && $project->is_investor_project ? 0 : 1}}">
+            <label class="custom-control-label" for="customSwitchsizelg">Investor Project</label>
+        </div>
+    </div>
 
 @push('custom-css')
     @include('extras.bootstrap-datepicker-css')

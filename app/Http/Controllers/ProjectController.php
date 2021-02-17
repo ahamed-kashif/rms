@@ -82,6 +82,7 @@ class ProjectController extends Controller
         $project->contractor_budget = $request->input('contractor_budget');
         $project->supplier_budget = $request->input('supplier_budget');
         $project->engineer_budget = $request->input('engineer_budget');
+        $project->is_investor_project = $request->input('is_investor_project');
 
         try{
             if($user->can('update project')){
@@ -174,6 +175,11 @@ class ProjectController extends Controller
         $project->contractor_budget = $request->input('contractor_budget');
         $project->supplier_budget = $request->input('supplier_budget');
         $project->engineer_budget = $request->input('engineer_budget');
+        if($request->has('is_investor_project')){
+            $project->is_investor_project = 1;
+        }else{
+            $project->is_investor_project = 0;
+        }
 
         try{
             if($user->can('update project')){

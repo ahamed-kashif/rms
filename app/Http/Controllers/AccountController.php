@@ -30,14 +30,14 @@ class AccountController extends Controller
 
 
         $contractors = Contractor::all();
-        $projects = Project::all();
+        $projects = Project::where('is_investor_project',0)->pluck('id')->toArray();
         $payment_methods = PaymentMethod::all();
 
         if($request->has('start') && $request->has('end')){
             $invoices = Invoice::whereBetween('created_at',[$request->input('start'),$request->input('end')])->orderBy('created_at','desc')->get();
             //dd($invoices->first()->created_at);
         }else{
-            $invoices = Invoice::with('balance')->orderBy('created_at','desc')->get();
+            $invoices = Invoice::with('balance')->whereIn('project_id',$projects)->orderBy('created_at','desc')->get();
         }
         $balances = Balance::with('invoices')->get();
         $title = 'Accounts';

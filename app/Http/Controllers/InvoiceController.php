@@ -161,7 +161,9 @@ class InvoiceController extends Controller
         if($user->can('create invoice')){
             if(session()->has('invoice')){
                 $record = session()->get('invoice');
-                $projects = Project::all();
+                $projects = Project::where('is_investor_project',0)->orderBy('updated_at')->get();
+                $otherProjects = Project::where('is_investor_project',1)->orderBy('updated_at')->get();
+                //dd($projects);
                 if($record['state'] == 'payment'){
                     $title = 'Invoice NO:   '.session()->get('invoice')['invoice']->invoice_no;
                     $breadcrumbs['invoices'] = '#';
@@ -170,7 +172,8 @@ class InvoiceController extends Controller
                         'title' => $title,
                         'breadcrumbs' => $breadcrumbs,
                         'invoice' => $record['invoice'],
-                        'projects' => $projects
+                        'projects' => $projects,
+                        'otherProjects' => $otherProjects
                     ]);
                 }
                 return redirect()->route('invoice.create')->with('error','Create an Invoice First');
@@ -247,6 +250,10 @@ class InvoiceController extends Controller
      * @return mixed
      */
     public function person_update(Request $request){
+        $request->validate([
+           'person_name' => 'required_with:other',
+           'phone' => 'required_with:other',
+        ]);
         if(session()->has('invoice')){
             $record = session()->get('invoice');
             $invoice = $record['invoice'];
@@ -289,8 +296,11 @@ class InvoiceController extends Controller
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
-                elseif($request->has('other')){
+                elseif($request->has('is_other')){
+                    //dd("Hello");
                     $invoice->is_office_expense = 1;
+                    $invoice->person_name = $request->input('person_name');
+                    $invoice->person_phone = $request->input('phone');
                     $invoice->save();
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }

@@ -105,13 +105,11 @@
             <input type="hidden" name="is_other" value="1" />
             <button type="button" id="other_btn" onclick="show_other()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Office/Other</button>
             <div class="form-group other">
-{{--                <label for="project_id" class="control-label">Select an Office/Others Project...</label>--}}
-{{--                <select class="form-control select2" name="project_id" id="other_project_id">--}}
-{{--                    <option>......</option>--}}
-{{--                    @foreach($projects as $project)--}}
-{{--                        <option value="{{$project->id}}">{{$project->name}}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
+                <label for="person_name">Person Name</label>
+                <input type="text" class="form-control" placeholder="Enter Person Name.." name="person_name" id="person_name">
+                <label for="person_name">Phone</label>
+                <input type="text" class="form-control" placeholder="Enter Phone Number.." name="phone" id="person_name">
+                <input type="submit" class="btn btn-sm btn-outline-primary mt-2" value="next">
             </div>
         </form>
     </div>
@@ -159,10 +157,6 @@
             $('.investors').on('change', function () {
                 investor.submit();
             });
-            $('.other').on('change', function () {
-                other.submit();
-            });
-
         });
 
         function show_contractor() {
@@ -215,8 +209,8 @@
             engineer.hide();
             supplier.hide();
             customer.hide();
-            investor.show();
-            other.hide();
+            investor.hide();
+            other.show();
             $('.other').show();
         }
     </script>

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Balance;
 use App\Models\Invoice;
+use App\Models\Project;
 use Illuminate\Console\Command;
 
 class Accounts extends Command
@@ -43,7 +44,10 @@ class Accounts extends Command
         if(Balance::count() != 0){
             $balance = Balance::latest()->first()->balance;
         }
-        $invoices = Invoice::notChecked()->get();
+        $projects = Project::where('is_investor_project',0)->pluck('id')->toArray();
+        //$otherProjects = Project::where('is_investor_project',1)->get();
+        $invoices = Invoice::whereIn('project_id',$projects)->notChecked()->get();
+        //dd($invoices);
         if(count($invoices) == 0){
             $this->info('Balance is already updated!');
             return 0;
