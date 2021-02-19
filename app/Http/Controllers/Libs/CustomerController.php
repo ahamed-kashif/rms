@@ -245,12 +245,6 @@ class CustomerController extends Controller
                 $customer->permanent_address = $request->input('permanent_address');
                 $customer->reference_person_name = $request->input('reference_person_name');
 
-//                $customer->flat_number = $request->input('flat_number');
-//                $customer->is_avail_loan = $request->has('is_avail_loan');
-//                $customer->is_installable = $request->has('is_installable');
-//                $customer->installment_amount = $request->input('installment_amount');
-//                $customer->installment_duration = $request->input('installment_duration');
-//                $customer->booking_amount = $request->input('booking_amount');
 
 
                 try{
