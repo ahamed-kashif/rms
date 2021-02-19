@@ -18,9 +18,13 @@ class ProjectController extends Controller
      *
      * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        if($request->has('is_investor_project')){
+            $projects = Project::where('is_investor_project',1)->get();
+        }else{
+            $projects = Project::all();
+        }
         $title = 'Project List';
         $breadcrumbs['projects'] = '#';
         $user = Auth::user();
@@ -102,7 +106,7 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -111,11 +115,14 @@ class ProjectController extends Controller
         $title = $project->name;
         $breadcrumbs['projects'] = route('project.index');
         $breadcrumbs[$project->name] = '#';
+        $accounts = $this->project_account($project->id);
+        //dd($accounts);
         if($user->can('show project')){
             return view('project.show')->with([
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs,
-                'project' => $project
+                'project' => $project,
+                'accounts' => $accounts
             ]);
         }
         return redirect()->route('home')->with([
@@ -203,4 +210,36 @@ class ProjectController extends Controller
     {
 
     }
+
+    /**
+     * Accounts calcutation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function project_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Project::find($id)->invoices()->get();
+        $balances = [];
+        $balance = 0;
+        if(count($invoices) == 0){
+            return 0;
+        }
+        foreach($invoices as $invoice) {
+            if ($invoice->is_checkin) {
+                $balance = $balance + $invoice->amount;
+                $balances[$invoice->id] = $balance;
+            } else {
+                $balance = $balance - $invoice->amount;
+                $balances[$invoice->id] = $balance;
+            }
+        }
+        $account['invoices'] = $invoices;
+        $account['balance'] = $balances;
+
+        return $account;
+    }
+
+
 }

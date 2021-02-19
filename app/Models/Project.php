@@ -42,5 +42,9 @@ class Project extends Model implements HasMedia
                     ->withPivot('purpose')
                     ->withTimestamps();
     }
+
+    public function invoices(){
+        return $this->hasMany(Invoice::class,'project_id','id');
+    }
 }
 

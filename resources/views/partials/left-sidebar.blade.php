@@ -25,7 +25,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('project.create')}}" key="t-p-grid">Create Project</a></li>
                         <li><a href="{{route('project.index')}}" key="t-p-list">Project List</a></li>
-                        <li><a href="#" key="t-p-overview">Summary</a></li>
+{{--                        <li><a href="#" key="t-p-overview">Summary</a></li>--}}
                     </ul>
                 </li>
                 <li>
@@ -60,6 +60,18 @@
                         <li><a href="{{route('investor.index')}}" key="t-contractor">Investors</a></li>
                         <li><a href="{{route('customer.index')}}" key="t-contractor">Customers</a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="{{route('project.index',['is_investor_project' => 1])}}" class="waves-effect">
+                        <i class="bx bx-building-house"></i>
+                        <span key="t-projects">Investor Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('account.index')}}" class="waves-effect">
+                        <i class="fas fa-table"></i>
+                        <span key="t-projects">Accounts</span>
+                    </a>
                 </li>
             </ul>
         </div>

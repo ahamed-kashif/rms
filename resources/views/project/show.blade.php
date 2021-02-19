@@ -1,4 +1,9 @@
 @extends('layouts.page')
+@section('page-css')
+    @include('extras.datatable-css')
+    @include('extras.select2-css')
+    @include('extras.bootstrap-datepicker-css')
+@endsection
 @section('page-title')
     @include('components.page-title')
 @endsection
@@ -68,4 +73,63 @@
         <!-- end col -->
     </div>
     <!-- end row -->
+    <h4 class="text-center">Accounts</h4>
+    <hr>
+    <table id="account" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+        <thead class="bg-secondary text-light">
+        <tr>
+            <th>Date</th>
+            <th>Invoice NO.</th>
+            <th>Received</th>
+            <th>Expense</th>
+            <th>Total(&#2547)</th>
+            <th>Person</th>
+            <th>Payment Method</th>
+            <th>Purpose</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        @foreach($accounts['invoices'] as $invoice)
+            <tr>
+                <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
+                <td>{{$invoice->invoice_no}}</td>
+                <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
+                <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
+                <td>{{$accounts['balance'][$invoice->id]}}</td>
+                <td>{{$invoice->person->name}}</td>
+                <td>{{$invoice->PaymentMethod->title}}</td>
+                <td>{{$invoice->description}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
+@section('page-js')
+    @include('extras.datatable-js')
+    @include('extras.select2-js')
+    @include('extras.bootstrap-datepicker-js')
+    <script>
+        $(document).ready(function() {
+            $('#project').select2();
+            $('#payment_method').select2();
+            $('#person').select2();
+            var groupColumn = 5;
+            let table = $("#account").DataTable({
+                "buttons":["copy","excel","pdf","colvis"],
+                "columnDefs": [
+                    // { "visible": false, "targets": groupColumn,},
+                    {'orderable' : false, "targets": [0,2,3,4,5,6,7]}
+                ],
+                "fixedHeader": {
+                    header: true,
+                    footer: true
+                },
+                "order": [[1, 'desc']],
+                "displayLength": 25,
+            } );
+            table.buttons().container().appendTo("#account_wrapper .col-md-6:eq(0)");
+        } );
+    </script>
 @endsection
