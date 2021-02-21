@@ -46,5 +46,9 @@ class Project extends Model implements HasMedia
     public function invoices(){
         return $this->hasMany(Invoice::class,'project_id','id');
     }
+
+    public function flat(){
+        return $this->hasMany(Flat::class,'project_id');
+    }
 }
 

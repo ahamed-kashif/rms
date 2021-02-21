@@ -66,3 +66,13 @@ Route::prefix('invoice')->group(function(){
     Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
 });
 Route::get('/accounts','AccountController@index')->name('account.index');
+
+
+/*** sani **/
+oute::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
+Route::post('/customers/{customer_id}/flat/store','Libs\FlatController@store')->name('flat.store');
+Route::get('/flat/','Libs\FlatController@index')->name('flat.index');
+Route::get('/flat/{id}','Libs\FlatController@show')->name('flat.show');
+Route::get('/flat/edit/{id}','Libs\FlatController@edit')->name('flat.edit');
+Route::post('/{id}','Libs\FlatController@update')->name('flat.update');
+Route::delete('/{id}','Libs\FlatController@destroy')->name('flat.destroy');

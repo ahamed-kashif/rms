@@ -11,6 +11,12 @@ class Customer extends Model
     use IsContactable;
     use Invoiceable;
     protected $fillable = [ 'name', 'email', 'nid', 'phone','project_id'];
+    public function Project(){
+        return $this->belongsTo(Project::class,'project_id',id);
+    }
 
+    public function flats(){
+        return $this->hasMany(Flat::class);
+    }
 
 }

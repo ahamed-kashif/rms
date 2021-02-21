@@ -34,7 +34,7 @@
         <tbody>
         @foreach($customers as $customer)
             <tr>
-                <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->name}}</a></td>
+                <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->full_name}}</a></td>
                 <td>{{$customer->phone_number}}</td>
                 <td>{{$customer->email}}</td>
                 <td>
