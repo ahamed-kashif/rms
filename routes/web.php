@@ -69,7 +69,7 @@ Route::get('/accounts','AccountController@index')->name('account.index');
 
 
 /*** sani **/
-oute::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
+Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
 Route::post('/customers/{customer_id}/flat/store','Libs\FlatController@store')->name('flat.store');
 Route::get('/flat/','Libs\FlatController@index')->name('flat.index');
 Route::get('/flat/{id}','Libs\FlatController@show')->name('flat.show');
