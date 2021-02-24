@@ -17,13 +17,13 @@ class CreateFlatsTable extends Migration
             $table->id();
             $table->string('flat_title');
 
-            $table->integer('customer_id')->unsigned();
-            $table->integer('project_id')->unsigned();
+            $table->integer('customer_id')->unsigned()->nullable();
+            $table->integer('project_id')->unsigned()->nullable();
             $table->string('flat_number');
-            $table->boolean('is_avail_loan')->default(false);
-            $table->boolean('is_installable')->default(false);
+            $table->boolean('is_avail_loan')->default(0);
+            $table->boolean('is_installable')->default(0);
             $table->float('installment_amount');
-            $table->text('installment_duration')->unsigned();
+            $table->integer('installment_duration')->unsigned()->nullable();
             $table->float('booking_amount');
 
             $table->float('flat_amount');

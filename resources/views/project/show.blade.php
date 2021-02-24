@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-8">
-            @include('project.inc.overview')
+            @include('project.inc.new_overview')
         </div>
         <!-- end col -->
 
@@ -91,6 +91,8 @@
 
         </thead>
         <tbody>
+
+        @if($accounts != 0)
         @foreach($accounts['invoices'] as $invoice)
             <tr>
                 <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
@@ -98,11 +100,12 @@
                 <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
                 <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
                 <td>{{$accounts['balance'][$invoice->id]}}</td>
-                <td>{{$invoice->person->name}}</td>
+                <td>{{$invoice->is_office_expense == 1 ? $invoice->person_name : $invoice->person->name}}</td>
                 <td>{{$invoice->PaymentMethod->title}}</td>
                 <td>{{$invoice->description}}</td>
             </tr>
         @endforeach
+        @endif
         </tbody>
     </table>
 @endsection

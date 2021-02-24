@@ -31,11 +31,6 @@ class CreateInvoicesTable extends Migration
             $table->boolean('is_checked')->default(0);
             $table->integer('balance_id')->unsigned()->nullable();
 
-            $table->foreign('project_id')
-                ->references('id')
-                ->on('projects')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
         });
     }
 

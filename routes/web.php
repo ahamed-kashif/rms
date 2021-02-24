@@ -66,7 +66,7 @@ Route::prefix('invoice')->group(function(){
     Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
 });
 Route::get('/accounts','AccountController@index')->name('account.index');
-
+Route::get('contacts/customer/{id}/print','Libs\CustomerController@print_customer')->name('customer.print');
 
 /*** sani **/
 Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');

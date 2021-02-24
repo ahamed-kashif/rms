@@ -77,19 +77,19 @@ class CustomerController extends Controller
 
 
         $request->validate([
-            'full_name' => 'required|max:20',
-            'father_or_husband_name' => 'max:20',
-            'mother_name' => 'max:20',
-            'occupation' => 'nullable|max:20',
+            'full_name' => 'required',
+            'father_or_husband_name' => 'required',
+            'mother_name' => 'required',
+            'occupation' => 'required',
             'date_of_birth'=>'required',
-            'nationality'=>'nullable',
-            'phone' => 'required|min:11',
-            'email' => 'email|unique:contractors',
-            'nid' => 'max:30|nullable',
-            'nominee_name' => 'required|max:20',
+            'nationality'=>'required',
+            'phone' => 'required',
+            'email' => 'email|nullable',
+            'nid' => 'required',
+            'nominee_name' => 'nullable',
             'present_address' => 'required|string',
             'permanent_address' => 'required|string',
-            'reference_person_name' => 'required|max:20',
+            'reference_person_name' => 'nullable',
             'project_id' => 'required'
         ]);
 
@@ -288,5 +288,18 @@ class CustomerController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+    }
+
+    public function print_customer($id){
+        $customer = Customer::find($id);
+        $title = 'Print '.$customer->name;
+        $breadcrumbs['customers'] = route('customer.index');
+        $breadcrumbs[$customer->name] = route('customer.show',$customer->id);
+        $breadcrumbs['print'] = 'javaScript:void();';
+        return view('libs.customer.print')->with([
+            'customer' => $customer,
+            'title' => $title,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 }

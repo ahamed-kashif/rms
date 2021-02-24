@@ -30,48 +30,45 @@
     <hr>
     <div class="row">
         <div class="col-md-5 col-lg-5">
-            <ol class="list-unstyled">
-                <li>
-                    <b>Contact Number</b><p><a href="tel:{{$customer->phone_number}}">{{$customer->phone_number}}</a></p>
-                </li>
-                <li>
-                    <b>Email Address</b><p><a href="email:{{$customer->email}}">{{$customer->email}}</a></p>
-                </li>
-                <li>
-                    <b>National ID (NID)</b><p>{{$customer->nid}}</p>
-                </li>
-                <li>
-                    <b>Address</b><p>{{$customer->present_address}}</p>
-                </li>
-            </ol>
-        </div>
-        <div class="col-md-7 col-lg-7 border-pink">
-            <div class="align-content-end">
-                <h5>Assigned Projects</h5>
-                <table class="table table-bordered align-content-center">
-                    <thead>
-                    <tr>
-                        <th class="title">Active<small>(n)</small></th>
-                        <th>Project</th>
-                        <th>Product</th>
-                    </tr>
-                    </thead>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
                     <tbody>
-                    <tr>
-                        <td><span class="badge badge-pill badge-success text-light font-size-15 p-2">active</span> </td>
-                        <td>Demo</td>
-                        <td>Demo</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
+                        <tr>
+                            <th>Father/Husband's Number</th>
+                            <td>{{$customer->father_or_husband_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Mother's Number</th>
+                            <td>{{$customer->mother_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Occupation</th>
+                            <td>{{$customer->occupation}}</td>
+                        </tr>
+                        <tr>
+                            <th>NID</th>
+                            <td>{{$customer->nid}}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact Number</th>
+                            <td><a href="tel:{{$customer->phone_number}}">{{$customer->phone_number}}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Flat NO.</th>
+                            <td>{{$customer->flats->first()->flat_number}}</td>
+                        </tr>
+                        <tr>
+                            <th>Flat Title</th>
+                            <td>{{$customer->flats->first()->flat_title}}</td>
+                        </tr>
+                        <tr>
+                            <th>Project Name</th>
+                            <td>{{$customer->flats->first()->project->name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Project Address</th>
+                            <td>{{$customer->flats->first()->project->address}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
