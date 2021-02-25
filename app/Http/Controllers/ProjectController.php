@@ -126,7 +126,11 @@ class ProjectController extends Controller
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs,
                 'project' => $project,
-                'accounts' => $accounts
+                'accounts' => $accounts,
+                'contractorBalance' => $this->contractor_balance($project->id),
+                'projectBalance' => $this->project_balance($project->id),
+                'supplierBalance' => $this->supplier_balance($project->id),
+                'engineerBalance' => $this->engineer_balance($project->id),
             ]);
         }
         return redirect()->route('home')->with([
@@ -216,7 +220,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Accounts calcutation of a project.
+     * Accounts calculation of a project.
      *
      * @param  int  $id
      * @return mixed
@@ -245,5 +249,76 @@ class ProjectController extends Controller
         return $account;
     }
 
+
+    public function project_balance($id){
+        $project = Project::find($id);
+        $invoices = $project->invoices()->where('is_checkin',0)->get();
+        $balance = $project->budget;
+        if(count($invoices) == 0){
+            return -1;
+        }
+        foreach($invoices as $invoice) {
+            if ($invoice->is_checkin) {
+                $balance = $balance + $invoice->amount;
+            } else {
+                $balance = $balance - $invoice->amount;
+            }
+        }
+
+        return  $balance;
+    }
+
+    public function contractor_balance($id){
+        $project = Project::find($id);
+        $contractors = $project->contractors()->get();
+        $balance = $project->contractor_budget;
+
+        foreach ($contractors as $contractor){
+            $invoices = $contractor->Invoice()->where('is_checkin',0)->get();
+            if(count($invoices) == 0){
+                return -1;
+            }
+            foreach($invoices as $invoice) {
+                $balance = $balance - $invoice->amount;
+            }
+        }
+
+        return $balance;
+    }
+
+    public function supplier_balance($id){
+        $project = Project::find($id);
+        $suppliers = $project->suppliers()->get();
+        $balance = $project->supplier_budget;
+
+        foreach ($suppliers as $supplier){
+            $invoices = $supplier->Invoice()->get();
+            if(count($invoices) == 0){
+                return -1;
+            }
+            foreach($invoices as $invoice) {
+                $balance = $balance - $invoice->amount;
+            }
+        }
+
+        return $balance;
+    }
+    public function engineer_balance($id){
+        $project = Project::find($id);
+        $engineers = $project->engineers()->get();
+        $balance = $project->engineer_budget;
+
+        foreach ($engineers as $engineer){
+            $invoices = $engineer->Invoice()->where('is_checkin',0)->get();
+            if(count($invoices) == 0){
+                return -1;
+            }
+            foreach($invoices as $invoice) {
+                $balance = $balance - $invoice->amount;
+            }
+        }
+
+        return $balance;
+    }
 
 }

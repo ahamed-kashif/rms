@@ -1,4 +1,7 @@
 @extends('layouts.page')
+@section('page-css')
+    @include('extras.datatable-css')
+@endsection
 @section('page-title')
     @include('components.page-title')
 @endsection
@@ -60,36 +63,59 @@
                 </li>
             </ol>
         </div>
-        <div class="col-md-7 col-lg-7 border-pink">
-            <div class="align-content-end">
-                <h5>Assigned Projects</h5>
-                <table class="table table-bordered align-content-center">
-                    <thead>
-                    <tr>
-                        <th class="title">Active<small>(n)</small></th>
-                        <th>Project</th>
-                        <th>Invested Amount</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span class="badge badge-pill badge-success text-light font-size-15 p-2">active</span> </td>
-                        <td>Demo</td>
-                        <td>Demo</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+{{--        <div class="col-md-7 col-lg-7 border-pink">--}}
+{{--            <div class="align-content-end">--}}
+{{--                <h5>Assigned Projects</h5>--}}
+{{--                <table class="table table-bordered align-content-center">--}}
+{{--                    <thead>--}}
+{{--                    <tr>--}}
+{{--                        <th class="title">Active<small>(n)</small></th>--}}
+{{--                        <th>Project</th>--}}
+{{--                        <th>Invested Amount</th>--}}
+{{--                    </tr>--}}
+{{--                    </thead>--}}
+{{--                    <tbody>--}}
+{{--                    <tr>--}}
+{{--                        <td><span class="badge badge-pill badge-success text-light font-size-15 p-2">active</span> </td>--}}
+{{--                        <td>Demo</td>--}}
+{{--                        <td>Demo</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td></td>--}}
+{{--                        <td>nill</td>--}}
+{{--                        <td>nill</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td></td>--}}
+{{--                        <td>nill</td>--}}
+{{--                        <td>nill</td>--}}
+{{--                    </tr>--}}
+{{--                    </tbody>--}}
+{{--                </table>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
+    @include('inc.account')
+@endsection
+@section('page-js')
+    @include('extras.datatable-js')
+    <script>
+        $(document).ready(function() {
+            var groupColumn = 5;
+            let table = $("#account").DataTable({
+                "buttons":["copy","excel","pdf","colvis"],
+                "columnDefs": [
+                    // { "visible": false, "targets": groupColumn,},
+                    {'orderable' : false, "targets": [0,2,3,4,5,6,7]}
+                ],
+                "fixedHeader": {
+                    header: true,
+                    footer: true
+                },
+                "order": [[1, 'desc']],
+                "displayLength": 25,
+            } );
+            table.buttons().container().appendTo("#account_wrapper .col-md-6:eq(0)");
+        } );
+    </script>
 @endsection

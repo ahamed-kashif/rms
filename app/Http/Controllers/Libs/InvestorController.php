@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Libs;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Investor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -102,7 +103,7 @@ class InvestorController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -120,10 +121,12 @@ class InvestorController extends Controller
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
+                $accounts = $this->investor_account($investor->id);
                 return view('libs.investor.show')->with([
                     'investor' => $investor,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -245,5 +248,18 @@ class InvestorController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+    }
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function investor_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Investor::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
     }
 }

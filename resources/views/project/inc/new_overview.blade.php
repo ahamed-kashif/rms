@@ -17,11 +17,11 @@
                 </tr>
                 <tr>
                     <th>Project Budget:</th>
-                    <td>{{isset($project) ? '৳ '.$project->budget : ''}}</td>
+                    <td>{{isset($project) ? $project->budget : ''}}</td>
                 </tr>
                 <tr>
                     <th>Remaining Budget:</th>
-                    <td>{{isset($project) ? '৳ '.$project->budget : ''}}</td>
+                    <td>{{isset($project) && $projectBalance > 0 ? $projectBalance : $project->budget}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -39,18 +39,18 @@
                     <tbody>
                     <tr>
                         <th>Contractors Budget</th>
-                        <td>{{isset($project) ? $project->description : ''}}</td>
-                        <td>{{isset($project) ? $project->description : ''}}</td>
+                        <td>{{isset($project) ? $project->contractor_budget : ''}}</td>
+                        <td>{{isset($contractorBalance) && $contractorBalance > 0 ? $contractorBalance : $project->contractor_budget}}</td>
                     </tr>
                     <tr>
                         <th>Suppliers Budget:</th>
-                        <td>{{isset($project) ? '৳ '.$project->budget : ''}}</td>
-                        <td>{{isset($project) ? '৳ '.$project->budget : ''}}</td>
+                        <td>{{isset($project) ? $project->supplier_budget : ''}}</td>
+                        <td>{{isset($supplierBalance) && $supplierBalance > 0 ? $supplierBalance : $project->supplier_budget}}</td>
                     </tr>
                     <tr>
                         <th>Engineers Budget:</th>
-                        <td>{{isset($project) ? '৳ '.$project->budget : ''}}</td>
-                        <td>{{isset($project) ? '৳ '.$project->budget : ''}}</td>
+                        <td>{{isset($project) ? $project->engineer_budget : ''}}</td>
+                        <td>{{isset($engineerBalance) && $engineerBalance > 0 ? $engineerBalance : $project->engineer_budget}}</td>
                     </tr>
                     </tbody>
                 </table>

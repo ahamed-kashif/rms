@@ -106,7 +106,7 @@ class ContractorController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -118,7 +118,7 @@ class ContractorController extends Controller
             $breadcrumbs['contact'] = "#";
             $breadcrumbs['contractors'] = route('contractor.index');
             $breadcrumbs[$contractor->name] = 'javaScript:void();';
-
+            $accounts = $this->contractor_account($contractor->id);
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
                 if($contractor == null){
@@ -127,7 +127,8 @@ class ContractorController extends Controller
                 return view('libs.contractor.show')->with([
                     'contractor' => $contractor,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -250,5 +251,19 @@ class ContractorController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+    }
+
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function contractor_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Contractor::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
     }
 }

@@ -23,10 +23,10 @@ CreateProjectsTable extends Migration
             $table->string('address')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->float('budget');
-            $table->float('contractor_budget')->nullable();
-            $table->float('supplier_budget')->nullable();
-            $table->float('engineer_budget')->nullable();
+            $table->bigInteger('budget');
+            $table->bigInteger('contractor_budget')->nullable();
+            $table->bigInteger('supplier_budget')->nullable();
+            $table->bigInteger('engineer_budget')->nullable();
             $table->enum('status',['pending','under construction','delayed','completed','cancelled'])->default('pending');
             $table->timestamps();
         });

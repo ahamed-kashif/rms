@@ -20,7 +20,7 @@
     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
-
+@stack('css')
 
 </head>
 
@@ -40,6 +40,6 @@
 @yield('js')
 <script src="{{asset('js/skote.js')}}"></script>
 {{--<script src="{{asset('js/app.js')}}"></script>--}}
-
+@stack('js')
 </body>
 </html>

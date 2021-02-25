@@ -136,7 +136,7 @@ class CustomerController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -148,7 +148,7 @@ class CustomerController extends Controller
             $breadcrumbs['contact'] = "#";
             $breadcrumbs['customers'] = route('customer.index');
             $breadcrumbs[$customer->name] = 'javaScript:void();';
-
+            $accounts = $this->customer_account($customer->id);
             if(is_numeric($id)){
                 $customer = Customer::find($id);
                 if($customer == null){
@@ -157,7 +157,8 @@ class CustomerController extends Controller
                 return view('libs.customer.show')->with([
                     'customer' => $customer,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -301,5 +302,19 @@ class CustomerController extends Controller
             'title' => $title,
             'breadcrumbs' => $breadcrumbs
         ]);
+    }
+
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function customer_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Customer::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
     }
 }
