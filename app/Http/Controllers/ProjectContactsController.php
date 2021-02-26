@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contractor;
 use App\Models\Engineer;
+use App\Models\Investor;
 use App\Models\Material;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
@@ -294,6 +295,97 @@ class ProjectContactsController extends Controller
                     }
                 }else{
                     return redirect()->back()->with('error','engineer does not exists!');
+                }
+            }else{
+                return redirect()->route('home')->with('error','Unauthorized Access!');
+            }
+        }else{
+            return redirect()->back()->with('error', 'Unauthorized Access!');
+        }
+    }
+    /**
+     * add investor to project.
+     *
+     * @param int $id,
+     * @return mixed
+     */
+    public function investors_view($id){
+        $user = Auth::user();
+        $project = Project::find($id);
+        $investors = Investor::all();
+        if($user->can('update project')){
+            $title = $project->name.'\'s Investors';
+            $breadcrumbs['projects'] = route('project.index');
+            $breadcrumbs[$project->name] = route('project.show',$project->id);
+            $breadcrumbs['investors'] = 'javascript:void(0)';
+            return view('project_contact.investor')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'project' => $project,
+                'investors' => $investors
+            ]);
+        }
+    }
+    /**
+     * add investor to project.
+     *
+     * @param int $id,
+     * @param Request $request,
+     * @return mixed
+     */
+    public function add_investor($id, Request $request)
+    {
+        $request->validate([
+            'investor' => 'required',
+        ]);
+        $user = Auth::user();
+        $project = Project::find($id);
+        $investor = Investor::find($request->input('investor'));
+        if($user->can('update project')){
+            if($investor != null){
+                try{
+                    $project->investors()->attach($investor->id,['purpose' => 'Investor']);
+                    return redirect()->back()->with('success','Investor Added successfully.');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e->getMessage());
+                }
+            }else{
+                return redirect()->back()->with('error','Investor does not exists!');
+            }
+        }else{
+            return redirect()->route('home')->with('error','Unauthorized Access!');
+        }
+
+    }
+
+    public function add_new_investor($id, Request $request){
+        $request->validate([
+            'investor_name' => 'required',
+            'investor_phone' => 'required'
+        ]);
+        $user = Auth::user();
+        $project = Project::find($id);
+        $investor = new Investor;
+        if($user->can('create investor')){
+            try{
+                $investor->name = $request->input('investor_name');
+                $investor->phone_number = $request->input('investor_phone');
+                $investor->save();
+            }catch(\Exception $e){
+                return redirect()->back()->withErrors($e->getMessage());
+            }
+
+
+            if($user->can('update project')){
+                if($investor != null){
+                    try{
+                        $project->investors()->attach($investor->id,['purpose' => 'Investor']);
+                        return redirect()->back()->with('success','Investor Added successfully.');
+                    }catch (\Exception $e){
+                        return redirect()->back()->withErrors($e->getMessage());
+                    }
+                }else{
+                    return redirect()->back()->with('error','investor does not exists!');
                 }
             }else{
                 return redirect()->route('home')->with('error','Unauthorized Access!');

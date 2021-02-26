@@ -71,7 +71,7 @@ class MaterialController extends Controller
         $material->title = $request->title;
         $material->unit = $request->unit;
         try{
-            if(auth()->user()->can('store material')){
+            if(auth()->user()->can('create material')){
                 $material->save();
                 return redirect()->route('material.edit',$material->id)->with('success','Material stored successfully!');
             }else{

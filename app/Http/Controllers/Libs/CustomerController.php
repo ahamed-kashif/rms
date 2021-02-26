@@ -312,9 +312,25 @@ class CustomerController extends Controller
      */
     public function customer_account($id)
     {
-        //$project = Project::find($id);
-        $invoices = Customer::find($id)->Invoice()->get();
+        $customer = Customer::find($id);
+        $invoices = $customer->Invoice()->get();
+        $balances = [];
+        $balance = $customer->flats()->first()->flat_amount;
+        if(count($invoices) == 0){
+            return 0;
+        }
+        foreach($invoices as $invoice) {
+            if ($invoice->is_checkin) {
+                $balance = $balance - $invoice->amount;
+                $balances[$invoice->id] = $balance;
+            } else {
+                $balance = $balance + $invoice->amount;
+                $balances[$invoice->id] = $balance;
+            }
+        }
         $account['invoices'] = $invoices;
+        $account['balance'] = $balances;
+
         return $account;
     }
 }

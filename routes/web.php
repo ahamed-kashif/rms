@@ -49,6 +49,9 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
    Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
    Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
+    Route::get('/investors','ProjectContactsController@investors_view')->name('project.investors.view');
+   Route::post('/investors','ProjectContactsController@add_investor')->name('project.investor.add');
+   Route::post('/investors/new','ProjectContactsController@add_new_investor')->name('project.investor.add.new');
 });
 /****Invoice Routes****/
 Route::prefix('invoice')->group(function(){

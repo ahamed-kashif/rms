@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -131,6 +132,7 @@ class ProjectController extends Controller
                 'projectBalance' => $this->project_balance($project->id),
                 'supplierBalance' => $this->supplier_balance($project->id),
                 'engineerBalance' => $this->engineer_balance($project->id),
+                'customerBalance' => $this->customer_balance($project->id),
             ]);
         }
         return redirect()->route('home')->with([
@@ -258,11 +260,7 @@ class ProjectController extends Controller
             return -1;
         }
         foreach($invoices as $invoice) {
-            if ($invoice->is_checkin) {
-                $balance = $balance + $invoice->amount;
-            } else {
-                $balance = $balance - $invoice->amount;
-            }
+            $balance = $balance - $invoice->amount;
         }
 
         return  $balance;
@@ -319,6 +317,31 @@ class ProjectController extends Controller
         }
 
         return $balance;
+    }
+
+    public function customer_balance($id){
+        $project = Project::find($id);
+        $account = [];
+        foreach (Customer::where('project_id',$id)->get() as $customer){
+            $invoices = $customer->Invoice()->get();
+            $balances = [];
+            $balance = $customer->flats()->first()->flat_amount;
+            if(count($invoices) == 0){
+                return 0;
+            }
+            foreach($invoices as $invoice) {
+                if ($invoice->is_checkin) {
+                    $balance = $balance - $invoice->amount;
+                    $balances[$invoice->id] = $balance;
+                } else {
+                    $balance = $balance + $invoice->amount;
+                    $balances[$invoice->id] = $balance;
+                }
+            }
+            $account[$customer->id]['invoices'] = $invoices;
+            $account[$customer->id]['balance'] = $balances;
+        }
+        return $account;
     }
 
 }
