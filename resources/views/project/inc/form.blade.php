@@ -28,8 +28,8 @@
         <label class="col-form-label col-lg-2">Project Date<code>*</code></label>
         <div class="col-lg-10">
             <div class="input-daterange input-group" data-provide="datepicker" data-date-format="dd M, yyyy" data-date-autoclose="true">
-                <input type="text" class="form-control" placeholder="Start Date" name="start_date" value="{{isset($project) ? date_format(date_create($project->start_date),'d M, yy') : ''}}"/>
-                <input type="text" class="form-control" placeholder="End Date" name="end_date" value="{{isset($project) ? date_format(date_create($project->end_date),'d M, yy') : ''}}"/>
+                <input type="text" class="form-control" placeholder="Start Date" name="start_date" value="{{isset($project) ? date_format(date_create($project->start_date),'d M, yy') : ''}}" autocomplete="off"/>
+                <input type="text" class="form-control" placeholder="End Date" name="end_date" value="{{isset($project) ? date_format(date_create($project->end_date),'d M, yy') : ''}}" autocomplete="off"/>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
     </div>
     <div class="form-group row mt-5 ml-3">
         <div class="custom-control custom-switch custom-switch-lg mb-3" dir="rtl">
-            <input type="checkbox" class="custom-control-input" name="is_investor_project" id="customSwitchsizelg" {{isset($project) && $project->is_investor_project ? 'checked' : ''}} value="{{isset($project) && $project->is_investor_project ? 0 : 1}}">
+            <input type="checkbox" class="custom-control-input" name="is_investor_project" id="customSwitchsizelg" {{(isset($project) && $project->is_investor_project) || isset($is_investor) ? 'checked' : ''}} value="{{isset($project) && $project->is_investor_project ? 0 : 1}}">
             <label class="custom-control-label" for="customSwitchsizelg">Investor Project</label>
         </div>
     </div>

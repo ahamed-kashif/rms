@@ -88,47 +88,38 @@
     </div>
     <!-- end row -->
 
-
-    <h4 class="text-center">Customer Accounts</h4>
+    <div class="row p-2">
+        <div class="col-sm-10 col-lg-10 col-md-10">
+            <h3>Customer List</h3>
+        </div>
+        <div class="col-sm-2 col-lg-2 col-md-2">
+            <div class="row">
+                <a href="{{route('customer.create',['project_id' => $project->id])}}" class="ml-auto btn btn-secondary px-4" title="Add customers"><i class="fas fa-user-plus font-size-16"></i></a>
+            </div>
+        </div>
+    </div>
     <hr>
-    <table id="customer_account" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-        <thead class="bg-secondary text-light">
+    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <thead>
         <tr>
-            <th>Date</th>
-            <th>Invoice NO.</th>
-            <th>Received</th>
-            <th>Expense</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
             <th>Balance</th>
-            <th>Person</th>
-            <th>Payment Method</th>
-            <th>Purpose</th>
         </tr>
 
         </thead>
         <tbody>
-
-        @if($customerBalance != 0)
-            @foreach($project->customers()->get() as $customer)
-                @foreach($customerBalance[$customer->id]['invoices'] as $invoice)
-                    <tr>
-                        <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
-                        <td><a href="{{route('invoice.show',$invoice->id)}}">{{$invoice->invoice_no}}</a></td>
-                        <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
-                        <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
-                        <td>{{$customerBalance[$customer->id]['balance'][$invoice->id]}}</td>
-                        <td>{{$invoice->is_office_expense == 1 ? $invoice->person_name : ($invoice->person->name == null ? $invoice->person->full_name : $invoice->person->name)}}</td>
-                        <td>{{$invoice->PaymentMethod->title}}</td>
-                        <td>{{$invoice->description}}</td>
-                    </tr>
-                @endforeach
-            @endforeach
-        @endif
+        @foreach($project->customers()->get() as $customer)
+            <tr>
+                <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->full_name}}</a></td>
+                <td>{{$customer->phone_number}}</td>
+                <td>{{$customer->email}}</td>
+                <td>{{end($customerBalance['balance'][$customer->id])}}</td>
+            </tr>
+        @endforeach
         </tbody>
-    </table>
-
-
-
+    </table><br><br><hr>
     @include('inc.account')
 @endsection
 @section('page-js')
@@ -136,11 +127,11 @@
     <script>
         $(document).ready(function() {
             var groupColumn = 5;
-            let table = $("#customer_account").DataTable({
+            let table = $("#account").DataTable({
                 "buttons":["copy","excel","pdf","colvis"],
                 "columnDefs": [
                     // { "visible": false, "targets": groupColumn,},
-                    {'orderable' : false, "targets": [0,2,3,4,5,6,7]}
+                    {'orderable' : false, "targets": [0,2,3,4,5,6]}
                 ],
                 "fixedHeader": {
                     header: true,

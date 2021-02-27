@@ -73,7 +73,7 @@ class EngineerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20',
+            'name' => 'required',
             'phone_number' => 'required|max:20',
             'email' => 'email|unique:engineers',
             'nid' => 'max:30|nullable'

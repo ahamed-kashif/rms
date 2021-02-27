@@ -22,16 +22,16 @@ class CreateFlatsTable extends Migration
             $table->string('flat_number');
             $table->boolean('is_avail_loan')->default(0);
             $table->boolean('is_installable')->default(0);
-            $table->float('installment_amount');
+            $table->bigInteger('installment_amount');
             $table->integer('installment_duration')->unsigned()->nullable();
-            $table->float('booking_amount');
+            $table->bigInteger('booking_amount');
 
-            $table->float('flat_amount');
-            $table->float('flat_utility');
-            $table->float('flat_car_parking');
-            $table->float('flat_total_received');
-            $table->float('flat_initial_received');
-            $table->float('flat_balance');
+            $table->bigInteger('flat_amount');
+            $table->bigInteger('flat_utility');
+            $table->bigInteger('flat_car_parking');
+            $table->bigInteger('flat_total_received');
+            $table->bigInteger('flat_initial_received');
+            $table->bigInteger('flat_balance');
 
 
             $table->timestamps();

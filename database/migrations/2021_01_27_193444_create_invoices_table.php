@@ -24,7 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->string('person_name')->nullable();
             $table->string('person_phone')->nullable();
             $table->boolean('is_checkin')->nullable();//0 for checkout 1 for checkin
-            $table->float('amount')->nullable();
+            $table->bigInteger('amount')->nullable();
             $table->string('description')->nullable();
             $table->unsignedBigInteger('payment_method_id')->nullable();
             $table->timestamps();

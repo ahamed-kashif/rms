@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     public $timestamps = true;
-    protected $dateFormat = 'd-m-Y';
+//    protected $dateFormat = 'd-m-Y';
+    protected $casts = [
+      'created_at' => 'datetime:d-m-Y',
+      'updated_at' => 'datetime:d-m-Y'
+    ];
     public function person(){
         return $this->morphTo(__FUNCTION__,'person_type','person_id');
     }

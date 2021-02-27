@@ -19,15 +19,12 @@ class ProjectController extends Controller
      *
      * @return mixed
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->has('is_investor_project')){
-            $projects = Project::where('is_investor_project',1)->get();
-        }else{
-            $projects = Project::all();
-        }
+
+        $projects = Project::where('is_investor_project',0)->get();
         $title = 'Project List';
-        $breadcrumbs['projects'] = '#';
+        $breadcrumbs['projects'] = route('project.index');
         $user = Auth::user();
         if($user->can('index project')){
             return view('project.index')->with([
@@ -38,6 +35,30 @@ class ProjectController extends Controller
         }
         return redirect()->route('home')->with('error','Unauthorized Access!');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return mixed
+     */
+    public function investor()
+    {
+        $projects = Project::where('is_investor_project',1)->get();
+        $title = 'Investor Project List';
+        $breadcrumbs['Investor projects'] = route('project.investor.list');
+        $user = Auth::user();
+        if($user->can('index project')){
+            return view('project.index')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'projects' => $projects
+            ]);
+        }
+        return redirect()->route('home')->with('error','Unauthorized Access!');
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -118,9 +139,14 @@ class ProjectController extends Controller
         $user = Auth::user();
         $project = Project::find($id);
         $title = $project->name;
-        $breadcrumbs['projects'] = route('project.index');
+        if($project->is_investor_project){
+            $breadcrumbs['investor projects'] = route('project.investor.list');
+        }else{
+            $breadcrumbs['projects'] = route('project.index');
+        }
         $breadcrumbs[$project->name] = '#';
         $accounts = $this->project_account($project->id);
+        //dd($project->customers()->get());
         //dd($accounts);
         if($user->can('show project')){
             return view('project.show')->with([
@@ -322,9 +348,10 @@ class ProjectController extends Controller
     public function customer_balance($id){
         $project = Project::find($id);
         $account = [];
+        $invoices = [];
+        $balances = [];
         foreach (Customer::where('project_id',$id)->get() as $customer){
             $invoices = $customer->Invoice()->get();
-            $balances = [];
             $balance = $customer->flats()->first()->flat_amount;
             if(count($invoices) == 0){
                 return 0;
@@ -338,9 +365,12 @@ class ProjectController extends Controller
                     $balances[$invoice->id] = $balance;
                 }
             }
-            $account[$customer->id]['invoices'] = $invoices;
-            $account[$customer->id]['balance'] = $balances;
+            $account['invoices'][$customer->id] = $invoices;
+            $account['balance'][$customer->id] = $balances;
+
         }
+        //dd($account);
+
         return $account;
     }
 

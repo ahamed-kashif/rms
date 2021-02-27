@@ -33,6 +33,9 @@ Route::prefix('project-resource')->group(function (){
     Route::resource('material', 'Libs\MaterialController');
 });
 Route::resource('project','ProjectController');
+Route::get('/investor-projects','ProjectController@investor')->name('project.investor.list');
+Route::get('/investor-projects/accounts','AccountController@investors_account_list')->name('project.investor.account.list');
+Route::get('/investor-projects/accounts/{id}','AccountController@investor_account_show')->name('project.investor.account.show');
 Route::prefix('project/{id}')->group(function (){
     Route::prefix('/resource')->group(function (){
         Route::get('/','ResourceController@index')->middleware('auth')->name('resource.index');

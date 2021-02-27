@@ -1,4 +1,7 @@
 @extends('layouts.page')
+@section('page-css')
+    @include('extras.select2-css')
+@endsection
 @section('page-title')
     @include('components.page-title')
 @endsection
@@ -125,9 +128,9 @@
         <div class="form-group">
             <label for="project_id">Select Project</label>
             <select class="select2-single form-control" name="project_id" id="project_id" required>
-                <option>Select any project</option>
+                <option value="">Select any project</option>
                 @foreach($projects as $project)
-                    <option value="{{$project->id}}">{{$project->name}}</option>
+                    <option value="{{$project->id}}" selected="{{isset($project_id) && ($project_id == $project->id) ? 'selected' : ''}}">{{$project->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -197,4 +200,10 @@
         </div>
 
     </form>
+@endsection
+@section('page-js')
+    @include('extras.select2-js')
+    <script>
+        $('#project_id').select2();
+    </script>
 @endsection

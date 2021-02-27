@@ -13,9 +13,15 @@ use App\Models\Project;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,70 +61,85 @@ class AccountController extends Controller
             'projects' => $projects
         ]);
     }
-
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function create()
+    public function investors_account_list(Request $request)
     {
-        //
+        $projects = Project::where('is_investor_project',1)->get();
+        $title = 'Investor Project Accounts';
+        $breadcrumbs['Investor projects'] = route('project.investor.list');
+        $user = Auth::user();
+        if($user->can('index project')){
+            return view('accounts.investor_list')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'projects' => $projects
+            ]);
+        }
+        return redirect()->route('home')->with('error','Unauthorized Access!');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @param Request $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function investor_account_show($id, Request $request)
     {
-        //
+        $project = Project::find($id);
+        $title = $project->name.' Accounts';
+        $breadcrumbs['investor projects accounts'] = route('project.investor.list');
+        $user = Auth::user();
+        $accounts = $this->project_account($id,$request->start,$request->end);
+        if($user->can('index project')){
+            return view('accounts.investor')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'project' => $project,
+                'accounts' => $accounts
+            ]);
+        }
+        return redirect()->route('home')->with('error','Unauthorized Access!');
     }
 
     /**
-     * Display the specified resource.
+     * Accounts calculation of a project.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param null $s_date
+     * @param null $e_date
+     * @return mixed
      */
-    public function show($id)
+    public function project_account($id, $s_date = null, $e_date = null)
     {
-        //
-    }
+        //$project = Project::find($id);
+        if($s_date != null && $e_date != null){
+            $invoices = Invoice::whereBetween('created_at',[$s_date,$e_date])->where('project_id',$id)->get();
+        }else{
+            $invoices = Project::find($id)->invoices()->get();
+        }
+        $balances = [];
+        $balance = 0;
+        if(count($invoices) == 0){
+            return 0;
+        }
+        foreach($invoices as $invoice) {
+            if ($invoice->is_checkin) {
+                $balance = $balance + $invoice->amount;
+                $balances[$invoice->id] = $balance;
+            } else {
+                $balance = $balance - $invoice->amount;
+                $balances[$invoice->id] = $balance;
+            }
+        }
+        $account['invoices'] = $invoices;
+        $account['balance'] = $balances;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $account;
     }
 }

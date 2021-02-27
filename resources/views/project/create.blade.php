@@ -1,5 +1,7 @@
 @extends('layouts.page')
-
+@section('page-css')
+    @include('extras.bootstrap-datepicker-css')
+@endsection
 @section('page-title')
     @include('components.page-title')
 @endsection
@@ -13,4 +15,7 @@
             <button type="submit" class="btn btn-primary justify-content-end">Create Project</button>
         </div>
     </form>
+@endsection
+@section('js')
+    @include('extras.bootstrap-datepicker-js')
 @endsection

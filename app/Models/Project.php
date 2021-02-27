@@ -38,9 +38,7 @@ class Project extends Model implements HasMedia
                     ->withTimestamps();
     }
     public function customers(){
-        return $this->morphedByMany(Customer::class,'contactable','project_contacts','contact_id','contactable_id')
-                    ->withPivot('purpose')
-                    ->withTimestamps();
+        return $this->hasMany(Customer::class);
     }
 
     public function invoices(){
