@@ -18,9 +18,9 @@
 <h1 style="text-align: center;"><u>Application Form For Apartment</u></h1>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<ul>
+<ul style="font-size: x-large; text-align: justify-all">
     <li style="text-align: left;">
-        <p><strong>FULL NAME (In block letter)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong></p>
+        <p><strong>FULL NAME (In block letter)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong>     <u>{{strtoupper($customer->full_name)}}</u></p>
     </li>
     <li style="text-align: left;">
         <p><strong>FATHER&rsquo;S/ HUSBAND&rsquo;S NAME&nbsp; &nbsp; &nbsp; &nbsp;-</strong></p>
@@ -57,7 +57,7 @@
         <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Car parking no-</strong></li>
 </ul>
 <p><strong>&nbsp;</strong></p>
-<ul style="text-align: justify;">
+<ul style="text-align: justify; font-size: x-large">
     <li style="text-align: left;">
         <p><strong>DO YOU WANT TO AVAILLOAN : Yes / No</strong></p>
     </li>
@@ -105,4 +105,14 @@
 <h3>&nbsp;</h3>
 <h3 style="text-align: center;"><strong><span style="text-decoration: underline;">ALLOTTEE&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="text-decoration: underline;">CHAIRMAN &nbsp;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-decoration: underline;">MANAGING DIRECTOR</span></strong></h3>
 <p style="text-align: center;"><span style="text-decoration: underline;"><strong>.</strong></span></p>
+
+
+
+<br><br><br><br>
+<div class="d-print-none">
+    <div class="float-right">
+        <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light mr-1"><i class="fa fa-print"></i></a>
+        {{--            <a href="#" class="btn btn-primary w-md waves-effect waves-light">Send</a>--}}
+    </div>
+</div>
 @endsection

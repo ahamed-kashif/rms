@@ -29,15 +29,6 @@
         <div class="row">
             <div class="col-md-12">
                  <div class="form-group">
-                      <label for="flat_number">Flat Number <code>*</code></label>
-                      <input type="text" class="form-control" id="flat_number" name="flat_number" placeholder="EX: 1122" required>
-                 </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                 <div class="form-group">
                       <label for="flat_floor">Flat Floor<code>*</code></label>
                       <input type="text" class="form-control" id="flat_floor" name="flat_floor" placeholder="EX: 1" required>
                  </div>
@@ -117,7 +108,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="flat_downpayment">Flat Booking <code>*</code></label>
+                    <label for="flat_downpayment">Flat Down payment <code>*</code></label>
                     <input type="text" class="form-control" id="flat_downpayment" name="flat_downpayment" placeholder="EX: 1000000 tk" required>
                 </div>
             </div>

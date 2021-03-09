@@ -80,8 +80,6 @@ class FlatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
-            'flat_number' =>'required|numeric',
             'flat_title' =>'required',
             'flat_floor' =>'required',
             'size' => 'required|numeric',
@@ -89,7 +87,6 @@ class FlatController extends Controller
             'installment_amount' => 'required_if:is_installable,==,1',
             'flat_booking'=>'required|numeric',
             'flat_downpayment'=>'required|numeric'
-
         ]);
 
         $flat = new Flat();
@@ -99,7 +96,8 @@ class FlatController extends Controller
 
         $flat->flat_title = $request->input('flat_title');
         $flat->is_avail_loan = $request->has('is_avail_loan');
-        $flat->flat_number = $request->input('flat_number');
+        $flat->size = $request->input('size');
+        $flat->floor_number = $request->input('flat_floor');
         $flat->is_installable = $request->has('is_installable');
         $flat->installment_duration = $request->input('installment_duration');
         $flat->installment_amount = $request->input('installment_amount');

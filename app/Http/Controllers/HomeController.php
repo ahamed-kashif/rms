@@ -24,7 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $balance = Balance::orderBy('updated_at', 'desc')->first()->balance;
+        $balance = 0;
+        if(count(Balance::all()) > 0){
+            $balance = Balance::orderBy('updated_at', 'desc')->first()->balance;
+        }
+
         return view('home')->with([
             'balance' => $balance
         ]);

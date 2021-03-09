@@ -17,9 +17,9 @@
                     <form action="{{route('customer.destroy',$customer->id)}}" method="post">
                         @csrf
                         @method('delete')
-                        @if($customer->doesntHave('flats'))
-                            <a class="btn btn-outline-primary w-xs" href="{{route('flat.create',$customer->id)}}">Add Flat</a>
-                        @endif
+
+                        <a class="btn btn-outline-primary w-xs" href="{{route('customer.print',$customer->id)}}">Print</a>
+
                         <a class="btn btn-outline-primary w-xs" href="{{route('customer.edit',$customer->id)}}">
                             <i class="fa fa-edit"></i>
                             <span class="text-alias"> Edit</span></a>
@@ -60,16 +60,8 @@
                             <td><a href="tel:{{$customer->phone_number}}">{{$customer->phone_number}}</a></td>
                         </tr>
                         <tr>
-                            <th>Flat NO.</th>
-                            <td>{{$customer->flats->first()->flat_number}}</td>
-                        </tr>
-                        <tr>
-                            <th>Flat Title</th>
-                            <td>{{$customer->flats->first()->flat_title}}</td>
-                        </tr>
-                        <tr>
-                            <th>Total Payable</th>
-                            <td>{{$customer->flats->first()->flat_amount}}</td>
+                            <th>Car Parking NO.</th>
+                            <td>{{$customer->flats->first()->car_parking_no}}</td>
                         </tr>
                         <tr>
                             <th>Project Name</th>
@@ -79,6 +71,40 @@
                             <th>Project Address</th>
                             <td>{{$customer->flats->first()->project->address}}</td>
                         </tr>
+                        <tr>
+                            <th>Flat Title</th>
+                            <td>{{$customer->flats->first()->flat_title}}</td>
+                        </tr>
+                        <tr>
+                            <th>Floor</th>
+                            <td>{{$customer->flats->first()->floor_number}}</td>
+                        </tr>
+                        <tr>
+                            <th>Loan</th>
+                            <td>{{$customer->flats->first()->is_avail_loan ? 'YES' : 'NO'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Payable</th>
+                            <td>{{$customer->flats->first()->flat_amount}}</td>
+                        </tr>
+                        <tr>
+                            <th>Booking Amount</th>
+                            <td>{{$customer->flats->first()->flat_booking}}</td>
+                        </tr>
+                        <tr>
+                            <th>Downpayment</th>
+                            <td>{{$customer->flats->first()->flat_downpayment}}</td>
+                        </tr>
+                        <tr>
+                            <th>Installment</th>
+                            <td>{{$customer->flats->first()->is_installable ? 'YES' : 'NO'}}</td>
+                        </tr>
+                        @if($customer->flats->first()->is_installable)
+                        <tr>
+                            <th>Installment Amount</th>
+                            <td>{{$customer->flats->first()->installment_amount}}</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
