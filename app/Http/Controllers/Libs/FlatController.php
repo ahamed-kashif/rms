@@ -17,7 +17,7 @@ class FlatController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -44,7 +44,7 @@ class FlatController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create($customer_id)
     {
@@ -81,10 +81,14 @@ class FlatController extends Controller
     {
         $request->validate([
 
-            'flat_number' =>'min:2|required',
-            'installment_amount' => 'required',
-            'installment_duration' => 'required',
-            'booking_amount'=>'required'
+            'flat_number' =>'required|numeric',
+            'flat_title' =>'required',
+            'flat_floor' =>'required',
+            'size' => 'required|numeric',
+            'installment_duration' => 'required_if:is_installable,==,1',
+            'installment_amount' => 'required_if:is_installable,==,1',
+            'flat_booking'=>'required|numeric',
+            'flat_downpayment'=>'required|numeric'
 
         ]);
 
@@ -99,13 +103,12 @@ class FlatController extends Controller
         $flat->is_installable = $request->has('is_installable');
         $flat->installment_duration = $request->input('installment_duration');
         $flat->installment_amount = $request->input('installment_amount');
-        $flat->booking_amount = $request->input('booking_amount');
+        $flat->flat_booking = $request->input('flat_booking');
         $flat->flat_amount = $request->input('flat_amount');
-        $flat->flat_utility = $request->input('flat_utility');
-        $flat->flat_car_parking = $request->input('flat_car_parking');
-        $flat->flat_total_received = $request->input('flat_total_received');
-        $flat->flat_initial_received = $request->input('flat_initial_received');
-        $flat->flat_balance = $request->input('flat_balance');
+        $flat->flat_downpayment = $request->input('flat_downpayment');
+        $flat->car_parking_no = $request->input('car_parking_no');
+        $flat->particulars = $request->input('particulars');
+
 
 
 

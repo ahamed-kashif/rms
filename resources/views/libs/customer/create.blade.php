@@ -92,8 +92,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="nominee_name">Nominee Name <code>*</code></label>
-                    <input type="text" class="form-control" id="nominee_name" name="nominee_name" placeholder="Ex: Shozibul Islam" required>
+                    <label for="nominee_name">Nominee Name</label>
+                    <input type="text" class="form-control" id="nominee_name" name="nominee_name" placeholder="Ex: Shozibul Islam">
                 </div>
             </div>
         </div>
@@ -101,8 +101,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="present_address">Present Address <code>*</code></label>
-                    <input type="text" class="form-control" id="present_address" name="present_address" placeholder="Ex: house: x, dhaka" required>
+                    <label for="present_address">Present Address</label>
+                    <input type="text" class="form-control" id="present_address" name="present_address" placeholder="Ex: house: x, dhaka">
                 </div>
             </div>
         </div>
@@ -112,15 +112,6 @@
                 <div class="form-group">
                     <label for="permanent_address">Permanent Address <code>*</code></label>
                     <input type="text" class="form-control" id="permanent_address" name="permanent_address" placeholder="Ex: house: x, dhaka" required>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="reference_person_name">Reference Person Name <code>*</code></label>
-                    <input type="text" class="form-control" id="reference_person_name" name="reference_person_name" placeholder="Ex: Shozibul Islam" required>
                 </div>
             </div>
         </div>

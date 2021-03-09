@@ -17,7 +17,7 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -42,7 +42,7 @@ class CustomerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -69,7 +69,7 @@ class CustomerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
 
     public function store(Request $request)
@@ -87,9 +87,8 @@ class CustomerController extends Controller
             'email' => 'email|nullable',
             'nid' => 'required',
             'nominee_name' => 'nullable',
-            'present_address' => 'required|string',
+            'present_address' => 'nullable|string',
             'permanent_address' => 'required|string',
-            'reference_person_name' => 'nullable',
             'project_id' => 'required'
         ]);
 
@@ -107,7 +106,6 @@ class CustomerController extends Controller
         $customer->nominee_name = $request->input('nominee_name');
         $customer->present_address = $request->input('present_address');
         $customer->permanent_address = $request->input('permanent_address');
-        $customer->reference_person_name = $request->input('reference_person_name');
         $customer->project_id = $request->project_id;
 //        $customer->flat_number = $request->input('flat_number');
 //        $customer->is_avail_loan = $request->has('is_avail_loan');
@@ -151,10 +149,9 @@ class CustomerController extends Controller
                     return redirect()->back()->with('error','Customer not exists!');
                 }
                 if ($customer->has('flats')){
-                    dd($customer->has('flats'));
                     $accounts = $this->customer_account($customer->id);
                 }else{
-                    $accounts = null;
+                    return redirect()->route('flat.create',$id)->with('error','Add Flat First');
                 }
                 return view('libs.customer.show')->with([
                     'customer' => $customer,

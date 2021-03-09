@@ -17,22 +17,56 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
                  <div class="form-check font-size-14">
-                    <input class="form-check-input" type="checkbox"  name="is_avail_loan" id="is_avail_loan" value="1" >
+                    <input class="form-check-input" type="checkbox"  name="is_avail_loan" id="is_avail_loan" value="0" >
                     <label class="form-check-label" for="is_avail_loan">Loan Available</label>
                  </div>
             </div>
         </div>
         <br>
-
         <div class="row">
             <div class="col-md-12">
                  <div class="form-group">
                       <label for="flat_number">Flat Number <code>*</code></label>
                       <input type="text" class="form-control" id="flat_number" name="flat_number" placeholder="EX: 1122" required>
+                 </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                 <div class="form-group">
+                      <label for="flat_floor">Flat Floor<code>*</code></label>
+                      <input type="text" class="form-control" id="flat_floor" name="flat_floor" placeholder="EX: 1" required>
+                 </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                 <div class="form-group">
+                      <label for="size">Size (SQRFeet)<code>*</code></label>
+                      <input type="number" class="form-control" id="size" name="size" placeholder="EX: 1200" required>
+                 </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                 <div class="form-group">
+                      <label for="car_parking_no">Car Parking NO.<code>*</code></label>
+                      <input type="text" class="form-control" id="size" name="car_parking_no" placeholder="EX: 1200" required>
+                 </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                 <div class="form-group">
+                      <label for="particulars">Particulars<code>*</code></label>
+                      <textarea type="text" class="form-control" id="particulars" name="particulars"></textarea>
                  </div>
             </div>
         </div>
@@ -42,7 +76,7 @@
          <div class="row">
              <div class="col-md-12">
                  <div class="form-check font-size-14">
-                       <input class="form-check-input" type="checkbox"  name="is_installable" id="is_installable" value="1" >
+                       <input class="form-check-input" type="checkbox"  name="is_installable" id="is_installable" value="0" >
                        <label class="form-check-label" for="is_installable">Installable</label>
                  </div>
              </div>
@@ -52,11 +86,10 @@
               <div class="col-md-12">
                    <div class="form-group">
                        <label for="installment_duration">Installment Duration <code>*</code></label>
-                       <input type="text" class="form-control" id="installment_duration" name="installment_duration" placeholder="EX: 4 months" required>
+                       <input type="text" class="form-control" id="installment_duration" name="installment_duration" placeholder="EX: 4 months">
                    </div>
               </div>
         </div>
-
         <div class="row">
                <div class="col-md-12">
                    <div class="form-group">
@@ -65,16 +98,6 @@
                    </div>
                </div>
         </div>
-
-        <div class="row">
-              <div class="col-md-12">
-                   <div class="form-group">
-                            <label for="booking_amount">Booking Amount <code>*</code></label>
-                            <input type="text" class="form-control" id="booking_amount" name="booking_amount" placeholder="Ex: 10000 tk" required>
-                   </div>
-              </div>
-        </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -83,60 +106,24 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="flat_utility">Flat Utility <code>*</code></label>
-                    <input type="text" class="form-control" id="flat_utility" name="flat_utility" placeholder="EX: 4000 tk" required>
+                    <label for="flat_booking">Flat Booking Amount <code>*</code></label>
+                    <input type="number" class="form-control" id="flat_booking" name="flat_booking" placeholder="EX: 1000000 tk" required>
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="flat_car_parking">Flat Car Parking <code>*</code></label>
-                    <input type="text" class="form-control" id="flat_car_parking" name="flat_car_parking" placeholder="EX: 4000 tk" required>
+                    <label for="flat_downpayment">Flat Booking <code>*</code></label>
+                    <input type="text" class="form-control" id="flat_downpayment" name="flat_downpayment" placeholder="EX: 1000000 tk" required>
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="flat_total_received">Flat Total Received <code>*</code></label>
-                    <input type="text" class="form-control" id="flat_total_received" name="flat_total_received" placeholder="EX: 4000 tk" required>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="flat_initial_received">Flat Received(Initial) <code>*</code></label>
-                    <input type="text" class="form-control" id="flat_initial_received" name="flat_initial_received" placeholder="EX: 4000 tk" required>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="flat_balance">Flat Balance <code>*</code></label>
-                    <input type="text" class="form-control" id="flat_balance" name="flat_balance" placeholder="EX: 4000 tk" required>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
         <div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Save</button>
         </div>
-
     </form>
 @endsection
