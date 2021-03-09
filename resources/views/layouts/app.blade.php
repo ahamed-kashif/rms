@@ -39,6 +39,11 @@
 <script src="{{asset('libs/node-waves/waves.min.js')}}"></script>
 @yield('js')
 <script src="{{asset('js/skote.js')}}"></script>
+{{--<script>--}}
+{{--    $(document).ready(function(){--}}
+{{--        $(".alert").delay(500).slideUp(300);--}}
+{{--    });--}}
+{{--</script>--}}
 {{--<script src="{{asset('js/app.js')}}"></script>--}}
 @stack('js')
 </body>

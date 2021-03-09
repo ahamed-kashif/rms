@@ -221,7 +221,7 @@ class InvoiceController extends Controller
                 $contractors = Project::find($invoice->project_id)->contractors()->get();
                 $suppliers = Project::find($invoice->project_id)->suppliers()->get();
                 $engineers = Project::find($invoice->project_id)->engineers()->get();
-                $customers = Customer::where('project_id',$invoice->project_id)->get();
+                $customers = Customer::has('flats')->where('project_id',$invoice->project_id)->get();
                 $investors = Project::find($invoice->project_id)->investors()->get();
                 if($record['invoice']->is_checkin != null && $record['invoice']->payment_method_id != null && $record['invoice']->project_id != null && $record['state'] == 'acchead'){
                     $title = 'Invoice NO:   '.session()->get('invoice')['invoice']->invoice_no;
@@ -260,6 +260,8 @@ class InvoiceController extends Controller
             try{
                 if($request->has('contractor_id')){
                     $contractor = Contractor::find($request->input('contractor_id'));
+                    $invoice->person_name = $contractor->name;
+                    $invoice->person_phone = $contractor->phone_number;
                     $contractor->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
@@ -268,30 +270,40 @@ class InvoiceController extends Controller
                 elseif($request->has('engineer_id')){
                     //dd($request->input('engineer_id'));
                     $engineer = Engineer::find($request->input('engineer_id'));
+                    $invoice->person_name = $engineer->name;
+                    $invoice->person_phone = $engineer->phone_number;
                     $engineer->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('supplier_id')){
                     $supplier = Supplier::find($request->input('supplier_id'));
+                    $invoice->person_name = $supplier->name;
+                    $invoice->person_phone = $supplier->phone_number;
                     $supplier->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('customer_id')){
                     $customer = Customer::find($request->input('customer_id'));
+                    $invoice->person_name = $customer->name;
+                    $invoice->person_phone = $customer->phone_number;
                     $customer->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('investor_id')){
                     $investor = Investor::find($request->input('investor_id'));
+                    $invoice->person_name = $investor->name;
+                    $invoice->person_phone = $investor->phone_number;
                     $investor->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('engineer_id')){
                     $engineer = Engineer::find($request->input('engineer_id'));
+                    $invoice->person_name = $engineer->name;
+                    $invoice->person_phone = $engineer->phone_number;
                     $engineer->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);

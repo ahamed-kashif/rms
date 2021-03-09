@@ -17,7 +17,7 @@
                     <form action="{{route('customer.destroy',$customer->id)}}" method="post">
                         @csrf
                         @method('delete')
-                        @if(count($customer->flats()->get()) <=0)
+                        @if($customer->doesntHave('flats'))
                             <a class="btn btn-outline-primary w-xs" href="{{route('flat.create',$customer->id)}}">Add Flat</a>
                         @endif
                         <a class="btn btn-outline-primary w-xs" href="{{route('customer.edit',$customer->id)}}">

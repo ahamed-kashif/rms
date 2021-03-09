@@ -140,19 +140,21 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = Customer::find($id);
-
         if(auth()->user()->can('show customer')){
-
-            $title = 'Show Customer';
-            $breadcrumbs['contact'] = "#";
-            $breadcrumbs['customers'] = route('customer.index');
-            $breadcrumbs[$customer->name] = 'javaScript:void();';
-            $accounts = $this->customer_account($customer->id);
             if(is_numeric($id)){
                 $customer = Customer::find($id);
+                $title = 'Show Customer';
+                $breadcrumbs['contact'] = "#";
+                $breadcrumbs['customers'] = route('customer.index');
+                $breadcrumbs[$customer->name] = 'javaScript:void();';
                 if($customer == null){
                     return redirect()->back()->with('error','Customer not exists!');
+                }
+                if ($customer->has('flats')){
+                    dd($customer->has('flats'));
+                    $accounts = $this->customer_account($customer->id);
+                }else{
+                    $accounts = null;
                 }
                 return view('libs.customer.show')->with([
                     'customer' => $customer,
@@ -313,6 +315,7 @@ class CustomerController extends Controller
     public function customer_account($id)
     {
         $customer = Customer::find($id);
+        //dd($customer->flats()->get());
         $invoices = $customer->Invoice()->get();
         $balances = [];
         $balance = $customer->flats()->first()->flat_amount;

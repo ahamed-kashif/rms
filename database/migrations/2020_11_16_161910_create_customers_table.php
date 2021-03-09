@@ -26,10 +26,9 @@ class CreateCustomersTable extends Migration
             $table->string('phone_number');
             $table->string('email')->nullable();
             $table->string('nid')->nullable();
-            $table->string('nominee_name');
-            $table->string('present_address');
+            $table->string('nominee_name')->nullable();
+            $table->string('present_address')->nullable();
             $table->string('permanent_address');
-            $table->string('reference_person_name');
             $table->integer('project_id')->unsigned();
 //            $table->string('flat_number');
 //            $table->boolean('is_avail_loan')->default(false);

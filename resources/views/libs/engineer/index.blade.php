@@ -36,7 +36,7 @@
         @foreach($engineers as $engineer)
             <tr>
                 <td><a href="{{route('engineer.show',$engineer->id)}}">{{$engineer->name}}</a></td>
-                <td>{{$engineer->phone}}</td>
+                <td>{{$engineer->phone_number}}</td>
                 <td>{{$engineer->email}}</td>
                 <td>NILL</td>
                 <td>

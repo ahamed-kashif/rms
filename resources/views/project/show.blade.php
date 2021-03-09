@@ -111,12 +111,14 @@
         </thead>
         <tbody>
         @foreach($project->customers()->get() as $customer)
+
             <tr>
                 <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->full_name}}</a></td>
                 <td>{{$customer->phone_number}}</td>
                 <td>{{$customer->email}}</td>
-                <td>{{end($customerBalance['balance'][$customer->id])}}</td>
+                <td>{{($customer->account() != 0) ? end($customer->account()['balance']) : $customer->flats()->first()->flat_amount}}</td>
             </tr>
+
         @endforeach
         </tbody>
     </table><br><br><hr>

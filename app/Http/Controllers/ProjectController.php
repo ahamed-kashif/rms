@@ -137,7 +137,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $project = Project::find($id);
+        $project = Project::findorfail($id);
         $title = $project->name;
         if($project->is_investor_project){
             $breadcrumbs['investor projects'] = route('project.investor.list');
@@ -147,7 +147,6 @@ class ProjectController extends Controller
         $breadcrumbs[$project->name] = '#';
         $accounts = $this->project_account($project->id);
         //dd($project->customers()->get());
-        //dd($accounts);
         if($user->can('show project')){
             return view('project.show')->with([
                 'title' => $title,
@@ -158,7 +157,6 @@ class ProjectController extends Controller
                 'projectBalance' => $this->project_balance($project->id),
                 'supplierBalance' => $this->supplier_balance($project->id),
                 'engineerBalance' => $this->engineer_balance($project->id),
-                'customerBalance' => $this->customer_balance($project->id),
             ]);
         }
         return redirect()->route('home')->with([
@@ -343,35 +341,6 @@ class ProjectController extends Controller
         }
 
         return $balance;
-    }
-
-    public function customer_balance($id){
-        $project = Project::find($id);
-        $account = [];
-        $invoices = [];
-        $balances = [];
-        foreach (Customer::where('project_id',$id)->get() as $customer){
-            $invoices = $customer->Invoice()->get();
-            $balance = $customer->flats()->first()->flat_amount;
-            if(count($invoices) == 0){
-                return 0;
-            }
-            foreach($invoices as $invoice) {
-                if ($invoice->is_checkin) {
-                    $balance = $balance - $invoice->amount;
-                    $balances[$invoice->id] = $balance;
-                } else {
-                    $balance = $balance + $invoice->amount;
-                    $balances[$invoice->id] = $balance;
-                }
-            }
-            $account['invoices'][$customer->id] = $invoices;
-            $account['balance'][$customer->id] = $balances;
-
-        }
-        //dd($account);
-
-        return $account;
     }
 
 }

@@ -40,7 +40,9 @@
             <tr>
                 <td>{{date_format(date_create($invoice->updated_at),'d/m/Y')}}</td>
                 <td>{{$invoice->invoice_no}}</td>
-                <td>{{$invoice->is_office_expense == 0 ? $invoice->person->name : 'Office'}}</td>
+                <td>
+                    {{$invoice->person_name}}
+                </td>
                 <td>{{$invoice->is_office_expense == 0 ? $relations[$invoice->person_type] : 'Other'}}</td>
                 <td>{{$invoice->project->name}}</td>
                 <td>{{$invoice->is_checkin ? 'Checkin' : 'Checkout'}}</td>
