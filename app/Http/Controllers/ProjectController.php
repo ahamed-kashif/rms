@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -117,7 +116,7 @@ class ProjectController extends Controller
         try{
             if($user->can('update project')){
                 $project->save();
-                return redirect()->route('project.edit',$project->id)->with('success','Project stored successfully!');
+                return redirect()->route('project.show',$project->id)->with('success','Project stored successfully!');
             }else{
                 return redirect()->back()->with('Unauthorized Access!');
             }
@@ -146,7 +145,6 @@ class ProjectController extends Controller
         }
         $breadcrumbs[$project->name] = '#';
         $accounts = $this->project_account($project->id);
-        //dd($project->customers()->get());
         if($user->can('show project')){
             return view('project.show')->with([
                 'title' => $title,
@@ -191,7 +189,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
      * @return mixed
      */
@@ -238,11 +236,18 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function destroy($id)
     {
-
+        return redirect()->route('project.show',$id)->with('error','Not Possible');
+        try{
+            $project = Project::findorfail($id);
+            $project->contractors()->detach();
+            $project->suppliers()->detach();
+        }catch (\Exception $e){
+            return redirect()->route('project.index',$e->getMessage());
+        }
     }
 
     /**

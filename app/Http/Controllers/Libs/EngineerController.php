@@ -16,7 +16,7 @@ class EngineerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -41,7 +41,7 @@ class EngineerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -67,7 +67,7 @@ class EngineerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
 
     public function store(Request $request)
@@ -75,7 +75,7 @@ class EngineerController extends Controller
         $request->validate([
             'name' => 'required',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:engineers',
+            'email' => 'email|unique:engineers|nullable',
             'nid' => 'max:30|nullable'
 
         ]);
@@ -139,7 +139,7 @@ class EngineerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function edit($id)
     {
@@ -177,7 +177,7 @@ class EngineerController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function update(Request $request, $id)
     {
@@ -196,7 +196,7 @@ class EngineerController extends Controller
                 $request->validate([
                     'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email',
+                    'email' => 'email|unique:engineers|nullable',
                     'nid' => 'max:30|nullable'
 
                 ]);

@@ -25,8 +25,8 @@
                 @else
                     <h4 style="margin-bottom: -10px"><u>Pay To</u></h4><br>
                 @endif
-                <span class="font-size-18 font-weight-bold">{{$invoice->is_office_expense ? $invoice->person_name : $invoice->person->name}}</span><br>
-                    {{$invoice->is_office_expense ? '' : $invoice->person->phone_number}}<br>
+                <span class="font-size-18 font-weight-bold">{{ $invoice->person_name}}</span><br>
+                    {{$invoice->person_phone}}<br>
             </address>
         </div>
     </div>

@@ -18,7 +18,7 @@ class InvestorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -43,7 +43,7 @@ class InvestorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -69,7 +69,7 @@ class InvestorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
 
     public function store(Request $request)
@@ -77,7 +77,7 @@ class InvestorController extends Controller
         $request->validate([
             'name' => 'required',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:investors',
+            'email' => 'email|unique:investors|nullable',
             'nid' => 'max:30|nullable'
 
         ]);
@@ -197,7 +197,7 @@ class InvestorController extends Controller
                 $request->validate([
                     'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email',
+                    'email' => 'email|unique:investors|nullable',
                     'nid' => 'max:30|nullable'
 
                 ]);

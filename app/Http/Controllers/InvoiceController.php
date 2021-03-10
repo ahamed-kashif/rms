@@ -59,7 +59,6 @@ class InvoiceController extends Controller
     {
         $user = Auth::user();
         $invoice = Invoice::orderBy('updated_at','desc')->first();
-        //dd($invoice);
         if(!empty($invoice)){
             if($invoice->amount == null){
                 return redirect()->route('invoice.amount.add',$invoice->id);
@@ -88,7 +87,6 @@ class InvoiceController extends Controller
         $invoice = new Invoice;
         if(Invoice::all()->count() > 0){
             $serial = Invoice::all()->count();
-            //dd($serial);
         }
         $serial++;
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
@@ -161,8 +159,8 @@ class InvoiceController extends Controller
         if($user->can('create invoice')){
             if(session()->has('invoice')){
                 $record = session()->get('invoice');
-                $projects = Project::where('is_investor_project',0)->orderBy('updated_at')->get();
-                $otherProjects = Project::where('is_investor_project',1)->orderBy('updated_at')->get();
+                $projects = Project::isActive()->where('is_investor_project',0)->orderBy('updated_at')->get();
+                $otherProjects = Project::isActive()->where('is_investor_project',1)->orderBy('updated_at')->get();
                 //dd($projects);
                 if($record['state'] == 'payment'){
                     $title = 'Invoice NO:   '.session()->get('invoice')['invoice']->invoice_no;
@@ -196,7 +194,13 @@ class InvoiceController extends Controller
         if(session()->has('invoice')){
             $record = session()->get('invoice');
             if(session()->forget('invoice') == null){
+                try{
+                    $project = Project::findorfail($request->input('project_id'));
+                }catch (\Exception $e){
+                    return redirect()->route('invoice.create')->with('error',$e->getMessage());
+                }
                 $record['invoice']->project_id = $request->input('project_id');
+                $record['invoice']->project_name = $project->name;
                 $record['state'] = 'acchead';
                 session()->put('invoice',$record);
                 return redirect()->route('invoice.person.add');
@@ -283,7 +287,7 @@ class InvoiceController extends Controller
                 }
                 elseif($request->has('customer_id')){
                     $customer = Customer::find($request->input('customer_id'));
-                    $invoice->person_name = $customer->name;
+                    $invoice->person_name = $customer->full_name;
                     $invoice->person_phone = $customer->phone_number;
                     $customer->Invoice()->save($invoice);
                     session()->forget('invoice');
@@ -310,6 +314,7 @@ class InvoiceController extends Controller
                     $invoice->person_name = $request->input('person_name');
                     $invoice->person_phone = $request->input('phone');
                     $invoice->save();
+                    session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
 
@@ -371,48 +376,17 @@ class InvoiceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function destroy($id)
     {
-        //
+        try{
+            Invoice::findorfail($id)->delete();
+        }catch(\Exception $e){
+            return redirect()->route('invoice.index')->with('error',$e->getMessage());
+        }
     }
 }

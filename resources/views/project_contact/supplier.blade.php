@@ -11,7 +11,7 @@
                 <div class="form-group p-3">
                     <label for="supplier">Supplier</label>
                     <select id="supplier" name="supplier" class="form-control select2">
-                        <option>Select a supplier</option>
+                        <option value="">Select a supplier</option>
                         @foreach($suppliers as $supplier)
                             <option value="{{$supplier->id}}">{{$supplier->name}}</option>
                         @endforeach
@@ -71,6 +71,7 @@
             <th scope="col">Name</th>
             <th scope="col">Phone</th>
             <th scope="col">Type</th>
+            <th scope="col">Action</th>
         </tr>
 
         </thead>
@@ -81,6 +82,13 @@
                 <td><a href="{{route('supplier.show',$supplier->id)}}">{{$supplier->name}}</a></td>
                 <td><a href="tel:{{$supplier->phone_number}}">{{$supplier->phone_number}}</a></td>
                 <td>{{$supplier->pivot->purpose}}</td>
+                <td>
+                    <form action="{{route('project.supplier.remove',[$project->id,$supplier->id])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Are you sure?')">remove</button>
+                    </form>
+                </td>
                 {{--                    <td>--}}
                 {{--                        <div class="dropdown align-content-center">--}}
                 {{--                            <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>--}}

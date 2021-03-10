@@ -48,5 +48,9 @@ class Project extends Model implements HasMedia
     public function flat(){
         return $this->hasMany(Flat::class,'project_id');
     }
+
+    public function scopeisActive($q){
+        return $q->where('is_active',1);
+    }
 }
 

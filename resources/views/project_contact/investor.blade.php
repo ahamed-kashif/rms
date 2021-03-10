@@ -51,6 +51,7 @@
             <th scope="col">Name</th>
             <th scope="col">Phone</th>
             <th scope="col">Type</th>
+            <th scope="col">Action</th>
         </tr>
 
         </thead>
@@ -61,6 +62,13 @@
                 <td><a href="{{route('investor.show',$investor->id)}}">{{$investor->name}}</a></td>
                 <td><a href="tel:{{$investor->phone_number}}">{{$investor->phone_number}}</a></td>
                 <td>{{$investor->pivot->purpose}}</td>
+                <td>
+                    <form action="{{route('project.investor.remove',[$project->id,$investor->id])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Are you sure?')">remove</button>
+                    </form>
+                </td>
                 {{--                    <td>--}}
                 {{--                        <div class="dropdown align-content-center">--}}
                 {{--                            <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>--}}

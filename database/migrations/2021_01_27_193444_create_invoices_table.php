@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('person_id')->nullable();
             $table->string('person_type')->nullable();
             $table->boolean('is_office_expense')->default(0);//other purpose inside project
+            $table->string('project_name')->nullable();
             $table->string('person_name')->nullable();
             $table->string('person_phone')->nullable();
             $table->boolean('is_checkin')->nullable();//0 for checkout 1 for checkin

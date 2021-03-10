@@ -32,7 +32,7 @@
         <div class="col-sm-6">
             <address>
                 <h4 style="margin-bottom: -10px"><u>Account Head</u></h4><br>
-                <span class="font-size-18 font-weight-bold">{{$invoice->project->name}}</span><br>
+                <span class="font-size-18 font-weight-bold">{{$invoice->project_name}}</span><br>
                 <span class="font-size-16">{{$invoice->project->address}}</span>
             </address>
         </div>

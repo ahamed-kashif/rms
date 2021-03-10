@@ -126,6 +126,28 @@
 @endsection
 @section('page-js')
     @include('extras.datatable-js')
+    <script type="text/javascript" src="{{asset('js/restapi.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#update_button').on('click', function () {
+                let form = $('#update_status');
+                let url = form.attr('action');
+                let status = $('#project_status').val();
+                console.log(status);
+                let updateStatus = $.ajax({
+                    dataType: 'json',
+                    type: 'PUT',
+                    data: {api_token: $api_token, status: status},
+                    url: url,
+                });
+
+                updateStatus.done(function (data) {
+                    alert(data.message);
+                    location.reload();
+                });
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             var groupColumn = 5;

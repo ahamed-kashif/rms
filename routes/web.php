@@ -46,15 +46,19 @@ Route::prefix('project/{id}')->group(function (){
    Route::get('/contractors','ProjectContactsController@contractors_view')->name('project.contractors.view');
    Route::post('/contractors','ProjectContactsController@add_contractor')->name('project.contractor.add');
    Route::post('/contractors/new','ProjectContactsController@add_new_contractor')->name('project.contractor.add.new');
+   Route::put('/contractors/{contractor}/remove','ProjectContactsController@remove_contractor')->name('project.contractor.remove');
    Route::get('/suppliers','ProjectContactsController@suppliers_view')->name('project.suppliers.view');
    Route::post('/suppliers','ProjectContactsController@add_supplier')->name('project.supplier.add');
    Route::post('/suppliers/new','ProjectContactsController@add_new_supplier')->name('project.supplier.add.new');
+   Route::put('/suppliers/{supplier}/remove','ProjectContactsController@remove_supplier')->name('project.supplier.remove');
    Route::get('/engineers','ProjectContactsController@engineers_view')->name('project.engineers.view');
    Route::post('/engineers','ProjectContactsController@add_engineer')->name('project.engineer.add');
    Route::post('/engineers/new','ProjectContactsController@add_new_engineer')->name('project.engineer.add.new');
+   Route::put('/engineers/{engineer}/remove','ProjectContactsController@remove_engineer')->name('project.engineer.remove');
    Route::get('/investors','ProjectContactsController@investors_view')->name('project.investors.view');
    Route::post('/investors','ProjectContactsController@add_investor')->name('project.investor.add');
    Route::post('/investors/new','ProjectContactsController@add_new_investor')->name('project.investor.add.new');
+   Route::put('/investors/{investor}/remove','ProjectContactsController@remove_investor')->name('project.investor.remove');
 });
 /****Invoice Routes****/
 Route::prefix('invoice')->group(function(){

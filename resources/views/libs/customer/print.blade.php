@@ -20,46 +20,43 @@
 <p>&nbsp;</p>
 <ul style="font-size: x-large; text-align: justify-all">
     <li style="text-align: left;">
-        <p><strong>FULL NAME (In block letter)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong>     <u>{{strtoupper($customer->full_name)}}</u></p>
+        <p><strong>FULL NAME (In block letter)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->full_name)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>FATHER&rsquo;S/ HUSBAND&rsquo;S NAME&nbsp; &nbsp; &nbsp; &nbsp;-</strong></p>
+        <p><strong>FATHER&rsquo;S/ HUSBAND&rsquo;S NAME&nbsp; &nbsp; &nbsp; &nbsp;-</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->father_or_husband_name)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>MOTHER&rsquo;S NAME&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong></p>
+        <p><strong>MOTHER&rsquo;S NAME&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->mother_name)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>OCCUPATION OF THE APPLICANT -</strong></p>
+        <p><strong>OCCUPATION OF THE APPLICANT -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->occupation)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>DATE OF BIRTH/AGE&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-</strong></p>
+        <p><strong>DATE OF BIRTH/AGE&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-</strong> &nbsp; &nbsp; <u>{{date_format(date_create($customer->date_of_birth), 'd M, Y')}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>NATIONALITY&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong></p>
+        <p><strong>NATIONALITY&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->nationality)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>TELEPHONE NO.( If any )&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong></p>
+        <p><strong>TELEPHONE NO.( If any )&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->phone_number)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>NOMINEE (With relationship)&nbsp; &nbsp; &nbsp; &nbsp;-</strong></p>
+        <p><strong>NOMINEE (With relationship)&nbsp; &nbsp; &nbsp; &nbsp;-</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->nominee_name)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>PARMANENT ADDRESS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong></p>
+        <p><strong>PERMANENT ADDRESS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->permanent_address)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>PRESENT ADDRESS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-</strong></p>
+        <p><strong>PRESENT ADDRESS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->present_address)}}</u></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>REFERENCE PERSON&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-</strong></p>
-    </li>
-    <li style="text-align: left;">
-        <p><strong>DETAILS OF PROJECT&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;&nbsp;</strong></p>
-        <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Car parking no-</strong></li>
+        <p><strong>DETAILS OF PROJECT&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp;&nbsp;</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->project->address)}}</u></p>
+        <strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Car parking no-</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->flats->car_parking_no)}}</u></li>
 </ul>
 <p><strong>&nbsp;</strong></p>
 <ul style="text-align: justify; font-size: x-large">
     <li style="text-align: left;">
-        <p><strong>DO YOU WANT TO AVAILLOAN : Yes / No</strong></p>
+        <p><strong>DO YOU WANT TO AVAILLOAN : <span {{$customer->is_avail_loan ? 'style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through; "' : ''}}>Yes</span> / <span {{(!$customer->is_avail_loan) ? 'style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through; "' : ''}}>No</span></strong></p>
     </li>
     <li style="text-align: left;">
         <p><strong>YOU WANT TO SETTLE THE PAYMENT -</strong></p>
@@ -68,7 +65,7 @@
         <p><strong>AMOUNT YOU HAVE PAID WITH -</strong></p>
     </li>
     <li style="text-align: left;">
-        <p><strong>PARTICULARS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong></p>
+        <p><strong>PARTICULARS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->particulars)}}</u></p>
     </li>
 </ul>
 <h4 style="text-align: justify;">&nbsp;</h4>
@@ -83,22 +80,13 @@
 <p style="text-align: justify;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;<u>For official use only </u></strong>Installment/At a time</p>
 <ul style="text-align: justify;">
     <li>
-        <p><strong>FLAT :Tk.</strong></p>
+        <p><strong>FLAT :Tk.</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->flats->flat_amount)}}</u></p>
     </li>
     <li>
-        <p><strong>UTILITY :Tk.</strong></p>
+        <p><strong>BOOKING (Initial) &nbsp;: Tk.</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->flats->flat_booking)}}</u></p>
     </li>
     <li>
-        <p><strong>CAR PARKING :Tk.</strong></p>
-    </li>
-    <li>
-        <p><strong>TOTAL :Tk.</strong></p>
-    </li>
-    <li>
-        <p><strong>RECEIVED (Initial) &nbsp;: Tk.</strong></p>
-    </li>
-    <li>
-        <p><strong>BALANCE :Tk</strong></p>
+        <p><strong>DOWN PAYMENT :Tk</strong> &nbsp; &nbsp; <u>{{strtoupper($customer->flats->flat_downpayment)}}</u></p>
     </li>
 </ul>
 <p>&nbsp;</p>

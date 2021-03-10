@@ -113,6 +113,24 @@ class ProjectContactsController extends Controller
             return redirect()->back()->with('error', 'Unauthorized Access!');
         }
     }
+
+    /**
+     * remove contractor.
+     *
+     * @param $project_id
+     * @param $id ,
+     * @return mixed
+     */
+    public function remove_contractor($project_id,$id){
+        try{
+            Project::findorfail($project_id)->contractors()->detach($id);
+            return redirect()->back()->with('success','removed');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+    }
+
+
     /**
      * add supplier to project.
      *
@@ -208,6 +226,24 @@ class ProjectContactsController extends Controller
             return redirect()->back()->with('error', 'Unauthorized Access!');
         }
     }
+
+    /**
+     * remove contractor.
+     *
+     * @param $project_id
+     * @param $id ,
+     * @return mixed
+     */
+    public function remove_supplier($project_id,$id){
+        try{
+            Project::findorfail($project_id)->suppliers()->detach($id);
+            return redirect()->back()->with('success','removed');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+    }
+
+
     /**
      * add supplier to project.
      *
@@ -303,6 +339,23 @@ class ProjectContactsController extends Controller
             return redirect()->back()->with('error', 'Unauthorized Access!');
         }
     }
+
+    /**
+     * remove engineer.
+     *
+     * @param $project_id
+     * @param $id ,
+     * @return mixed
+     */
+    public function remove_engineer($project_id,$id){
+        try{
+            Project::findorfail($project_id)->engineers()->detach($id);
+            return redirect()->back()->with('success','removed');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+    }
+
     /**
      * add investor to project.
      *
@@ -392,6 +445,22 @@ class ProjectContactsController extends Controller
             }
         }else{
             return redirect()->back()->with('error', 'Unauthorized Access!');
+        }
+    }
+
+    /**
+     * remove investor.
+     *
+     * @param $project_id
+     * @param $id ,
+     * @return mixed
+     */
+    public function remove_investor($project_id,$id){
+        try{
+            Project::findorfail($project_id)->investors()->detach($id);
+            return redirect()->back()->with('success','removed');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 

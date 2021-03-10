@@ -49,7 +49,7 @@ class CustomerController extends Controller
 
         if(auth()->user()->can('create customer')){
             $customer = Customer::all();
-            $project = Project::all();
+            $project = Project::isActive()->get();
             $title = 'Add Customer';
             $breadcrumbs['contacts'] = "#";
             $breadcrumbs['customers'] = route('customer.index');
@@ -107,6 +107,7 @@ class CustomerController extends Controller
         $customer->present_address = $request->input('present_address');
         $customer->permanent_address = $request->input('permanent_address');
         $customer->project_id = $request->project_id;
+
 //        $customer->flat_number = $request->input('flat_number');
 //        $customer->is_avail_loan = $request->has('is_avail_loan');
 //        $customer->is_installable = $request->has('is_installable');
@@ -148,7 +149,7 @@ class CustomerController extends Controller
                 if($customer == null){
                     return redirect()->back()->with('error','Customer not exists!');
                 }
-                if ($customer->has('flats')){
+                if ($customer->flats()->count() >= 1){
                     $accounts = $this->customer_account($customer->id);
                 }else{
                     return redirect()->route('flat.create',$id)->with('error','Add Flat First');
@@ -171,7 +172,7 @@ class CustomerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function edit($id)
     {
@@ -187,7 +188,6 @@ class CustomerController extends Controller
 
             if(is_numeric($id)){
                 $customer = Customer::find($id);
-
                 if($customer == null){
                     return redirect()->back()->with('error','customer not exists!');
                 }
@@ -211,7 +211,7 @@ class CustomerController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function update(Request $request, $id)
     {
@@ -227,9 +227,6 @@ class CustomerController extends Controller
                 if($customer == null){
                     return redirect()->back()->with('error','customer not exists!');
                 }
-
-
-
                 $customer->project_id = $request->project_id;
                 $customer->full_name = $request->input('full_name');
                 $customer->father_or_husband_name = $request->input('father_or_husband_name');
@@ -244,11 +241,8 @@ class CustomerController extends Controller
                 $customer->present_address = $request->input('present_address');
                 $customer->permanent_address = $request->input('permanent_address');
                 $customer->reference_person_name = $request->input('reference_person_name');
-
-
-
                 try{
-                    $customer->save();
+                    $customer->update();
                     return redirect()->back()->with('success','successfully updated');
 
 
@@ -266,10 +260,11 @@ class CustomerController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function destroy($id)
     {
+        return redirect()->route('customer.show',$id)->with('error','Not possible');
         if(auth()->user()->can('delete customer')){
             if(is_numeric($id)){
                 $customer = Customer::find($id);

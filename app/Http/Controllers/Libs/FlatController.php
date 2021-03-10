@@ -74,7 +74,7 @@ class FlatController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
 
     public function store(Request $request)
@@ -112,8 +112,7 @@ class FlatController extends Controller
 
         try{
             $flat->save();
-
-            return redirect()->back()->with('success','successfully stored');
+            return redirect()->route('customer.show',$request->customer_id)->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }

@@ -107,8 +107,8 @@
             <div class="form-group other">
                 <label for="person_name">Person Name</label>
                 <input type="text" class="form-control" placeholder="Enter Person Name.." name="person_name" id="person_name">
-                <label for="person_name">Phone</label>
-                <input type="text" class="form-control" placeholder="Enter Phone Number.." name="phone" id="person_name">
+                <label for="person_phone">Phone</label>
+                <input type="text" class="form-control" placeholder="Enter Phone Number.." name="phone" id="person_phone">
                 <input type="submit" class="btn btn-sm btn-outline-primary mt-2" value="next">
             </div>
         </form>

@@ -27,7 +27,7 @@ CreateProjectsTable extends Migration
             $table->bigInteger('contractor_budget')->nullable();
             $table->bigInteger('supplier_budget')->nullable();
             $table->bigInteger('engineer_budget')->nullable();
-            $table->enum('status',['pending','under construction','delayed','completed','cancelled'])->default('pending');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
