@@ -259,16 +259,13 @@ class InvoiceController extends Controller
             $invoice = $record['invoice'];
             try{
                 if($request->has('contractor_id')){
-                    $contractor = Contractor::find($request->input('contractor_id'));
+                    $contractor = Contractor::findorfail($request->input('contractor_id'));
                     $invoice->person_name = $contractor->name;
                     $invoice->person_phone = $contractor->phone_number;
                     $contractor->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
-                }
-                //dd('ay');
-                elseif($request->has('engineer_id')){
-                    //dd($request->input('engineer_id'));
+                }elseif($request->has('engineer_id')){
                     $engineer = Engineer::find($request->input('engineer_id'));
                     $invoice->person_name = $engineer->name;
                     $invoice->person_phone = $engineer->phone_number;
@@ -309,7 +306,6 @@ class InvoiceController extends Controller
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('is_other')){
-                    //dd("Hello");
                     $invoice->is_office_expense = 1;
                     $invoice->person_name = $request->input('person_name');
                     $invoice->person_phone = $request->input('phone');
