@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Balance;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $balance = 0;
+        if(count(Balance::all()) > 0){
+            $balance = Balance::orderBy('updated_at', 'desc')->first()->balance;
+        }
+
+        return view('home')->with([
+            'balance' => $balance
+        ]);
     }
 }

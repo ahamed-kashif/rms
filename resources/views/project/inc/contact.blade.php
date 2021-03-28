@@ -10,10 +10,10 @@
                         </span>
                     </div>
                 </td>
-                <td><h5 class="font-size-14 m-0">{{$contact->name}}</h5></td>
+                <td><h6 class="m-0">{{$contact->name}}</h6></td>
                 <td>
                     <div>
-                        <span class="badge badge-primary font-size-11">{{$contact->pivot->purpose}}</span>
+                        <span class="badge badge-primary font-size-10">{{$contact->pivot->purpose}}</span>
                     </div>
                 </td>
             </tr>

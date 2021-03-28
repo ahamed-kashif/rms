@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectsTable extends Migration
+class
+CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,15 +18,16 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('area')->unique();
+            $table->boolean('is_investor_project')->default(0);
             $table->string('description')->nullable();
             $table->string('address')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->float('budget');
-            $table->float('contractor_budget')->nullable();
-            $table->float('supplier_budget')->nullable();
-            $table->float('engineer_budget')->nullable();
-            $table->enum('status',['pending','under construction','delayed','completed','cancelled'])->default('pending');
+            $table->bigInteger('budget');
+            $table->bigInteger('contractor_budget')->nullable();
+            $table->bigInteger('supplier_budget')->nullable();
+            $table->bigInteger('engineer_budget')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

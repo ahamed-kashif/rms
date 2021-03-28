@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         $role = Role::create(['name' => 'admin']);
-        //$role->givePermissionTo(Permission::all());
+        $role->givePermissionTo(Permission::all());
 
         $root_user = User::find(1);
         $root_user->assignRole('super-admin');

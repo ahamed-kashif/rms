@@ -36,11 +36,11 @@
         </div>
     </div>
 @endsection
-@push('custom-css')
+@section('page-css')
     @include('extras.dropzone-css')
+@endsection
+@section('page-js')
     @include('extras.dropzone-js')
-@endpush
-@push('custom-js')
     <script type="text/javascript" src="{{asset('js/restapi.js')}}"></script>
     <script type="text/javascript">
         Dropzone.options.dropzone = {
@@ -74,4 +74,4 @@
             }
         }
     </script>
-@endpush
+@endsection

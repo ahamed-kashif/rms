@@ -18,7 +18,7 @@
                     </select>
                     <label for="contractor_type" class="mt-1">Contractor Type</label>
                     <select id="contractor_type" name="contractor_type" class="form-control select2">
-                        <option>Select a Contractor Type</option>
+                        <option value="">Select a Contractor Type</option>
                         @foreach($materials as $material)
                             <option value="{{$material->title}}">{{$material->title}}</option>
                         @endforeach
@@ -71,6 +71,7 @@
             <th scope="col">Name</th>
             <th scope="col">Phone</th>
             <th scope="col">Type</th>
+            <th scope="col">Action</th>
         </tr>
 
         </thead>
@@ -81,6 +82,13 @@
                 <td><a href="{{route('contractor.show',$contractor->id)}}">{{$contractor->name}}</a></td>
                 <td><a href="tel:{{$contractor->phone_number}}">{{$contractor->phone_number}}</a></td>
                 <td>{{$contractor->pivot->purpose}}</td>
+                <td>
+                    <form action="{{route('project.contractor.remove',[$project->id,$contractor->id])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Are you sure?')">remove</button>
+                    </form>
+                </td>
 {{--                    <td>--}}
 {{--                        <div class="dropdown align-content-center">--}}
 {{--                            <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>--}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Libs;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Investor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,7 @@ class InvestorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -42,7 +43,7 @@ class InvestorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -68,15 +69,15 @@ class InvestorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20',
+            'name' => 'required',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:investors',
+            'email' => 'email|unique:investors|nullable',
             'nid' => 'max:30|nullable'
 
         ]);
@@ -102,7 +103,7 @@ class InvestorController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -120,10 +121,12 @@ class InvestorController extends Controller
                 if($investor == null){
                     return redirect()->back()->with('error','investor not exists!');
                 }
+                $accounts = $this->investor_account($investor->id);
                 return view('libs.investor.show')->with([
                     'investor' => $investor,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -194,7 +197,7 @@ class InvestorController extends Controller
                 $request->validate([
                     'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email',
+                    'email' => 'email|unique:investors|nullable',
                     'nid' => 'max:30|nullable'
 
                 ]);
@@ -245,5 +248,18 @@ class InvestorController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+    }
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function investor_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Investor::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
     }
 }

@@ -17,18 +17,15 @@ class ContractorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
         if(auth()->user()->can('index contractor')){
             $contractors = Contractor::all();
-
             $title = 'Contractor';
             $breacrumbs['Contacts'] = "#";
             $breacrumbs['Contractors'] = 'javaScript:void();';
-
-
             return view('libs.contractor.index')->with([
                 'title' => $title,
                 'breadcrumbs'=> $breacrumbs,
@@ -42,7 +39,7 @@ class ContractorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -67,22 +64,20 @@ class ContractorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return mixed
      */
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20',
+            'name' => 'required',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:contractors',
+            'email' => 'email|unique:contractors|nullable',
             'nid' => 'max:30|nullable'
 
         ]);
-
         $contractor = new Contractor;
-
         $contractor->name = $request->input('name');
         $contractor->phone_number = $request->input('phone_number');
         $contractor->email = $request->input('email');
@@ -106,7 +101,7 @@ class ContractorController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -118,7 +113,7 @@ class ContractorController extends Controller
             $breadcrumbs['contact'] = "#";
             $breadcrumbs['contractors'] = route('contractor.index');
             $breadcrumbs[$contractor->name] = 'javaScript:void();';
-
+            $accounts = $this->contractor_account($contractor->id);
             if(is_numeric($id)){
                 $contractor = Contractor::find($id);
                 if($contractor == null){
@@ -127,7 +122,8 @@ class ContractorController extends Controller
                 return view('libs.contractor.show')->with([
                     'contractor' => $contractor,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -198,7 +194,7 @@ class ContractorController extends Controller
                 $request->validate([
                     'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email',
+                    'email' => 'email|unique:contractors|nullable',
                     'nid' => 'max:30|nullable'
 
                 ]);
@@ -250,5 +246,19 @@ class ContractorController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+    }
+
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function contractor_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Contractor::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
     }
 }

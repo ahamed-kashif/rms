@@ -102,10 +102,12 @@ class SupplierController extends Controller
                 if($supplier == null){
                     return redirect()->back()->with('error','Supplier not exists!');
                 }
+                $accounts = $this->supplier_account($supplier->id);
                 return view('libs.supplier.show')->with([
                     'supplier' => $supplier,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -170,7 +172,7 @@ class SupplierController extends Controller
                 $request->validate([
                     'name' => 'required',
                     'phone' => 'required',
-                    'email' => 'nullable|email',
+                    'email' => 'email|unique:suppliers|nullable',
                     'address' => 'nullable|max:25',
                     'nid' => 'nullable|max:25',
 
@@ -218,7 +220,19 @@ class SupplierController extends Controller
         return redirect('home')->with('error','Unauthorized Access!');
     }
 
-
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function supplier_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Supplier::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
+    }
 
 
 }

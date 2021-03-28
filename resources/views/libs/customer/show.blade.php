@@ -1,11 +1,14 @@
 @extends('layouts.page')
+@section('page-css')
+    @include('extras.datatable-css')
+@endsection
 @section('page-title')
     @include('components.page-title')
 @endsection
 @section('content')
     <div class="row">
         <h3 class="card-title">
-            {{$customer->name}}
+            {{$customer->full_name}}
 
         </h3>
         <div class="ml-auto">
@@ -14,6 +17,9 @@
                     <form action="{{route('customer.destroy',$customer->id)}}" method="post">
                         @csrf
                         @method('delete')
+
+                        <a class="btn btn-outline-primary w-xs" href="{{route('customer.print',$customer->id)}}">Print</a>
+
                         <a class="btn btn-outline-primary w-xs" href="{{route('customer.edit',$customer->id)}}">
                             <i class="fa fa-edit"></i>
                             <span class="text-alias"> Edit</span></a>
@@ -30,52 +36,132 @@
     <hr>
     <div class="row">
         <div class="col-md-5 col-lg-5">
-            <ol class="list-unstyled">
-                <li>
-                    <b>Contact Number</b><p><a href="tel:{{$customer->phone_number}}">{{$customer->phone_number}}</a></p>
-                </li>
-                <li>
-                    <b>Email Address</b><p><a href="email:{{$customer->email}}">{{$customer->email}}</a></p>
-                </li>
-                <li>
-                    <b>National ID (NID)</b><p>{{$customer->nid}}</p>
-                </li>
-                <li>
-                    <b>Address</b><p>{{$customer->address}}</p>
-                </li>
-            </ol>
-        </div>
-        <div class="col-md-7 col-lg-7 border-pink">
-            <div class="align-content-end">
-                <h5>Assigned Projects</h5>
-                <table class="table table-bordered align-content-center">
-                    <thead>
-                    <tr>
-                        <th class="title">Active<small>(n)</small></th>
-                        <th>Project</th>
-                        <th>Product</th>
-                    </tr>
-                    </thead>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
                     <tbody>
-                    <tr>
-                        <td><span class="badge badge-pill badge-success text-light font-size-15 p-2">active</span> </td>
-                        <td>Demo</td>
-                        <td>Demo</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>nill</td>
-                        <td>nill</td>
-                    </tr>
+                        <tr>
+                            <th>Father/Husband's Number</th>
+                            <td>{{$customer->father_or_husband_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Mother's Number</th>
+                            <td>{{$customer->mother_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Occupation</th>
+                            <td>{{$customer->occupation}}</td>
+                        </tr>
+                        <tr>
+                            <th>NID</th>
+                            <td>{{$customer->nid}}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact Number</th>
+                            <td><a href="tel:{{$customer->phone_number}}">{{$customer->phone_number}}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Car Parking NO.</th>
+                            <td>{{$customer->flats->first()->car_parking_no}}</td>
+                        </tr>
+                        <tr>
+                            <th>Project Name</th>
+                            <td>{{$customer->flats->first()->project->name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Project Address</th>
+                            <td>{{$customer->flats->first()->project->address}}</td>
+                        </tr>
+                        <tr>
+                            <th>Flat Title</th>
+                            <td>{{$customer->flats->first()->flat_title}}</td>
+                        </tr>
+                        <tr>
+                            <th>Floor</th>
+                            <td>{{$customer->flats->first()->floor_number}}</td>
+                        </tr>
+                        <tr>
+                            <th>Loan</th>
+                            <td>{{$customer->flats->first()->is_avail_loan ? 'YES' : 'NO'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Payable</th>
+                            <td>{{$customer->flats->first()->flat_amount}}</td>
+                        </tr>
+                        <tr>
+                            <th>Booking Amount</th>
+                            <td>{{$customer->flats->first()->flat_booking}}</td>
+                        </tr>
+                        <tr>
+                            <th>Downpayment</th>
+                            <td>{{$customer->flats->first()->flat_downpayment}}</td>
+                        </tr>
+                        <tr>
+                            <th>Installment</th>
+                            <td>{{$customer->flats->first()->is_installable ? 'YES' : 'NO'}}</td>
+                        </tr>
+                        @if($customer->flats->first()->is_installable)
+                        <tr>
+                            <th>Installment Amount</th>
+                            <td>{{$customer->flats->first()->installment_amount}}</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <h4 class="text-center">Accounts</h4>
+    <hr>
+    <table id="account" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <thead class="bg-secondary text-light">
+            <tr>
+                <th>Date</th>
+                <th>Invoice NO.</th>
+                <th>Received</th>
+                <th>Expense</th>
+                <th>Balance</th>
+                <th>Person</th>
+                <th>Payment Method</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if($accounts != 0)
+            @foreach($accounts['invoices'] as $invoice)
+                <tr>
+                    <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
+                    <td><a href="{{route('invoice.show',$invoice->id)}}">{{$invoice->invoice_no}}</a></td>
+                    <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
+                    <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
+                    <td>{{$accounts['balance'][$invoice->id]}}</td>
+                    <td>{{$invoice->is_office_expense == 1 ? $invoice->person_name : ($invoice->person->name == null ? $invoice->person->full_name : $invoice->person->name)}}</td>
+                    <td>{{$invoice->PaymentMethod->title}}</td>
+                    <td>{{$invoice->description}}</td>
+                </tr>
+            @endforeach
+        @endif
+        </tbody>
+    </table>
 @endsection
-
+@section('page-js')
+    @include('extras.datatable-js')
+    <script>
+        $(document).ready(function() {
+            var groupColumn = 5;
+            let table = $("#account").DataTable({
+                "buttons":["copy","excel","pdf","colvis"],
+                "columnDefs": [
+                    // { "visible": false, "targets": groupColumn,},
+                    {'orderable' : false, "targets": [0,2,3,4,5,6,7]}
+                ],
+                "fixedHeader": {
+                    header: true,
+                    footer: true
+                },
+                "order": [[1, 'desc']],
+                "displayLength": 25,
+            } );
+            table.buttons().container().appendTo("#account_wrapper .col-md-6:eq(0)");
+        } );
+    </script>
+@endsection

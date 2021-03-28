@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('css')
     @yield('page-css')
-    @stack('custom-css')
 @endsection
 @section('body')
     <!-- Begin page -->
@@ -80,5 +79,4 @@
 @endsection
 @section('js')
     @yield('page-js')
-    @stack('custom-js')
 @endsection

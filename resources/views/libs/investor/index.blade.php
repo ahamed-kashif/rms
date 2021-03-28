@@ -36,7 +36,7 @@
         @foreach($investor as $investor)
             <tr>
                 <td><a href="{{route('investor.show',$investor->id)}}">{{$investor->name}}</a></td>
-                <td>{{$investor->phone}}</td>
+                <td>{{$investor->phone_number}}</td>
                 <td>{{$investor->email}}</td>
                 <td>NILL</td>
                 <td>

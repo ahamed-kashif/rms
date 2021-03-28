@@ -16,7 +16,7 @@ class EngineerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -41,7 +41,7 @@ class EngineerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -67,15 +67,15 @@ class EngineerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:20',
+            'name' => 'required',
             'phone_number' => 'required|max:20',
-            'email' => 'email|unique:engineers',
+            'email' => 'email|unique:engineers|nullable',
             'nid' => 'max:30|nullable'
 
         ]);
@@ -103,7 +103,7 @@ class EngineerController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -115,7 +115,7 @@ class EngineerController extends Controller
             $breadcrumbs['contact'] = "#";
             $breadcrumbs['engineers'] = route('engineer.index');
             $breadcrumbs[$engineer->name] = 'javaScript:void();';
-
+            $accounts = $this->engineer_account($engineer->id);
             if(is_numeric($id)){
                 $engineer = Engineer::find($id);
                 if($engineer == null){
@@ -124,7 +124,8 @@ class EngineerController extends Controller
                 return view('libs.engineer.show')->with([
                     'engineer' => $engineer,
                     'title' => $title,
-                    'breadcrumbs'=> $breadcrumbs
+                    'breadcrumbs'=> $breadcrumbs,
+                    'accounts' => $accounts
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -138,7 +139,7 @@ class EngineerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function edit($id)
     {
@@ -176,7 +177,7 @@ class EngineerController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function update(Request $request, $id)
     {
@@ -195,7 +196,7 @@ class EngineerController extends Controller
                 $request->validate([
                     'name' => 'required|max:20',
                     'phone_number' => 'required|max:20',
-                    'email' => 'email',
+                    'email' => 'email|unique:engineers|nullable',
                     'nid' => 'max:30|nullable'
 
                 ]);
@@ -247,5 +248,19 @@ class EngineerController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+    }
+
+    /**
+     * Accounts calculation of a project.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function engineer_account($id)
+    {
+        //$project = Project::find($id);
+        $invoices = Engineer::find($id)->Invoice()->get();
+        $account['invoices'] = $invoices;
+        return $account;
     }
 }

@@ -35,7 +35,7 @@
         @foreach($suppliers as $supplier)
             <tr>
                 <td><a href="{{route('supplier.show',$supplier->id)}}">{{$supplier->name}}</a></td>
-                <td>{{$supplier->phone}}</td>
+                <td>{{$supplier->phone_number}}</td>
                 <td>{{$supplier->email}}</td>
                 <td>
                     <div class="dropdown align-content-center">

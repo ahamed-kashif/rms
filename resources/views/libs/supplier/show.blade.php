@@ -2,6 +2,9 @@
 @section('page-title')
     @include('components.page-title')
 @endsection
+@section('page-css')
+    @include('extras.datatable-css')
+@endsection
 @section('content')
     <div class="row">
         <h3 class="card-title">
@@ -79,5 +82,27 @@
             </div>
         </div>
     </div>
+    @include('inc.account')
 @endsection
-
+@section('page-js')
+    @include('extras.datatable-js')
+    <script>
+        $(document).ready(function() {
+            var groupColumn = 5;
+            let table = $("#account").DataTable({
+                "buttons":["copy","excel","pdf","colvis"],
+                "columnDefs": [
+                    // { "visible": false, "targets": groupColumn,},
+                    {'orderable' : false, "targets": [0,2,3,4,5,6]}
+                ],
+                "fixedHeader": {
+                    header: true,
+                    footer: true
+                },
+                "order": [[1, 'desc']],
+                "displayLength": 25,
+            } );
+            table.buttons().container().appendTo("#account_wrapper .col-md-6:eq(0)");
+        } );
+    </script>
+@endsection

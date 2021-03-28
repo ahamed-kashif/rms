@@ -13,14 +13,14 @@
 {{--    <meta content="Themesbrand" name="author" />--}}
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/rms.svg')}}">
-
+    @yield('css')
     <!-- Bootstrap Css -->
     <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
-    @yield('css')
+@stack('css')
 
 </head>
 
@@ -39,7 +39,12 @@
 <script src="{{asset('libs/node-waves/waves.min.js')}}"></script>
 @yield('js')
 <script src="{{asset('js/skote.js')}}"></script>
+{{--<script>--}}
+{{--    $(document).ready(function(){--}}
+{{--        $(".alert").delay(500).slideUp(300);--}}
+{{--    });--}}
+{{--</script>--}}
 {{--<script src="{{asset('js/app.js')}}"></script>--}}
-
+@stack('js')
 </body>
 </html>
