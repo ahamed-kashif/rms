@@ -27,7 +27,6 @@
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Assigned Projects</th>
             <th>Action</th>
         </tr>
 
@@ -37,8 +36,7 @@
             <tr>
                 <td><a href="{{route('engineer.show',$engineer->id)}}">{{$engineer->name}}</a></td>
                 <td>{{$engineer->phone_number}}</td>
-                <td>{{$engineer->email}}</td>
-                <td>NILL</td>
+                <td>{{isset($engineer->email) ? $engineer->email : 'N/A'}}</td>
                 <td>
                     <div class="dropdown align-content-center">
                         <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>

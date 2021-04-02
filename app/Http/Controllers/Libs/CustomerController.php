@@ -78,18 +78,17 @@ class CustomerController extends Controller
 
         $request->validate([
             'full_name' => 'required',
-            'father_or_husband_name' => 'required',
-            'mother_name' => 'required',
-            'occupation' => 'required',
-            'date_of_birth'=>'required',
-            'nationality'=>'required',
+            'father_or_husband_name' => 'nullable',
+            'mother_name' => 'nullable',
+            'occupation' => 'nullable',
+            'date_of_birth'=>'nullable',
+            'nationality'=>'nullable',
             'phone' => 'required',
             'email' => 'email|nullable',
-            'nid' => 'required',
+            'nid' => 'nullable',
             'nominee_name' => 'nullable',
             'present_address' => 'nullable|string',
-            'permanent_address' => 'required|string',
-            'project_id' => 'required'
+            'permanent_address' => 'nullable|string',
         ]);
 
         $customer = new Customer();
@@ -106,7 +105,6 @@ class CustomerController extends Controller
         $customer->nominee_name = $request->input('nominee_name');
         $customer->present_address = $request->input('present_address');
         $customer->permanent_address = $request->input('permanent_address');
-        $customer->project_id = $request->project_id;
 
 //        $customer->flat_number = $request->input('flat_number');
 //        $customer->is_avail_loan = $request->has('is_avail_loan');
@@ -183,7 +181,7 @@ class CustomerController extends Controller
             $title = 'Edit '.$customer->name;
             $breadcrumbs['contact'] = "#";
             $breadcrumbs['customers'] = route('customer.index');
-            $breadcrumbs[$customer->name] = route('customer.show',$customer->id);
+            $breadcrumbs[$customer->full_name] = route('customer.show',$customer->id);
             $breadcrumbs['edit'] = 'javaScript:void();';
 
             if(is_numeric($id)){
@@ -240,7 +238,6 @@ class CustomerController extends Controller
                 $customer->nominee_name = $request->input('nominee_name');
                 $customer->present_address = $request->input('present_address');
                 $customer->permanent_address = $request->input('permanent_address');
-                $customer->reference_person_name = $request->input('reference_person_name');
                 try{
                     $customer->update();
                     return redirect()->back()->with('success','successfully updated');
@@ -264,7 +261,6 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        return redirect()->route('customer.show',$id)->with('error','Not possible');
         if(auth()->user()->can('delete customer')){
             if(is_numeric($id)){
                 $customer = Customer::find($id);
@@ -272,11 +268,13 @@ class CustomerController extends Controller
                     return redirect()->back()->with('error','customer not exists!');
                 }
                 try{
-
+                    if($customer->Invoice()->count() > 0){
+                        return redirect()->route('customer.show', $customer->id)->with('error','There are'.$customer->invoices()->count().' invoices generated against this customer!');
+                    }
                     $customer->delete();
                     return redirect()->route('customer.index')->with('success','successfully deleted!');
                 }catch (\Exception $e){
-                    return redirect()->back()->withErrors($e);
+                    return redirect()->back()->withErrors($e->getmessage());
                 }
             }else{
                 return redirect()->back()->with('error','wrong url!');

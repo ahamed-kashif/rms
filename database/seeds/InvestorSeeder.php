@@ -24,6 +24,6 @@ class InvestorSeeder extends Seeder
         Permission::create(['name' => 'api_get investor']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
         Role::findByName('admin')->givePermissionTo(Permission::all());
-        factory(Investor::class, 10)->create();
+        //factory(Investor::class, 10)->create();
     }
 }

@@ -1,5 +1,8 @@
 <div class="card">
     <div class="card-body">
+        <div class="text-right">
+            <a href="{{route('project.edit',$project->id)}}"><i class="fa fa-edit"></i><span class="text-alias"> Edit</span></a>
+        </div>
         <div class="table-responsive">
             <table>
                 <tbody class="table table-striped table-bordered">

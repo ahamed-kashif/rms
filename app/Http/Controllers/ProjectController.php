@@ -137,6 +137,7 @@ class ProjectController extends Controller
     {
         $user = Auth::user();
         $project = Project::findorfail($id);
+        //dd($project->customers()->get());
         $title = $project->name;
         if($project->is_investor_project){
             $breadcrumbs['investor projects'] = route('project.investor.list');
@@ -303,7 +304,7 @@ class ProjectController extends Controller
         foreach ($contractors as $contractor){
             $invoices = $contractor->Invoice()->where('is_checkin',0)->get();
             if(count($invoices) == 0){
-                return -1;
+                continue;
             }
             foreach($invoices as $invoice) {
                 $balance = $balance - $invoice->amount;
@@ -321,7 +322,7 @@ class ProjectController extends Controller
         foreach ($suppliers as $supplier){
             $invoices = $supplier->Invoice()->get();
             if(count($invoices) == 0){
-                return -1;
+                continue;
             }
             foreach($invoices as $invoice) {
                 $balance = $balance - $invoice->amount;
@@ -338,7 +339,7 @@ class ProjectController extends Controller
         foreach ($engineers as $engineer){
             $invoices = $engineer->Invoice()->where('is_checkin',0)->get();
             if(count($invoices) == 0){
-                return -1;
+                continue;
             }
             foreach($invoices as $invoice) {
                 $balance = $balance - $invoice->amount;

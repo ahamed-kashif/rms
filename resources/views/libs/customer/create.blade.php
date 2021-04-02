@@ -1,7 +1,7 @@
 @extends('layouts.page')
-@section('page-css')
-    @include('extras.select2-css')
-@endsection
+<!--@section('page-css')-->
+<!--    @include('extras.select2-css')-->
+<!--@endsection-->
 @section('page-title')
     @include('components.page-title')
 @endsection
@@ -50,7 +50,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="date_of_birth">Date of Birth</label>
-                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Ex: 1/1/1990" required>
+                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Ex: 1/1/1990">
                 </div>
             </div>
 
@@ -110,21 +110,21 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="permanent_address">Permanent Address <code>*</code></label>
-                    <input type="text" class="form-control" id="permanent_address" name="permanent_address" placeholder="Ex: house: x, dhaka" required>
+                    <label for="permanent_address">Permanent Address</label>
+                    <input type="text" class="form-control" id="permanent_address" name="permanent_address" placeholder="Ex: house: x, dhaka">
                 </div>
             </div>
         </div>
         <br>
-        <div class="form-group">
-            <label for="project_id">Select Project</label>
-            <select class="select2-single form-control" name="project_id" id="project_id" required>
-                <option value="">Select any project</option>
-                @foreach($projects as $project)
-                    <option value="{{$project->id}}" selected="{{isset($project_id) && ($project_id == $project->id) ? 'selected' : ''}}">{{$project->name}}</option>
-                @endforeach
-            </select>
-        </div>
+        <!--<div class="form-group">-->
+        <!--    <label for="project_id">Select Project</label>-->
+        <!--    <select class="select2-single form-control" name="project_id" id="project_id" required>-->
+        <!--        <option value="">Select any project</option>-->
+        <!--        @foreach($projects as $project)-->
+        <!--            <option value="{{$project->id}}" selected="{{isset($project_id) && ($project_id == $project->id) ? 'selected' : ''}}">{{$project->name}}</option>-->
+        <!--        @endforeach-->
+        <!--    </select>-->
+        <!--</div>-->
 
 
 {{--        <div class="row">--}}
@@ -192,9 +192,9 @@
 
     </form>
 @endsection
-@section('page-js')
-    @include('extras.select2-js')
-    <script>
-        $('#project_id').select2();
-    </script>
-@endsection
+<!--@section('page-js')-->
+<!--    @include('extras.select2-js')-->
+<!--    <script>-->
+<!--        $('#project_id').select2();-->
+<!--    </script>-->
+<!--@endsection-->

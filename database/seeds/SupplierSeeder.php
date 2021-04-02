@@ -23,6 +23,6 @@ class SupplierSeeder extends Seeder
         Permission::create(['name' => 'api_get supplier']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
         Role::findByName('admin')->givePermissionTo('show supplier');
-        factory(supplier::class, 10)->create();
+        //factory(supplier::class, 10)->create();
     }
 }

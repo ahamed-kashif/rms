@@ -8,7 +8,16 @@
     <form action="{{route('flat.store',$customer_id)}}" method="post">
         @csrf
         <input type="hidden" id="customer_id" name="customer_id" value="{{$customer_id}}">
-        <input type="hidden" id="project_id" name="project_id" value="{{$project_id}}">
+        
+        <div class="form-group">
+            <label for="project_id">Select Project</label>
+            <select class="select2-single form-control" name="project_id" id="project_id" required>
+                <option value="">Select any project</option>
+                @foreach($projects as $project)
+                    <option value="{{$project->id}}">{{$project->name}}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -76,7 +85,7 @@
         <div class="row">
               <div class="col-md-12">
                    <div class="form-group">
-                       <label for="installment_duration">Installment Duration <code>*</code></label>
+                       <label for="installment_duration">Installment Duration <code>(Required if Installable)</code></label>
                        <input type="text" class="form-control" id="installment_duration" name="installment_duration" placeholder="EX: 4 months">
                    </div>
               </div>
@@ -84,8 +93,8 @@
         <div class="row">
                <div class="col-md-12">
                    <div class="form-group">
-                        <label for="installment_amount">Installment Amount <code>*</code></label>
-                        <input type="text" class="form-control" id="installment_amount" name="installment_amount" placeholder="EX: 4000 tk" required>
+                        <label for="installment_amount">Installment Amount <code>(Required if Installable)</code></label>
+                        <input type="text" class="form-control" id="installment_amount" name="installment_amount" placeholder="EX: 4000 tk">
                    </div>
                </div>
         </div>
