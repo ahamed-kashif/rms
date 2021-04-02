@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Libs;
 use App\Models\Flat;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Project;
 
 use Illuminate\Http\Request;
 
@@ -25,8 +26,7 @@ class FlatController extends Controller
             $flat = FLat::all();
 
             $title = 'Flat';
-            $breacrumbs['Contacts'] = "#";
-            $breacrumbs['Flat'] = 'javaScript:void();';
+            $breacrumbs['Flats'] = 'javaScript:void();';
 
 
             return view('libs.flat.index')->with([
@@ -51,16 +51,15 @@ class FlatController extends Controller
         if(auth()->user()->can('create flat')){
         if(is_numeric($customer_id)) {
             $customer = Customer::find($customer_id);
-            $project_id = $customer->project_id;
+            $projects = Project::isActive()->get();
 
             $title = 'Add Flat';
-            $breadcrumbs['contacts'] = "#";
-            //$breadcrumbs['customers'] = route('flat.index');
-            $breadcrumbs['add'] = 'javaScript:void();';
+            $breadcrumbs['Flats'] = "#";
+            $breadcrumbs['Add'] = 'javaScript:void();';
             return view('libs.flat.create')->with([
                 'title' => $title,
                 'breadcrumbs' => $breadcrumbs,
-                'project_id' => $project_id,
+                'projects' => $projects,
                 'customer_id' => $customer_id
             ]);
         }}
@@ -88,12 +87,9 @@ class FlatController extends Controller
             'flat_booking'=>'required|numeric',
             'flat_downpayment'=>'required|numeric'
         ]);
-
         $flat = new Flat();
-
         $flat->project_id = $request->project_id;
         $flat->customer_id = $request->customer_id;
-
         $flat->flat_title = $request->input('flat_title');
         $flat->is_avail_loan = $request->has('is_avail_loan');
         $flat->size = $request->input('size');
@@ -106,11 +102,9 @@ class FlatController extends Controller
         $flat->flat_downpayment = $request->input('flat_downpayment');
         $flat->car_parking_no = $request->input('car_parking_no');
         $flat->particulars = $request->input('particulars');
-
-
-
-
         try{
+            $customer = Customer::find($request->customer_id);
+            $customer->update('project_id',$request->project_id);
             $flat->save();
             return redirect()->route('customer.show',$request->customer_id)->with('success','successfully stored');
         }catch (\Exception $e){
@@ -131,8 +125,7 @@ class FlatController extends Controller
         if(auth()->user()->can('show flat')){
 
             $title = 'Show Flat';
-            $breadcrumbs['contact'] = "#";
-            $breadcrumbs['flat'] = route('flat.index');
+            $breadcrumbs['Flats'] = route('flat.index');
             $breadcrumbs[$flat->name] = 'javaScript:void();';
 
             if(is_numeric($id)){
@@ -258,7 +251,9 @@ class FlatController extends Controller
                     return redirect()->back()->with('error','flat not exists!');
                 }
                 try{
-
+                    if($flat->customers()->Invoice()->count() > 0){
+                        return redirect()->route('flat.show',$flat->id)->with('error','This flat has invoice/s');
+                    }
                     $flat->delete();
                     return redirect()->route('flat.index')->with('success','successfully deleted!');
                 }catch (\Exception $e){

@@ -19,9 +19,9 @@ class UsersTableSeeder extends Seeder
         $user = User::create(
             [
                 'id' 		=> 	1,
-                'name'	=>	'root_user',
-                'email'		=>	'admin@maroon.lab',
-                'phone_number' => '01783511730',
+                'name'	=>	'Reaz',
+                'email'		=>	'admin@fsrel.com',
+                'phone_number' => '01989091217',
                 'password'	=>	Hash::make('12345678')
             ]
         );
@@ -30,8 +30,8 @@ class UsersTableSeeder extends Seeder
             [
                 'id' 		=> 	2,
                 'name'	=>	'dev_user',
-                'email'		=>	'admin@fsrelbd.com',
-                'phone_number' => '01989091217',
+                'email'		=>	'account@fsrel.com',
+                'phone_number' => '01989091218',
                 'password'	=>	Hash::make('12345678')
             ]
         );

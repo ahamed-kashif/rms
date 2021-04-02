@@ -5,10 +5,9 @@
 @section('content')
     <h4 class="card-title mb-4">{{isset($customer) ? $customer->name : ''}}</h4>
 
-    <form action="{{route('customer.update', $customer->id)}}" method="post">
+    <form action="{{route('customer.update', $customer->id)}}" method="post" id="customer-edit">
         @csrf
         @method('put')
-        @csrf
         <input type="hidden" id="project_id" name="project_id" value="{{$customer->project_id}}">
         <div class="row">
             <div class="col-md-12">
@@ -116,14 +115,14 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="reference_person_name">Reference Person Name <code>*</code></label>
-                    <input type="text" class="form-control" id="reference_person_name" name="reference_person_name" value="{{ $customer->reference_person_name }}" required>
-                </div>
-            </div>
-        </div>
+        <!--<div class="row">-->
+        <!--    <div class="col-md-12">-->
+        <!--        <div class="form-group">-->
+        <!--            <label for="reference_person_name">Reference Person Name <code>*</code></label>-->
+        <!--            <input type="text" class="form-control" id="reference_person_name" name="reference_person_name" value="{{ $customer->reference_person_name }}" required>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
 
 {{--        <div class="form-group">--}}
 {{--            <label for="project_id">Select Project</label>--}}
@@ -139,6 +138,16 @@
 
         <div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Save</button>
+            <button type="button" class="btn btn-primary" id="flat"><i class="fas fa-save mr-2"></i>Save & Update Flat</button>
         </div>
     </form>
 @endsection
+@push('js')
+    <script>
+        let form = $('#customer-edit');
+        $('#flat').on('click', function(){
+            form.append('<input type="hidden" name="updateFlat" value="1" />');
+            form.submit();
+        });
+    </script>
+@endpush

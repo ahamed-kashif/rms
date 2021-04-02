@@ -23,6 +23,6 @@ class ContractorsSeeder extends Seeder
         Permission::create(['name' => 'api_get contractor']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
         Role::findByName('admin')->givePermissionTo(Permission::all());
-        factory(Contractor::class, 10)->create();
+        //factory(Contractor::class, 10)->create();
     }
 }

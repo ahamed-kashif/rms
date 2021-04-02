@@ -12,10 +12,10 @@ class PaymentMethodSeeder extends Seeder
     public function run()
     {
         \App\Models\PaymentMethod::create([
-            'title' => 'cash'
+            'title' => 'CASH'
         ]);
         \App\Models\PaymentMethod::create([
-            'title' => 'check'
+            'title' => 'CHEQUE'
         ]);
     }
 }

@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="phone_number">Contact Number<code>*</code></label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Ex: 01xxxxxxxxxx" required>
+                    <input type="text" class="form-control" id="phone" name="phone_number" placeholder="Ex: 01xxxxxxxxxx" required>
                 </div>
             </div>
             <div class="col-md-6">

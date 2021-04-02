@@ -57,7 +57,7 @@ class SupplierController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'phone' => 'unique:suppliers|required',
+            'phone_number' => 'unique:suppliers|required',
             'email' => 'nullable|email|unique:suppliers',
             'address' => 'nullable|max:25',
             'nid' => 'nullable|max:25',
@@ -67,7 +67,7 @@ class SupplierController extends Controller
         $supplier = new Supplier();
 
         $supplier->name = $request->name;
-        $supplier->phone = $request->phone;
+        $supplier->phone_number = $request->phone_number;
         $supplier->email = $request->email;
         $supplier->address = $request->address;
         $supplier->nid = $request->nid;
@@ -180,7 +180,7 @@ class SupplierController extends Controller
 
 
                 $supplier->name = $request->name;
-                $supplier->phone = $request->phone;
+                $supplier->phone_number = $request->phone_number;
                 $supplier->email = $request->email;
                 $supplier->address = $request->address;
                 $supplier->nid = $request->nid;

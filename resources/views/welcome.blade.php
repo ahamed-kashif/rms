@@ -46,10 +46,7 @@
     <!-- Sidebar Footer -->
     <div class="bauen-footer">
         <ul>
-            <li><a href="#"><i class="ti-facebook"></i></a></li>
-            <li><a href="#"><i class="ti-twitter"></i></a></li>
-            <li><a href="#"><i class="ti-instagram"></i></a></li>
-            <li><a href="#"><i class="ti-pinterest"></i></a></li>
+            <li><a href="https://www.facebook.com/FSREL"><i class="ti-facebook"></i></a></li>
         </ul>
     </div>
 </aside>
@@ -68,7 +65,7 @@
                                     <h1>Innovate Desing in Bangladesh</h1>
                                     <h4>Where Dreams Come Home</h4>
 
-                                    <div class="butn-light mt-30 mb-30"><a href="#"><span>Contact Us</span></a></div>
+                                    <div class="butn-light mt-30 mb-30"><a href="#contact"><span>Contact Us</span></a></div>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +81,7 @@
                                     <h1>Innovate Desing in Bangladesh</h1>
                                     <h4>Where Dreams Come Home</h4>
 
-                                    <div class="butn-light mt-30 mb-30"><a href="#"><span>Contact Us</span></a></div>
+                                    <div class="butn-light mt-30 mb-30"><a href="#contact"><span>Contact Us</span></a></div>
                                 </div>
                             </div>
                         </div>
@@ -110,9 +107,9 @@
                 <div class="row">
                     <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
                         <h2 class="section-title">About <span>FSREL</span></h2>
-                        <p>Architecture viverra tristique justo duis vitae diam neque nivamus aestan ateuene artines aringianu atelit finibus viverra nec lacus. Nedana theme erodino setlie suscipe no curabit tristique.</p>
-                        <p>Design inilla duiman at elit finibus viverra nec a lacus themo the drudea seneoice misuscipit non sagie the fermen.</p>
-                        <p>Planner inilla duiman at elit finibus viverra nec a lacus themo the drudea seneoice misuscipit non sagie the fermen. Viverra tristique jusio the ivite dianne onen nivami acsestion.</p>
+                        <p>First Security Real Estate Ltd. has started its journey in the year of 2010, FSREL came in real estate to bring Quality, Commitment, Service and safe investment for the people of our country. Since the inception we have been winning our clients hearts by ensuring timely handover of their desired living as the way we promised. </p>
+                        <p>Our hi-skilled construction-team will ensure a long life building and safety of your stay. Actually, the surprising fact is that, within this short span of time, FSREL handed-over 35 projects in time. Moreover, right now FSREL has 09 on-going projects. </p>
+                        <p>Our promise remains to develop a portfolio of luxury spaces and offer investors as well as buyers an unparalleled quality of service, inimitable by competitors. It is the commitment to both impeccably high standards and attention to detail that drive us to our success.</p>
                     </div>
                     <div class="col-md-6 animate-box" data-animate-effect="fadeInUp">
                         <div class="about-img">
@@ -137,33 +134,65 @@
                             <div class="item">
                                 <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/1.jpg')}}" alt=""> </div>
                                 <div class="con">
-                                    <h6><a href="#">Interior</a></h6>
-                                    <h5><a href="#">Cotton House</a></h5>
-                                    <div class="line"></div> <a href="#"><i class="ti-arrow-right"></i></a>
+                                    <h6><a href="#">Flat Size - 1974,1597 & 2268 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-30, Road-4, Block-G, Banasree, Dhaka.</a></h6>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/2.jpg')}}" alt=""> </div>
                                 <div class="con">
-                                    <h6><a href="#">Exterior</a></h6>
-                                    <h5><a href="#">Armada Center</a></h5>
-                                    <div class="line"></div> <a href="#"><i class="ti-arrow-right"></i></a>
+                                    <h6><a href="#">Flat Size - 1921 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-26, Road-8, Block-E, Banasree, Dhaka.</a></h6>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
                                 </div>
                             </div>
                             <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('img/projects/3.jpg')}}" alt=""> </div>
+                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/3.jpg')}}" alt=""> </div>
                                 <div class="con">
-                                    <h6><a href="#">Urban</a></h6>
-                                    <h5><a href="#">Stonya Villa</a></h5>
-                                    <div class="line"></div> <a href="#"><i class="ti-arrow-right"></i></a>
+                                    <h6><a href="#">Flat Size - 1735 & 1702 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-14, Road-8, Block-M, Banasree, Dhaka.</a></h6>>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/4.jpg')}}" alt=""> </div>
                                 <div class="con">
-                                    <h6><a href="#">Interior</a></h6>
-                                    <h5><a href="#">Prime Hotel</a></h5>
-                                    <div class="line"></div> <a href="#"><i class="ti-arrow-right"></i></a>
+                                    <h6><a href="#">Flat Size - 1701 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-35, Road-6, Block-F, Banasree, Dhaka.</a></h6>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/5.jpg')}}" alt=""> </div>
+                                <div class="con">
+                                    <h6><a href="#">Flat Size - 1807 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-23, Road-5, Block-B, Banasree, Dhaka.</a></h6>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/6.jpg')}}" alt=""> </div>
+                                <div class="con">
+                                    <h6><a href="#">Flat Size - 1813 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-53, Road-5, Block-G, Banasree, Dhaka.</a></h6>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/7.jpg')}}" alt=""> </div>
+                                <div class="con">
+                                    <h6><a href="#">Flat Size - 1800 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-08, Road-2, Block-G, Banasree, Dhaka.</a></h6>>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/8.jpg')}}" alt=""> </div>
+                                <div class="con">
+                                    <h6><a href="#">Flat Size - 1456 & 1444 sft</a></h6>
+                                    <h6><a href="#">Location - Plot-11, Road-1, Block-H, Banasree, Dhaka.</a></h6>
+                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -271,15 +300,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 mb-30 animate-box" data-animate-effect="fadeInUp">
-                        <p>Our firm nisl sodales sit amet sapien idea placerat sodales orcite. Vivamus ne miss rhoncus felis bauen architecture.</p>
+                        <p>FSRELs Vision is to Provide Excellent product and services of superior quality and value that will enhance the lives of consumers today and for generations to come.</p>
                         <p><b>REHAB :</b> *******</p>
                     </div>
                     <div class="col-md-4 mb-30 animate-box" data-animate-effect="fadeInUp">
-                        <p><b>Phone :</b>
+                        <p><b>Contact No</b>
                         <ul style="list-style: none">
+                            <li>+8801799399592</li>
                             <li>+8801741896101</li>
-                            <li>+8801770122641</li>
-                            <li>+8801716339588</li>
+                            <li>+8801619399592</li>
                         </ul>
                         <p><b>Email :</b>support@fsrel.com</p>
                         <p><b>Address :</b> House # 07, Road # 03, Block # F, Banasree, Rampura, Dhaka 1219</p>
@@ -296,7 +325,7 @@
                                 <textarea name="message" id="message" cols="40" rows="3" placeholder="Your Message"></textarea>
                             </div>
                             <div class="col-md-12">
-                                <button class="butn-dark mt-15" type="button"><a href="javascript:void()" onclick="alert('fuck you!')"><span>Send</span></a></button>
+                                <button class="butn-dark mt-15" type="button"><a href="javascript:void()" onclick="alert('Thank you for your message!')"><span>Send</span></a></button>
                             </div>
                         </form>
                     </div>
@@ -312,7 +341,7 @@
                         <div class="col-md-6">
                             <div class="vid-area">
                                 <div class="vid-icon">
-                                    <a class="play-button vid" href="https://youtu.be/RziCmLzpFNY">
+                                    <a class="play-button vid" href="https://www.youtube.com/watch?v=o6eokLFh_S0">
                                         <svg class="circle-fill">
                                             <circle cx="43" cy="43" r="39" stroke="#fff" stroke-width=".5"></circle>
                                         </svg>
@@ -331,37 +360,37 @@
                         <div class="col-md-5 offset-md-1">
                             <div class="testimonials-box animate-box" data-animate-effect="fadeInUp">
                                 <div class="head-box">
-                                    <h4>What Client's Say?</h4>
+                                    <h4>BOARD OF DIRECTORS</h4>
                                 </div>
                                 <div class="owl-carousel owl-theme">
                                     <div class="item"> <span class="quote"><img src="{{asset('landing_page/img/quot.png')}}" alt=""></span>
-                                        <p>Architect dapibus augue metus the nec feugiat erat hendrerit nec. Duis ve ante the lemon sanleo nec feugiat erat hendrerit necuis ve ante.</p>
+                                        <p>MD. Mizanur Rahman, the founder promoter of FSREL, opts to do business by providing good products and services in Bangladesh. With his visionary leadership and extensive business knowledge, FSREL drives forward to not only provide superior quality products and services but to demonstrate unparalleled foresight.</p>
                                         <div class="info">
                                             <div class="author-img"> <img src="{{asset('landing_page/img/team/1.jpg')}}" alt=""> </div>
                                             <div class="cont">
-                                                <h6>Ashikur Rahman</h6> <span>Bahar Villa Ownar</span>
+                                                <h6>MD. MIZANUR RAHMAN</h6> <span>MANAGING DIRECTOR</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="item"> <span class="quote">
                                                 <img src="{{asset('landing_page/img/quot.png')}}" alt="">
                                             </span>
-                                        <p>Interior dapibus augue metus the nec feugiat erat hendrerit nec. Duis ve ante the lemon sanleo nec feugiat erat hendrerit necuis ve ante.</p>
+                                        <p>MD. Shakhawat Hossaib has an experienced entrepreneur with a long track record in this sector. Under his strong leadership and entrepreneurial spirit, FSREL has become one of the leading real estate developers in the country.</p>
                                         <div class="info">
                                             <div class="author-img"> <img src="{{asset('landing_page/img/team/2.jpg')}}" alt=""> </div>
                                             <div class="cont">
-                                                <h6>Emily White</h6> <span>Armada Owner</span>
+                                                <h6>MD. SHAKHAWAT HOSSAIN</h6> <span>CHAIRMAN</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="item"> <span class="quote">
                                                 <img src="{{asset('landing_page/img/quot.png')}}" alt="">
                                             </span>
-                                        <p>Urban dapibus augue metus the nec feugiat erat hendrerit nec. Duis ve ante the lemon sanleo nec feugiat erat hendrerit necuis ve ante.</p>
+                                        <p>Riazul Zannah completed his BBA with a specialization in Strategic Management from IUB. Under his leadership, FSREL strives to strengthen its strategic marketing and branding. Moreover, his focus on quality and driving product innovation by incorporating modern features into FSREL projects continue to truly differentiate it from competitors.</p>
                                         <div class="info">
                                             <div class="author-img"> <img src="{{asset('landing_page/img/team/4.jpg')}}" alt=""> </div>
                                             <div class="cont">
-                                                <h6>Jesica Smith</h6> <span>Alsa Manager</span>
+                                                <h6>RIAZUL ZANNAH</h6> <span>GENERAL MANAGER</span>
                                             </div>
                                         </div>
                                     </div>
@@ -397,38 +426,8 @@
             </div>
 
         </section>
+         <br> <br>
         <!-- Footer -->
-        <footer class="main-footer dark">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 mb-30">
-                        <div class="item fotcont">
-                            <div class="fothead">
-                                <h6>Phone</h6>
-                            </div>
-                            <p>+8801741896101</p>
-                            <p>+8801770122641</p>
-                            <p>+8801716339588</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-30">
-                        <div class="item fotcont">
-                            <div class="fothead">
-                                <h6>Email</h6>
-                            </div>
-                            <p>support@fsrel.com</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-30">
-                        <div class="item fotcont">
-                            <div class="fothead">
-                                <h6>Our Address</h6>
-                            </div>
-                            <p>House # 07, Road # 03, Block # F, Banasree, Rampura, Dhaka 1219</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="sub-footer">
                 <div class="container">
                     <div class="row">
@@ -438,7 +437,7 @@
                             </div>
                         </div>
                         <!--  <div class="col-md-4 abot">
-                             <div class="social-icon"> <a href="index.html"><i class="ti-facebook"></i></a> <a href="index.html"><i class="ti-twitter"></i></a> <a href="index.html"><i class="ti-instagram"></i></a> <a href="index.html"><i class="ti-pinterest"></i></a> </div>
+                             <div class="social-icon"> <a href="index.html"><i class="ti-facebook"></i></a> <a href="https://www.facebook.com/FSREL"></i></a> </div>
                          </div> -->
                         <div class="col-md-4"> </div>
                     </div>
@@ -461,8 +460,45 @@
 <script src="{{asset('landing_page/js/jquery.stellar.min.js')}}"></script>
 <script src="{{asset('landing_page/js/jquery.magnific-popup.js')}}"></script>
 <script src="{{asset('landing_page/js/YouTubePopUp.js')}}"></script>
+<script src="{{asset('landing_page/js/FacebookPopUp.js')}}"></script>
 <script src="{{asset('landing_page/js/custom.js')}}"></script>
+<script>
+    $(document).ready(function(){
+          $('.con').hide();
+      });
+      $('.item').hover(
+        function(){
+          $(this).find('.con').show();
+        },
+        function(){
+          $(this).find('.con').hide();
+        }
+      );
+</script>
 </body>
+<!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v10.0'
+          });
+        };
 
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution="setup_tool"
+        page_id="1927881484147239"
+  theme_color="#d4a88c">
+      </div>
 
 </html>

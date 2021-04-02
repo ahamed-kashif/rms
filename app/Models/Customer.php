@@ -39,4 +39,19 @@ class Customer extends Model
 
         return $account;
     }
+    public function total(){
+        $invoices = $this->Invoice()->get();
+        $total = 0;
+        if(count($invoices) == 0){
+            return 0;
+        }
+        foreach($invoices as $invoice) {
+            if ($invoice->is_checkin) {
+                $total = $total + $invoice->amount;
+            } else {
+                $total = $total - $invoice->amount;
+            }
+        }
+        return $total;
+    }
 }

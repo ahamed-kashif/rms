@@ -27,7 +27,6 @@
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Assigned Projects</th>
             <th>Action</th>
         </tr>
 
@@ -37,7 +36,7 @@
             <tr>
                 <td><a href="{{route('investor.show',$investor->id)}}">{{$investor->name}}</a></td>
                 <td>{{$investor->phone_number}}</td>
-                <td>{{$investor->email}}</td>
+                <td>{{isset($investor->email) ? $investor->email : 'N/A'}}</td>
                 <td>NILL</td>
                 <td>
                     <div class="dropdown align-content-center">

@@ -36,7 +36,7 @@
             <tr>
                 <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->full_name}}</a></td>
                 <td>{{$customer->phone_number}}</td>
-                <td>{{$customer->email}}</td>
+                <td>{{isset($customer->email) ? $customer->email : 'N/A'}}</td>
                 <td>
                     <div class="dropdown align-content-center">
                         <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>

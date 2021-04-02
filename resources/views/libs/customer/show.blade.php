@@ -61,19 +61,19 @@
                         </tr>
                         <tr>
                             <th>Car Parking NO.</th>
-                            <td>{{$customer->flats->first()->car_parking_no}}</td>
+                            <td>{{$customer->flats->car_parking_no}}</td>
                         </tr>
                         <tr>
                             <th>Project Name</th>
-                            <td>{{$customer->flats->first()->project->name}}</td>
+                            <td>{{$customer->flats->project->name}}</td>
                         </tr>
                         <tr>
                             <th>Project Address</th>
-                            <td>{{$customer->flats->first()->project->address}}</td>
+                            <td>{{$customer->flats->project->address}}</td>
                         </tr>
                         <tr>
                             <th>Flat Title</th>
-                            <td>{{$customer->flats->first()->flat_title}}</td>
+                            <td>{{$customer->flats->flat_title}}</td>
                         </tr>
                         <tr>
                             <th>Floor</th>
@@ -85,7 +85,7 @@
                         </tr>
                         <tr>
                             <th>Total Payable</th>
-                            <td>{{$customer->flats->first()->flat_amount}}</td>
+                            <td>{{$customer->flats->flat_amount}}</td>
                         </tr>
                         <tr>
                             <th>Booking Amount</th>
@@ -93,16 +93,16 @@
                         </tr>
                         <tr>
                             <th>Downpayment</th>
-                            <td>{{$customer->flats->first()->flat_downpayment}}</td>
+                            <td>{{$customer->flats->flat_downpayment}}</td>
                         </tr>
                         <tr>
                             <th>Installment</th>
-                            <td>{{$customer->flats->first()->is_installable ? 'YES' : 'NO'}}</td>
+                            <td>{{$customer->flats->is_installable ? 'YES' : 'NO'}}</td>
                         </tr>
-                        @if($customer->flats->first()->is_installable)
+                        @if($customer->flats->is_installable)
                         <tr>
                             <th>Installment Amount</th>
-                            <td>{{$customer->flats->first()->installment_amount}}</td>
+                            <td>{{$customer->flats->installment_amount}}</td>
                         </tr>
                         @endif
                     </tbody>

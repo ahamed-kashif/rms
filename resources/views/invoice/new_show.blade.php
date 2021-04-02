@@ -13,7 +13,7 @@
         </div>
     </div>
     <hr style="margin-top: -40px">
-    <div class="row mb-5 mt-5">
+    <div class="row mb-5 mt-5 border border-secondary">
         <div class="col-md-6">
             <h4 style="margin-bottom:  -30px"><u>Billing From</u></h4>
             <address class="">
@@ -21,14 +21,24 @@
                 <br>
                 <strong class="font-size-24">First security real estate limited</strong><br>
                 <strong class="font-size-16">Address-House 7, Road 3, F block, Banasree,<br>
-                Rampura, Dhaka-1219, Bangladesh.<br>
-                Mobile: +8801799399592<br>
-                Email: support@fsrel.com<br>
-                Website: www. fsrel.com<br></strong>
+                    Rampura, Dhaka-1219, Bangladesh.<br>
+                    Mobile: +8801799399592<br>
+                    Email: support@fsrel.com<br>
+                    Website: www. fsrel.com<br></strong>
             </address>
         </div>
     </div>
-    <div class="row">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row mb-4">
         <div class="col-sm-6">
             <address>
                 <h4 style="margin-bottom: -10px"><u>Account Head</u></h4><br>
@@ -44,7 +54,7 @@
                     <h4 style="margin-bottom: -10px"><u>Pay To</u></h4><br>
                 @endif
                 <span class="font-size-18 font-weight-bold">{{ $invoice->person_name }}</span><br>
-                    <span class="font-size-16">{{ $invoice->person_phone }}</span><br>
+                <span class="font-size-16">{{ $invoice->person_phone }}</span><br>
             </address>
         </div>
     </div>
@@ -83,39 +93,27 @@
             </div>
         </div>
     </div><br><br><br><br><br><br><br>
-    <div class="row">
-        <div class="col-md-6">
-            <span class="font-size-14"><u><b>Receiver Signature</b></u></span>
-        </div>
-        <div class="col-md-6">
-            <div class="text-right">
-                <span class="font-size-14"><u><b>Chief Accountant</b></u></span>
-            </div>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <tbody>
+                <tr class="col-md-12 col-lg-12 col-sm-12">
+                    <th class="pb-5"><u>Receiver Signature</u></th>
+                    <th class="pb-5"><u>Chief Accountant</u></th>
+                </tr>
+                <tr class="col-md-12 col-lg-12 col-sm-12">
+                    <th class="pb-5"><u>General Manager</u></th>
+                    <th class="pb-5"><u>Chairman</u></th>
+                </tr>
+                <tr class="col-md-12 col-lg-12 col-sm-12">
+                    <th class="pb-5" colspan="12"><u>Managing Director</u></th>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <br><br><br>
-    <div class="row">
-        <div class="col-md-6">
-            <span class="font-size-14"><u><b>General Manager</b></u></span>
-        </div>
-        <div class="col-md-6">
-            <div class="text-right">
-                <span class="font-size-14"><u><b>Chairman</b></u></span>
-            </div>
-        </div>
-    </div>
-    <br><br><br>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="text-center">
-            <span class="font-size-14"><u><b>Managing Director</b></u></span>
-            </div>
-        </div>
-    </div><br><br><br><br>
     <div class="d-print-none">
         <div class="float-right">
             <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light mr-1"><i class="fa fa-print"></i></a>
-{{--            <a href="#" class="btn btn-primary w-md waves-effect waves-light">Send</a>--}}
+            {{--            <a href="#" class="btn btn-primary w-md waves-effect waves-light">Send</a>--}}
         </div>
     </div>
 
