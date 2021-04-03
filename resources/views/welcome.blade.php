@@ -1,504 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>F S R E L</title>
-    <link rel="shortcut icon" href="{{asset('landing_page/img/favicon.png')}}" />
-    <link rel="stylesheet" href="{{asset('landing_page/css/plugins.css')}}" />
-    <link rel="stylesheet" href="{{asset('landing_page/css/style.css')}}" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144098545-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-144098545-1');
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home | RMS</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}}
+    </style>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
 </head>
+<body class="antialiased">
+<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    @if (Route::has('login'))
+        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            @auth
+                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-<!-- Preloader -->
-<div id="preloader"></div>
-<!-- Progress scroll totop -->
-<div class="progress-wrap cursor-pointer">
-    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-</div>
-<!-- Sidebar Section --><a href="#" class="js-bauen-nav-toggle bauen-nav-toggle"><i></i></a>
-<aside id="bauen-aside">
-    <!-- Logo -->
-    <div class="bauen-logo">
-        <a href="/"> <img src="{{asset('landing_page/img/logo.png')}}" class="logo-img" alt="">
-            <h5>First Security <span>Real Estate Ltd</span></h5>
-        </a>
-    </div>
-    <!-- Menu -->
-    <nav class="bauen-main-menu">
-        <ul>
-            <li><a href='/#home'>Home</a></li>
-            <li><a href='/#about'>About Us</a></li>
-            <li><a href='/#projects'>Projects</a></li>
-            <li><a href='/#contact'>Contact</a></li>
-        </ul>
-    </nav>
-    <!-- Sidebar Footer -->
-    <div class="bauen-footer">
-        <ul>
-            <li><a href="https://www.facebook.com/FSREL"><i class="ti-facebook"></i></a></li>
-        </ul>
-    </div>
-</aside>
-<!-- Main -->
-<div id="bauen-main">
-    <!-- Slider -->
-    <header id="home" class="header slider-fade">
-        <div class="owl-carousel owl-theme">
-            <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
-            <div class="text-right item bg-img" data-overlay-dark="3" data-background="{{asset('landing_page/img/slider/1.jpg')}}">
-                <div class="v-middle caption">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-7 offset-md-5">
-                                <div class="o-hidden">
-                                    <h1>Innovate Desing in Bangladesh</h1>
-                                    <h4>Where Dreams Come Home</h4>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
 
-                                    <div class="butn-light mt-30 mb-30"><a href="#contact"><span>Contact Us</span></a></div>
-                                </div>
-                            </div>
+    <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+            <h1>Real Estate Management System (RMS)</h1>
+        </div>
+
+        <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
+                    </div>
+
+                    <div class="ml-12">
+                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="text-right item bg-img" data-overlay-dark="4" data-background="{{asset('landing_page/img/slider/2.jpg')}}">
-                <div class="v-middle caption">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-7 offset-md-5">
-                                <div class="o-hidden">
-                                    <h1>Innovate Desing in Bangladesh</h1>
-                                    <h4>Where Dreams Come Home</h4>
 
-                                    <div class="butn-light mt-30 mb-30"><a href="#contact"><span>Contact Us</span></a></div>
-                                </div>
-                            </div>
+                <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <div class="flex items-center">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
+                    </div>
+
+                    <div class="ml-12">
+                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                        <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
+                    </div>
+
+                    <div class="ml-12">
+                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
+                    <div class="flex items-center">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
+                    </div>
+
+                    <div class="ml-12">
+                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Corner -->
-        <div class="hero-corner"></div>
-        <div class="hero-corner3"></div>
-    </header>
-    <!-- Content -->
-    <div class="content-wrapper">
-        <!-- Lines -->
-        <section class="content-lines-wrapper">
-            <div class="content-lines-inner">
-                <div class="content-lines"></div>
-            </div>
-        </section>
-        <!-- About -->
-        <section id="about" class="about section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
-                        <h2 class="section-title">About <span>FSREL</span></h2>
-                        <p>First Security Real Estate Ltd. has started its journey in the year of 2010, FSREL came in real estate to bring Quality, Commitment, Service and safe investment for the people of our country. Since the inception we have been winning our clients hearts by ensuring timely handover of their desired living as the way we promised. </p>
-                        <p>Our hi-skilled construction-team will ensure a long life building and safety of your stay. Actually, the surprising fact is that, within this short span of time, FSREL handed-over 35 projects in time. Moreover, right now FSREL has 09 on-going projects. </p>
-                        <p>Our promise remains to develop a portfolio of luxury spaces and offer investors as well as buyers an unparalleled quality of service, inimitable by competitors. It is the commitment to both impeccably high standards and attention to detail that drive us to our success.</p>
-                    </div>
-                    <div class="col-md-6 animate-box" data-animate-effect="fadeInUp">
-                        <div class="about-img">
-                            <div class="img"> <img src="{{asset('landing_page/img/about.jpg')}}" class="img-fluid" alt=""> </div>
-                            <div class="about-img-2 about-buro">Dhaka Office</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Projects -->
-        <section id="projects" class="projects section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="section-title">Our <span>Projects</span></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/1.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1974,1597 & 2268 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-30, Road-4, Block-G, Banasree, Dhaka.</a></h6>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/2.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1921 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-26, Road-8, Block-E, Banasree, Dhaka.</a></h6>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/3.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1735 & 1702 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-14, Road-8, Block-M, Banasree, Dhaka.</a></h6>>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/4.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1701 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-35, Road-6, Block-F, Banasree, Dhaka.</a></h6>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/5.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1807 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-23, Road-5, Block-B, Banasree, Dhaka.</a></h6>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/6.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1813 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-53, Road-5, Block-G, Banasree, Dhaka.</a></h6>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/7.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1800 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-08, Road-2, Block-G, Banasree, Dhaka.</a></h6>>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="{{asset('landing_page/img/projects/8.jpg')}}" alt=""> </div>
-                                <div class="con">
-                                    <h6><a href="#">Flat Size - 1456 & 1444 sft</a></h6>
-                                    <h6><a href="#">Location - Plot-11, Road-1, Block-H, Banasree, Dhaka.</a></h6>
-                                    <div class="line"></div> <a href="#contact"><i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- services -->
-        <!--   <section id="services" class="services section-padding">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-md-12">
-                          <h2 class="section-title">Our <span>Services</span></h2>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-4">
-                          <div class="item">
-                              <a href="architecture.html"> <img src="img/icons/icon-1.png" alt="">
-                                  <h5>Architecture</h5>
-                                  <div class="line"></div>
-                                  <p>Architecture bibendum eros eget lacus the vulputate sit amet vehicuta nibhen ulicera in the vitae miss.</p>
-                                  <div class="numb">01</div>
-                              </a>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="item">
-                              <a href="interior-design.html"> <img src="img/icons/icon-2.png" alt="">
-                                  <h5>Interior Design</h5>
-                                  <div class="line"></div>
-                                  <p>Architecture bibendum eros eget lacus the vulputate sit amet vehicuta nibhen ulicera in the vitae miss.</p>
-                                  <div class="numb">02</div>
-                              </a>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="item">
-                              <a href="urban-design.html"> <img src="img/icons/icon-3.png" alt="">
-                                  <h5>Urban Design</h5>
-                                  <div class="line"></div>
-                                  <p>Architecture bibendum eros eget lacus the vulputate sit amet vehicuta nibhen ulicera in the vitae miss.</p>
-                                  <div class="numb">03</div>
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section> -->
-        <!-- Blog -->
-        <!-- <section id="blog" class="bauen-blog section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="section-title">Current <span>News</span></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="img/slider/1.jpg" alt=""> </div>
-                                <div class="con"> <span class="category">
-                                        <a href="blog.html">Architecture </a> - 20.12.2021
-                                    </span>
-                                    <h5><a href="post.html">Modern Architectural Structures</a></h5>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="img/slider/2.jpg" alt=""> </div>
-                                <div class="con"> <span class="category">
-                                        <a href="blog.html">Interior</a> - 18.12.2021
-                                    </span>
-                                    <h5><a href="post.html">Modernism in Architecture</a></h5>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="img/slider/3.jpg" alt=""> </div>
-                                <div class="con"> <span class="category">
-                                        <a href="blog.html">Urban</a> - 16.12.2021
-                                    </span>
-                                    <h5><a href="post.html">Postmodern Architecture</a></h5>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="position-re o-hidden"> <img src="img/slider/4.jpg" alt=""> </div>
-                                <div class="con"> <span class="category">
-                                        <a href="blog.html">Planing</a> - 14.12.2021
-                                    </span>
-                                    <h5><a href="post.html">Modern Architecture Buildings</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!-- Contact -->
-        <section id="contact" class="section-padding" data-scroll-index="5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 animate-box" data-animate-effect="fadeInUp">
-                        <h2 class="section-title">Contact <span>Us</span></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 mb-30 animate-box" data-animate-effect="fadeInUp">
-                        <p>FSRELs Vision is to Provide Excellent product and services of superior quality and value that will enhance the lives of consumers today and for generations to come.</p>
-                        <p><b>REHAB :</b> *******</p>
-                    </div>
-                    <div class="col-md-4 mb-30 animate-box" data-animate-effect="fadeInUp">
-                        <p><b>Contact No</b>
-                        <ul style="list-style: none">
-                            <li>+8801799399592</li>
-                            <li>+8801741896101</li>
-                            <li>+8801619399592</li>
-                        </ul>
-                        <p><b>Email :</b>support@fsrel.com</p>
-                        <p><b>Address :</b> House # 07, Road # 03, Block # F, Banasree, Rampura, Dhaka 1219</p>
-                    </div>
-                    <div class="col-md-4 animate-box" data-animate-effect="fadeInUp">
-                        <form  class="row">
-                            <div class="col-md-12">
-                                <input type="text" name="name" id="name" placeholder="Full Name">
-                            </div>
-                            <div class="col-md-12">
-                                <input type="email" name="email" id="email" placeholder="Your Email" required="">
-                            </div>
-                            <div class="col-md-12">
-                                <textarea name="message" id="message" cols="40" rows="3" placeholder="Your Message"></textarea>
-                            </div>
-                            <div class="col-md-12">
-                                <button class="butn-dark mt-15" type="button"><a href="javascript:void()" onclick="alert('Thank you for your message!')"><span>Send</span></a></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Promo video - Testiominals -->
-        <section class="testimonials">
-            <div class="background bg-img bg-fixed section-padding pb-0" data-background="{{('/landing_page/img/banner2.jpg')}}" data-overlay-dark="3">
-                <div class="container">
-                    <div class="row">
-                        <!-- Promo video -->
-                        <div class="col-md-6">
-                            <div class="vid-area">
-                                <div class="vid-icon">
-                                    <a class="play-button vid" href="https://www.youtube.com/watch?v=o6eokLFh_S0">
-                                        <svg class="circle-fill">
-                                            <circle cx="43" cy="43" r="39" stroke="#fff" stroke-width=".5"></circle>
-                                        </svg>
-                                        <svg class="circle-track">
-                                            <circle cx="43" cy="43" r="39" stroke="none" stroke-width="1" fill="none"></circle>
-                                        </svg> <span class="polygon">
-                                                <i class="ti-control-play"></i>
-                                            </span> </a>
-                                </div>
-                                <div class="cont mt-15 mb-30">
-                                    <h5>View promo video</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Testiominals -->
-                        <div class="col-md-5 offset-md-1">
-                            <div class="testimonials-box animate-box" data-animate-effect="fadeInUp">
-                                <div class="head-box">
-                                    <h4>BOARD OF DIRECTORS</h4>
-                                </div>
-                                <div class="owl-carousel owl-theme">
-                                    <div class="item"> <span class="quote"><img src="{{asset('landing_page/img/quot.png')}}" alt=""></span>
-                                        <p>MD. Mizanur Rahman, the founder promoter of FSREL, opts to do business by providing good products and services in Bangladesh. With his visionary leadership and extensive business knowledge, FSREL drives forward to not only provide superior quality products and services but to demonstrate unparalleled foresight.</p>
-                                        <div class="info">
-                                            <div class="author-img"> <img src="{{asset('landing_page/img/team/1.jpg')}}" alt=""> </div>
-                                            <div class="cont">
-                                                <h6>MD. MIZANUR RAHMAN</h6> <span>MANAGING DIRECTOR</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item"> <span class="quote">
-                                                <img src="{{asset('landing_page/img/quot.png')}}" alt="">
-                                            </span>
-                                        <p>MD. Shakhawat Hossaib has an experienced entrepreneur with a long track record in this sector. Under his strong leadership and entrepreneurial spirit, FSREL has become one of the leading real estate developers in the country.</p>
-                                        <div class="info">
-                                            <div class="author-img"> <img src="{{asset('landing_page/img/team/2.jpg')}}" alt=""> </div>
-                                            <div class="cont">
-                                                <h6>MD. SHAKHAWAT HOSSAIN</h6> <span>CHAIRMAN</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item"> <span class="quote">
-                                                <img src="{{asset('landing_page/img/quot.png')}}" alt="">
-                                            </span>
-                                        <p>Riazul Zannah completed his BBA with a specialization in Strategic Management from IUB. Under his leadership, FSREL strives to strengthen its strategic marketing and branding. Moreover, his focus on quality and driving product innovation by incorporating modern features into FSREL projects continue to truly differentiate it from competitors.</p>
-                                        <div class="info">
-                                            <div class="author-img"> <img src="{{asset('landing_page/img/team/4.jpg')}}" alt=""> </div>
-                                            <div class="cont">
-                                                <h6>RIAZUL ZANNAH</h6> <span>GENERAL MANAGER</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Clients -->
-        <section class="clients">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7 owl-carousel owl-theme">
-                        <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo1.png')}}" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo2.png')}}" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo3.png')}}" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo4.png')}}" alt=""></a>
-                        </div>
-                        <div class="clients-logo">
-                            <a href="#0"><img src="{{asset('landing_page/client_logo/company-logo5.png')}}" alt=""></a>
-                        </div>
-                    </div>
+
+        <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
+            <div class="text-center text-sm text-gray-500 sm:text-left">
+                <div class="flex items-center">
+                    <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
+                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+
+                    <a href="https://laravel.bigcartel.com" class="ml-1 underline">
+                        Shop
+                    </a>
+
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
+                        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+
+                    <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
+                        Sponsor
+                    </a>
                 </div>
             </div>
 
-        </section>
-         <br> <br>
-        <!-- Footer -->
-            <div class="sub-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="text-left">
-                                <p>© 2021 FSREL. All right reserved.</p>
-                            </div>
-                        </div>
-                        <!--  <div class="col-md-4 abot">
-                             <div class="social-icon"> <a href="index.html"><i class="ti-facebook"></i></a> <a href="https://www.facebook.com/FSREL"></i></a> </div>
-                         </div> -->
-                        <div class="col-md-4"> </div>
-                    </div>
-                </div>
+            <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+                Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
             </div>
-        </footer>
+        </div>
     </div>
 </div>
-<!-- jQuery -->
-<script src="{{asset('landing_page/js/jquery-3.5.1.min.js')}}"></script>
-<script src="{{asset('landing_page/js/jquery-migrate-3.0.0.min.js')}}"></script>
-<script src="{{asset('landing_page/js/modernizr-2.6.2.min.js')}}"></script>
-<script src="{{asset('landing_page/js/pace.js')}}"></script>
-<script src="{{asset('landing_page/js/popper.min.js')}}"></script>
-<script src="{{asset('landing_page/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('landing_page/js/scrollIt.min.js')}}"></script>
-<script src="{{asset('landing_page/js/smooth-scroll.min.js')}}"></script>
-<script src="{{asset('landing_page/js/jquery.waypoints.min.js')}}"></script>
-<script src="{{asset('landing_page/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('landing_page/js/jquery.stellar.min.js')}}"></script>
-<script src="{{asset('landing_page/js/jquery.magnific-popup.js')}}"></script>
-<script src="{{asset('landing_page/js/YouTubePopUp.js')}}"></script>
-<script src="{{asset('landing_page/js/FacebookPopUp.js')}}"></script>
-<script src="{{asset('landing_page/js/custom.js')}}"></script>
-<script>
-    $(document).ready(function(){
-          $('.con').hide();
-      });
-      $('.item').hover(
-        function(){
-          $(this).find('.con').show();
-        },
-        function(){
-          $(this).find('.con').hide();
-        }
-      );
-</script>
 </body>
-<!-- Load Facebook SDK for JavaScript -->
-      <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v10.0'
-          });
-        };
-
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your Chat Plugin code -->
-      <div class="fb-customerchat"
-        attribution="setup_tool"
-        page_id="1927881484147239"
-  theme_color="#d4a88c">
-      </div>
-
 </html>
