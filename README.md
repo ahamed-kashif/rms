@@ -4,12 +4,17 @@
     -> Laravel 7
     -> JQuery
 
-## Features
+## Structure
 #### Classification of Projects
     -> General Project
     -> Investor Project
 ##### The only difference between two projects is
     -> In case of Investor Projects, every project is an independent project. (i.e. Every investor project has an individual accounts)
+#### Project
+      ->project->flats--belongs_to-->customer
+Every project has it's own contacts (i.e. Contractors, Suppliers, Engineers, Investors). One project can have multiple of flats/space and every flat of a project belongs to a customer.
+##### NB: All invoices will be generated under a project.
+## Features
 
 #### General Features
     -> Add, Update Projects and Investor Projects
