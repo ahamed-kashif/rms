@@ -71,6 +71,12 @@
                         <li><a href="{{route('project.investor.account.list')}}" key="t-contractor">Investor Projects</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route('project-material.index')}}" class="waves-effect">
+                        <i class="fas fa-table"></i>
+                        <span key="t-projects">Project Materials</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

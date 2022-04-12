@@ -81,7 +81,10 @@ Route::prefix('invoice')->group(function(){
 });
 Route::get('/accounts','AccountController@index')->name('account.index');
 Route::get('contacts/customer/{id}/print','Libs\CustomerController@print_customer')->name('customer.print');
-
+Route::prefix('project-materials')->group(function(){
+    Route::get('/','ProjectMaterialController@index')->name('project-material.index');
+    Route::get('/{id}/materials','ProjectMaterialController@materialIndex')->name('project-material.material.index');
+});
 /*** sani **/
 Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
 Route::post('/customers/{customer_id}/flat/store','Libs\FlatController@store')->name('flat.store');

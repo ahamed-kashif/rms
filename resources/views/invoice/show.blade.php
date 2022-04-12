@@ -81,6 +81,27 @@
                 <label class="font-weight-bold font-size-17"><u>Amount(&#2547)</u></label>
                 <h2 class="font-weight-bold font-size-21 text-monospace">{{$invoice->amount}}</h2>
             </div>
+            @if ($invoice->has('materials'))
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Material</th>
+                                    <th>Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{$invoice->materials->first()->title}}</td>
+                                    <td>{{$invoice->materials->first()->pivot->qty}} {{$invoice->materials->first()->unit}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div><br><br><br><br><br><br><br>
     <div class="row">
