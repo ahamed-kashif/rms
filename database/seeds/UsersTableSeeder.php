@@ -35,11 +35,11 @@ class UsersTableSeeder extends Seeder
                 'password'	=>	Hash::make('12345678')
             ]
         );
-        $role = Role::create(['name' => 'super-admin']);
-        $role->givePermissionTo(Permission::all());
+        $role = Spatie\Permission\Models\Role::create(['name' => 'super-admin']);
+        $role->givePermissionTo(Spatie\Permission\Models\Permission::all());
 
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
+        $role = Spatie\Permission\Models\Role::create(['name' => 'admin']);
+        $role->givePermissionTo(Spatie\Permission\Models\Permission::all());
 
         $root_user = User::find(1);
         $root_user->assignRole('super-admin');

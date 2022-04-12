@@ -9,7 +9,9 @@ use App\Traits\Invoiceable;
 class Customer extends Model
 {
     use Invoiceable;
-    protected $fillable = [ 'name', 'email', 'nid', 'phone','project_id'];
+//    protected $fillable = [ 'name', 'email', 'nid', 'phone','project_id'];
+
+    protected $guarded = ['id','created_at','update_at'];
     public function project(){
         return $this->belongsTo(Project::class,'project_id','id');
     }

@@ -14,14 +14,14 @@ class FlatSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit flat']);
-        Permission::create(['name' => 'delete flat']);
-        Permission::create(['name' => 'create flat']);
-        Permission::create(['name' => 'index flat']);
-        Permission::create(['name' => 'show flat']);
-        Permission::create(['name' => 'update flat']);
-        Permission::create(['name' => 'api_get flat']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit flat']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete flat']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create flat']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index flat']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show flat']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update flat']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get flat']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
     }
 }

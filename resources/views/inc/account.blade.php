@@ -8,6 +8,7 @@
         <th>Invoice NO.</th>
         <th>Received</th>
         <th>Expense</th>
+        <th>Balance</th>
         <th>Person</th>
         <th>Payment Method</th>
         <th>Purpose</th>
@@ -23,6 +24,7 @@
                 <td><a href="{{route('invoice.show',$invoice->id)}}">{{$invoice->invoice_no}}</a></td>
                 <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
                 <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
+                <td>{{$accounts['balance'][$invoice->id]}}</td>
                 <td>{{$invoice->person_name}}</td>
                 <td>{{$invoice->PaymentMethod->title}}</td>
                 <td>{{$invoice->description}}</td>

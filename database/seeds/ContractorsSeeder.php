@@ -14,15 +14,15 @@ class ContractorsSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit contractor']);
-        Permission::create(['name' => 'delete contractor']);
-        Permission::create(['name' => 'create contractor']);
-        Permission::create(['name' => 'index contractor']);
-        Permission::create(['name' => 'show contractor']);
-        Permission::create(['name' => 'update contractor']);
-        Permission::create(['name' => 'api_get contractor']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit contractor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete contractor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create contractor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index contractor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show contractor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update contractor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get contractor']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
         //factory(Contractor::class, 10)->create();
     }
 }

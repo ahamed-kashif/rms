@@ -10,6 +10,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
+use Illuminate\Support\Facades\Redirect;
 
 class ProjectContactsController extends Controller
 {
@@ -39,7 +40,7 @@ class ProjectContactsController extends Controller
                 'breadcrumbs' => $breadcrumbs,
                 'project' => $project,
                 'contractors' => $contractors,
-                'materials' => $materials
+                'materials' => $materials,
             ]);
         }
     }
@@ -63,6 +64,11 @@ class ProjectContactsController extends Controller
             if($contractor != null){
                 try{
                     $project->contractors()->attach($contractor->id,['purpose' => $request->input('contractor_type')]);
+                    if (session()->has('forward_url')) {
+                        $url = session('forward_url');
+                        session()->forget('forward_url');
+                        return \redirect()->to($url);
+                    }
                     return redirect()->back()->with('success','Contractor Added successfully.');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
@@ -99,6 +105,11 @@ class ProjectContactsController extends Controller
                 if($contractor != null){
                     try{
                         $project->contractors()->attach($contractor->id,['purpose' => $request->input('contractor_type')]);
+                        if (session()->has('forward_url')) {
+                            $url = session('forward_url');
+                            session()->forget('forward_url');
+                            return \redirect()->to($url);
+                        }
                         return redirect()->back()->with('success','Contractor Added successfully.');
                     }catch (\Exception $e){
                         return redirect()->back()->withErrors($e->getMessage());
@@ -176,6 +187,11 @@ class ProjectContactsController extends Controller
             if($supplier != null){
                 try{
                     $project->suppliers()->attach($supplier->id,['purpose' => $request->input('supplier_type')]);
+                    if (session()->has('forward_url')) {
+                        $url = session('forward_url');
+                        session()->forget('forward_url');
+                        return \redirect()->to($url);
+                    }
                     return redirect()->back()->with('success','supplier Added successfully.');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
@@ -212,6 +228,9 @@ class ProjectContactsController extends Controller
                 if($supplier != null){
                     try{
                         $project->suppliers()->attach($supplier->id,['purpose' => $request->input('supplier_type')]);
+                        if (session()->has('forward_url')) {
+                            return \redirect()->to(session('forward_url'));
+                        }
                         return redirect()->back()->with('success','supplier Added successfully.');
                     }catch (\Exception $e){
                         return redirect()->back()->withErrors($e->getMessage());
@@ -289,6 +308,11 @@ class ProjectContactsController extends Controller
             if($engineer != null){
                 try{
                     $project->engineers()->attach($engineer->id,['purpose' => $request->input('engineer_type')]);
+                    if (session()->has('forward_url')) {
+                        $url = session('forward_url');
+                        session()->forget('forward_url');
+                        return \redirect()->to($url);
+                    }
                     return redirect()->back()->with('success','Engineer Added successfully.');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
@@ -325,6 +349,11 @@ class ProjectContactsController extends Controller
                 if($engineer != null){
                     try{
                         $project->engineers()->attach($engineer->id,['purpose' => $request->input('engineer_type')]);
+                        if (session()->has('forward_url')) {
+                            $url = session('forward_url');
+                            session()->forget('forward_url');
+                            return \redirect()->to($url);
+                        }
                         return redirect()->back()->with('success','Engineer Added successfully.');
                     }catch (\Exception $e){
                         return redirect()->back()->withErrors($e->getMessage());
@@ -398,6 +427,11 @@ class ProjectContactsController extends Controller
             if($investor != null){
                 try{
                     $project->investors()->attach($investor->id,['purpose' => 'Investor']);
+                    if (session()->has('forward_url')) {
+                        $url = session('forward_url');
+                        session()->forget('forward_url');
+                        return \redirect()->to($url);
+                    }
                     return redirect()->back()->with('success','Investor Added successfully.');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
@@ -433,6 +467,11 @@ class ProjectContactsController extends Controller
                 if($investor != null){
                     try{
                         $project->investors()->attach($investor->id,['purpose' => 'Investor']);
+                        if (session()->has('forward_url')) {
+                            $url = session('forward_url');
+                            session()->forget('forward_url');
+                            return \redirect()->to($url);
+                        }
                         return redirect()->back()->with('success','Investor Added successfully.');
                     }catch (\Exception $e){
                         return redirect()->back()->withErrors($e->getMessage());

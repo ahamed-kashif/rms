@@ -13,14 +13,14 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit project']);
-        Permission::create(['name' => 'delete project']);
-        Permission::create(['name' => 'create project']);
-        Permission::create(['name' => 'index project']);
-        Permission::create(['name' => 'show project']);
-        Permission::create(['name' => 'update project']);
-        Permission::create(['name' => 'api_get project']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit project']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete project']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create project']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index project']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show project']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update project']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get project']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
     }
 }

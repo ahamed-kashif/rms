@@ -17,15 +17,15 @@ class EngineerSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit engineer']);
-        Permission::create(['name' => 'delete engineer']);
-        Permission::create(['name' => 'create engineer']);
-        Permission::create(['name' => 'index engineer']);
-        Permission::create(['name' => 'show engineer']);
-        Permission::create(['name' => 'update engineer']);
-        Permission::create(['name' => 'api_get engineer']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit engineer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete engineer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create engineer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index engineer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show engineer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update engineer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get engineer']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
         //factory(Engineer::class, 10)->create();
     }
 }

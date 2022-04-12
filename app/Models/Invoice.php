@@ -27,4 +27,8 @@ class Invoice extends Model
     public function balance(){
         return $this->belongsTo(Balance::class,'balance_id','id');
     }
+
+    public function materials(){
+        return $this->belongsToMany(Material::class,'invoices_materials','invoice_id','material_id','id')->withPivot(['qty']);
+    }
 }

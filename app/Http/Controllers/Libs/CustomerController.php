@@ -83,7 +83,7 @@ class CustomerController extends Controller
             'occupation' => 'nullable',
             'date_of_birth'=>'nullable',
             'nationality'=>'nullable',
-            'phone' => 'required',
+            'phone_number' => 'required',
             'email' => 'email|nullable',
             'nid' => 'nullable',
             'nominee_name' => 'nullable',
@@ -91,37 +91,16 @@ class CustomerController extends Controller
             'permanent_address' => 'nullable|string',
         ]);
 
-        $customer = new Customer();
-
-        $customer->full_name = $request->input('full_name');
-        $customer->father_or_husband_name = $request->input('father_or_husband_name');
-        $customer->mother_name = $request->input('mother_name');
-        $customer->occupation = $request->input('occupation');
-        $customer->date_of_birth = $request->input('date_of_birth');
-        $customer->nationality = $request->input('nationality');
-        $customer->phone_number = $request->input('phone');
-        $customer->email = $request->input('email');
-        $customer->nid = $request->input('nid');
-        $customer->nominee_name = $request->input('nominee_name');
-        $customer->present_address = $request->input('present_address');
-        $customer->permanent_address = $request->input('permanent_address');
-
-//        $customer->flat_number = $request->input('flat_number');
-//        $customer->is_avail_loan = $request->has('is_avail_loan');
-//        $customer->is_installable = $request->has('is_installable');
-//        $customer->installment_amount = $request->input('installment_amount');
-//        $customer->installment_duration = $request->input('installment_duration');
-//        $customer->booking_amount = $request->input('booking_amount');
-
-
-        //dd($customer);
         try{
-            //return redirect()->route(‘flat.creat’, ‘customer_id’ => $customer->id);
+            $customer = Customer::create($request->except(['_token','_method','flat_amount','flat_title']))->flats()->create([
+                'flat_amount' => $request->flat_amount,
+                'project_id' => $request->project_id,
+                'flat_title' => $request->flat_title
+            ]);
 
-            $customer->save();
-            //dd($customer->id);
-
-            return redirect()->route('flat.create', $customer->id);
+            return redirect()->route('customer.show',$customer->id)->with([
+                'success' => 'Customer created'
+            ]);
 
 
         }catch (\Exception $e){
@@ -221,25 +200,10 @@ class CustomerController extends Controller
             $breadcrumbs['customers'] = route('customer.index');
 
             if(is_numeric($id)){
-                $customer = Customer::find($id);
-                if($customer == null){
-                    return redirect()->back()->with('error','customer not exists!');
-                }
-                $customer->project_id = $request->project_id;
-                $customer->full_name = $request->input('full_name');
-                $customer->father_or_husband_name = $request->input('father_or_husband_name');
-                $customer->mother_name = $request->input('mother_name');
-                $customer->occupation = $request->input('occupation');
-                $customer->date_of_birth = $request->input('date_of_birth');
-                $customer->nationality = $request->input('nationality');
-                $customer->phone_number = $request->input('phone');
-                $customer->email = $request->input('email');
-                $customer->nid = $request->input('nid');
-                $customer->nominee_name = $request->input('nominee_name');
-                $customer->present_address = $request->input('present_address');
-                $customer->permanent_address = $request->input('permanent_address');
                 try{
-                    $customer->update();
+                    $customer = Customer::findOrFail($id);
+                    $customer->update($request->except(['_token','_method']));
+                    $customer->flats()->update($request->only(['flat_title','flat_amount','project_id']));
                     return redirect()->back()->with('success','successfully updated');
 
 

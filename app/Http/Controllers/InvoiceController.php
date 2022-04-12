@@ -6,6 +6,7 @@ use App\Helpers\InvoiceSession;
 use App\Models\Contractor;
 use App\Models\Customer;
 use App\Models\Engineer;
+use App\Models\Material;
 use App\Models\Supplier;
 use App\Models\Investor;
 use App\Models\Invoice;
@@ -222,11 +223,12 @@ class InvoiceController extends Controller
             if(session()->has('invoice')){
                 $record = session()->get('invoice');
                 $invoice = $record['invoice'];
-                $contractors = Project::find($invoice->project_id)->contractors()->get();
-                $suppliers = Project::find($invoice->project_id)->suppliers()->get();
-                $engineers = Project::find($invoice->project_id)->engineers()->get();
+                $project = Project::find($invoice->project_id);
+                $contractors = $project->contractors()->get();
+                $suppliers = $project->suppliers()->get();
+                $engineers = $project->engineers()->get();
                 $customers = Customer::has('flats')->where('project_id',$invoice->project_id)->get();
-                $investors = Project::find($invoice->project_id)->investors()->get();
+                $investors = $project->investors()->get();
                 if($record['invoice']->is_checkin != null && $record['invoice']->payment_method_id != null && $record['invoice']->project_id != null && $record['state'] == 'acchead'){
                     $title = 'Invoice NO:   '.session()->get('invoice')['invoice']->invoice_no;
                     $breadcrumbs['invoices'] = '#';
@@ -239,7 +241,8 @@ class InvoiceController extends Controller
                         'suppliers' => $suppliers,
                         'engineers' => $engineers,
                         'customers' => $customers,
-                        'investors' => $investors
+                        'investors' => $investors,
+                        'project' => $project
                     ]);
                 }
                 return redirect()->route('invoice.create')->with('error','Create an Invoice First');
@@ -283,7 +286,7 @@ class InvoiceController extends Controller
                     $invoice->person_phone = $supplier->phone_number;
                     $supplier->Invoice()->save($invoice);
                     session()->forget('invoice');
-                    return redirect()->route('invoice.amount.add',$invoice->id);
+                    return redirect()->route('invoice.material.add',$invoice->id);
                 }
                 elseif($request->has('customer_id')){
                     $customer = Customer::find($request->input('customer_id'));
@@ -324,6 +327,28 @@ class InvoiceController extends Controller
 
         }
 
+    }
+    public function add_material($id){
+        $invoice = Invoice::find($id);
+        $title = 'Invoice No.   '.$invoice->invoice_no;
+        $breadcrumbs['invoices'] = "#";
+        $breadcrumbs[$invoice->invoice_no] = "#";
+        $breadcrumbs['Add Material'] = '#';
+        return view('invoice.material')->with([
+            'invoice' => $invoice,
+            'title' => $title,
+            'breadcrumbs' => $breadcrumbs,
+            'materials' => Material::all()
+        ]);
+    }
+    public function material_update(Request $request, $id){
+        $request->validate([
+            'material_id' => 'required|numeric',
+            'qty' => 'required|numeric'
+        ]);
+        $invoice = Invoice::find($id);
+        $invoice->materials()->attach(Material::findOrFail($request->material_id),['qty' => $request->qty]);
+        return redirect()->route('invoice.amount.add',$invoice->id);
     }
     public function add_amount($id){
         $invoice = Invoice::find($id);

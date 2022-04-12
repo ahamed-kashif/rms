@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +74,8 @@ Route::prefix('invoice')->group(function(){
     Route::post('/account-head/update','InvoiceController@account_head_update')->name('invoice.account-head.update');
     Route::get('/person/add','InvoiceController@add_person')->name('invoice.person.add');
     Route::post('/person/update','InvoiceController@person_update')->name('invoice.person.update');
+    Route::get('/material/add/{id}','InvoiceController@add_material')->name('invoice.material.add');
+    Route::post('/material/update/{id}','InvoiceController@material_update')->name('invoice.material.update');
     Route::get('/amount/add/{id}','InvoiceController@add_amount')->name('invoice.amount.add');
     Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
 });
@@ -86,3 +90,39 @@ Route::get('/flat/{id}','Libs\FlatController@show')->name('flat.show');
 Route::get('/flat/edit/{id}','Libs\FlatController@edit')->name('flat.edit');
 Route::post('/{id}','Libs\FlatController@update')->name('flat.update');
 Route::delete('/{id}','Libs\FlatController@destroy')->name('flat.destroy');
+Route::get('/forward/project/{id}', function(Request $request, $id){
+   try{
+       $project = App\Models\Project::findorfail($id);
+       if(session()->has('forward_url')){
+           session()->forget('forward_url');
+       }
+       switch ($request->tag) {
+           case 'contractor':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.contractor.add',$project->id);
+           case 'supplier':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.supplier.add',$project->id);
+           case 'engineer':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.engineer.add',$project->id);
+           case 'investor':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.investor.add',$project->id);
+           default:
+               break;
+       }
+       return redirect();
+   }catch (\Exception $e){
+       return redirect()->back()->with(['error' => $e->getMessage()]);
+   }
+
+})->name('forward');
+
+Route::get('/t', function (){
+   dd(url()->full());
+});

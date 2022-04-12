@@ -259,7 +259,10 @@ class ProjectController extends Controller
      */
     public function project_account($id)
     {
-        //$project = Project::find($id);
+        $project = Project::findorfail($id);
+        if($project->invoices()->count() < 1){
+            return 0;
+        }
         $invoices = Project::find($id)->invoices()->get();
         $balances = [];
         $balance = 0;
@@ -299,7 +302,7 @@ class ProjectController extends Controller
     public function contractor_balance($id){
         $project = Project::find($id);
         $contractors = $project->contractors()->get();
-        $balance = $project->contractor_budget;
+        $balance = (float)$project->contractor_budget;
 
         foreach ($contractors as $contractor){
             $invoices = $contractor->Invoice()->where('is_checkin',0)->get();
@@ -307,7 +310,7 @@ class ProjectController extends Controller
                 continue;
             }
             foreach($invoices as $invoice) {
-                $balance = $balance - $invoice->amount;
+                $balance = $balance - (float)$invoice->amount;
             }
         }
 
