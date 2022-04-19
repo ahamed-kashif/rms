@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Helpers\InvoiceSession;
 use App\Models\Contractor;
 use App\Models\Customer;
@@ -41,6 +42,7 @@ class InvoiceController extends Controller
                 'App\Models\Engineer' => 'engineer',
                 'App\Models\Investor' => 'investor',
                 'App\Models\Customer' => 'customer',
+                'App\Employee' => 'employee'
                 ];
             return view('invoice.index')->with([
                 'title' => $title,
@@ -412,6 +414,54 @@ class InvoiceController extends Controller
             Invoice::findorfail($id)->delete();
         }catch(\Exception $e){
             return redirect()->route('invoice.index')->with('error',$e->getMessage());
+        }
+    }
+
+    public function createSalary(){
+        try{
+            return view('invoice.salary')->with([
+               'title' => 'Salary create',
+               'breadcrumbs' => [
+                   'Dashboard' => route('home'),
+                   'Employees' => route('employee.index'),
+               ],
+               'employees' => Employee::all(),
+               'pms' => PaymentMethod::all()
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+    public function updateSalary(Request $request){
+        try{
+            $request->validate([
+                'employee_id' => 'required',
+                'amount' => 'required'
+            ]);
+            $serial =0;
+            if(Invoice::all()->count() > 0){
+                $serial = Invoice::all()->count();
+            }
+            $serial++;
+            Employee::findOrFail($request->employee_id)->Invoice()->create([
+                'serial' => $serial,
+                'amount' => $request->amount,
+                'invoice_no' => (date('Ymd')).'-'.sprintf('%03d', $serial),
+                'is_checkin' => 0,
+                'project_id' => 0,
+                'person_name' => Employee::findOrFail($request->employee_id)->name,
+                'payment_method_id' => $request->payment_method_id
+            ]);
+            Artisan::call('account:generate');
+            return redirect()->route('account.index')->with([
+                'success' => 'Invoice Created'
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

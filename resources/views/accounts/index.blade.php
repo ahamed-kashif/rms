@@ -79,8 +79,8 @@
                 <td>{{$invoice->invoice_no}}</td>
                 <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
                 <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
-                <td>{{$invoice->balance['balance']}}</td>
-                <td>{{$invoice->project->name}}</td>
+                <td>{{$invoice->balance->balance}}</td>
+                <td>{{$invoice->project_id == 0 ? 'Employee Salary' : $invoice->project->name}}</td>
                 <td>{{$invoice->person_name}}</td>
                 <td>{{$invoice->PaymentMethod->title}}</td>
                 <td>{{$invoice->description}}</td>

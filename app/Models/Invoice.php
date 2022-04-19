@@ -8,6 +8,7 @@ class Invoice extends Model
 {
     public $timestamps = true;
 //    protected $dateFormat = 'd-m-Y';
+    protected $guarded = ['id','created_at','updated_at'];
     protected $casts = [
       'created_at' => 'datetime:d-m-Y',
       'updated_at' => 'datetime:d-m-Y'

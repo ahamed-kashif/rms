@@ -61,7 +61,15 @@ Route::prefix('project/{id}')->group(function (){
    Route::post('/investors','ProjectContactsController@add_investor')->name('project.investor.add');
    Route::post('/investors/new','ProjectContactsController@add_new_investor')->name('project.investor.add.new');
    Route::put('/investors/{investor}/remove','ProjectContactsController@remove_investor')->name('project.investor.remove');
+
+
 });
+Route::get('/employees','EmployeeController@index')->name('employee.index');
+Route::get('/employee/{id}','EmployeeController@show')->name('employee.show');
+Route::post('/employee/store','EmployeeController@store')->name('employee.store');
+Route::get('/employee/edit/{id}','EmployeeController@edit')->name('employee.edit');
+Route::put('/employee/update/{id}','EmployeeController@update')->name('employee.update');
+Route::delete('/employee/delete/{id}','EmployeeController@delete')->name('employee.destroy');
 /****Invoice Routes****/
 Route::prefix('invoice')->group(function(){
     Route::get('/','InvoiceController@index')->name('invoice.index');
@@ -78,6 +86,8 @@ Route::prefix('invoice')->group(function(){
     Route::post('/material/update/{id}','InvoiceController@material_update')->name('invoice.material.update');
     Route::get('/amount/add/{id}','InvoiceController@add_amount')->name('invoice.amount.add');
     Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
+    Route::get('/salary/create','InvoiceController@createSalary')->name('invoice.salary.create');
+    Route::post('/salary/update','InvoiceController@updateSalary')->name('invoice.salary.update');
 });
 Route::get('/accounts','AccountController@index')->name('account.index');
 Route::get('contacts/customer/{id}/print','Libs\CustomerController@print_customer')->name('customer.print');

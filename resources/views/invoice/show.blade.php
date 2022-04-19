@@ -81,7 +81,7 @@
                 <label class="font-weight-bold font-size-17"><u>Amount(&#2547)</u></label>
                 <h2 class="font-weight-bold font-size-21 text-monospace">{{$invoice->amount}}</h2>
             </div>
-            @if ($invoice->has('materials'))
+            @if ($invoice->materials->count() > 0)
                 <div class="row">
                     <div class="col-12">
                         <table class="table-responsive">

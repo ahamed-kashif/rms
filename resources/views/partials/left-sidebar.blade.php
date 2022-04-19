@@ -59,6 +59,7 @@
                         <li><a href="{{route('engineer.index')}}" key="t-contractor">Engineers</a></li>
                         <li><a href="{{route('investor.index')}}" key="t-contractor">Investors</a></li>
                         <li><a href="{{route('customer.index')}}" key="t-contractor">Customers</a></li>
+                        <li><a href="{{route('employee.index')}}" key="t-contractor">Employees</a></li>
                     </ul>
                 </li>
                 <li>
@@ -75,6 +76,12 @@
                     <a href="{{route('project-material.index')}}" class="waves-effect">
                         <i class="fas fa-table"></i>
                         <span key="t-projects">Project Materials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('invoice.salary.create')}}" class="waves-effect">
+                        <i class="fas fa-table"></i>
+                        <span key="t-projects">Create Salary</span>
                     </a>
                 </li>
             </ul>

@@ -1,7 +1,7 @@
 @extends('layouts.page')
-<!--@section('page-css')-->
-<!--    @include('extras.select2-css')-->
-<!--@endsection-->
+@section('page-css')
+ @include('extras.select2-css')
+@endsection
 @section('page-title')
     @include('components.page-title')
 @endsection
@@ -17,9 +17,11 @@
 
     </form>
 @endsection
-<!--@section('page-js')-->
-<!--    @include('extras.select2-js')-->
-<!--    <script>-->
-<!--        $('#project_id').select2();-->
-<!--    </script>-->
-<!--@endsection-->
+@section('page-js')
+    @include('extras.select2-js')
+<script>
+    $(document).ready(function(){
+        $('#project_id').select2();
+    })
+</script>
+@endsection
