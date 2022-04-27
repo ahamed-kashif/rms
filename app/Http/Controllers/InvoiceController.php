@@ -95,6 +95,7 @@ class InvoiceController extends Controller
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
         $invoice->serial = $serial;
         $invoice->is_checkin = $request->input('is_checkin');
+        $invoice->created_by = Auth::user()->name;
         if(session()->has('invoice')){
             session()->forget('invoice');
         }
@@ -452,7 +453,9 @@ class InvoiceController extends Controller
                 'is_checkin' => 0,
                 'project_id' => 0,
                 'person_name' => Employee::findOrFail($request->employee_id)->name,
-                'payment_method_id' => $request->payment_method_id
+                'person_phone' => Employee::findOrFail($request->employee_id)->phone,
+                'payment_method_id' => $request->payment_method_id,
+                'created_by' => Auth::user()->name
             ]);
             Artisan::call('account:generate');
             return redirect()->route('account.index')->with([

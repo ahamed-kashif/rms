@@ -63,6 +63,9 @@
                 </table>
             </div>
         </div>
+        <div class="col-md-7 col-lg-7">
+            @include('inc.drive')
+        </div>
     </div>
     <h4 class="text-center">Accounts</h4>
     <hr>

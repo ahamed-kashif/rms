@@ -135,7 +135,9 @@ class CustomerController extends Controller
                     'customer' => $customer,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs,
-                    'accounts' => $accounts
+                    'accounts' => $accounts,
+                    'project' => $customer,
+                    'upload_url' => route('resource.create.customer',$customer->id)
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');

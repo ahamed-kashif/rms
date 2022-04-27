@@ -139,3 +139,13 @@ Route::get('/forward/project/{id}', function(Request $request, $id){
 Route::get('/t', function (){
    dd(url()->full());
 });
+Route::get('/contractor/{id}/resources','ResourceController@index_contractor')->middleware('auth')->name('resource.index.contractor');
+Route::get('/contractor/{id}/resource/create','ResourceController@upload_contractor')->middleware('auth')->name('resource.create.contractor');
+Route::get('/customer/{id}/resources','ResourceController@index_customer')->middleware('auth')->name('resource.index.customer');
+Route::get('/customer/{id}/resource/create','ResourceController@upload_customer')->middleware('auth')->name('resource.create.customer');
+Route::get('/engineer/{id}/resources','ResourceController@index_engineer')->middleware('auth')->name('resource.index.engineer');
+Route::get('/engineer/{id}/resource/create','ResourceController@upload_engineer')->middleware('auth')->name('resource.create.engineer');
+Route::get('/supplier/{id}/resources','ResourceController@index_supplier')->middleware('auth')->name('resource.index.supplier');
+Route::get('/supplier/{id}/resource/create','ResourceController@upload_supplier')->middleware('auth')->name('resource.create.supplier');
+Route::get('/investor/{id}/resources','ResourceController@index_investor')->middleware('auth')->name('resource.index.investor');
+Route::get('/investor/{id}/resource/create','ResourceController@upload_investor')->middleware('auth')->name('resource.create.investor');

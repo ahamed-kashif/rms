@@ -71,7 +71,6 @@
             @csrf
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="customer_btn" onclick="show_customer()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Customer</button>
-            <a href="{{route('customer.create')}}">Add new Customer</a><br>
             <div class="form-group customer">
                 @if(count($customers) > 0)
                     <label for="customer_id" class="control-label">Select an Customer Project...</label>

@@ -12,7 +12,7 @@
             <form action="{{route('invoice.payment.method.update')}}" method="post">
                 @csrf
                 <input type="hidden" name="payment_method_id" value="{{$pm->id}}" />
-                <button type="submit" class="btn btn-outline-info btn-lg btn-block waves-effect waves-light mb-1">{{ucfirst($pm->title)}}</button>
+                <button type="submit" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">{{ucfirst($pm->title)}}</button>
             </form>
         @endforeach
     </div>

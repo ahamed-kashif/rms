@@ -156,6 +156,7 @@ class ProjectController extends Controller
                 'projectBalance' => $this->project_balance($project->id),
                 'supplierBalance' => $this->supplier_balance($project->id),
                 'engineerBalance' => $this->engineer_balance($project->id),
+                'upload_url' => route('resource.create',$project->id)
             ]);
         }
         return redirect()->route('home')->with([

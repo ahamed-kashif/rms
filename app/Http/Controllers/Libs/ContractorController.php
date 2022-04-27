@@ -123,7 +123,9 @@ class ContractorController extends Controller
                     'contractor' => $contractor,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs,
-                    'accounts' => $accounts
+                    'accounts' => $accounts,
+                    'project' => $contractor,
+                    'upload_url' => route('resource.create.contractor',$contractor->id)
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');

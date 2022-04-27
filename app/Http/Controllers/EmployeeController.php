@@ -36,6 +36,23 @@ class EmployeeController extends Controller
         }
     }
 
+    public function edit($id){
+        try{
+            $emp = Employee::findOrFail($id);
+            return view('employee.edit')->with([
+                'title' => 'Employee Edit',
+                'breadcrumbs' => [
+                    'Dashboard' => route('home')
+                ],
+                'employee' => $emp
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function update($id, Request $request){
         try{
             Employee::findOrFail($id)->update($request->except(['_token','_method']));

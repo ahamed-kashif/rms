@@ -125,7 +125,9 @@ class EngineerController extends Controller
                     'engineer' => $engineer,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs,
-                    'accounts' => $accounts
+                    'accounts' => $accounts,
+                    'project' => $engineer,
+                    'upload_url' => route('resource.create.engineer',$engineer->id)
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');

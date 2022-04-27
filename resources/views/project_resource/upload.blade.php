@@ -3,13 +3,8 @@
     @include('components.page-title')
 @endsection
 @section('content')
-    <h4 class="card-title">Dropzone</h4>
-    <p class="card-title-desc">DropzoneJS is an open source library
-        that provides drag’n’drop file uploads with image previews.
-    </p>
-
     <div>
-        <form id="dropzone" action="{{route('ajax.upload.resource',$project->id)}}" class="dropzone" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form id="dropzone" action="{{$upload_url}}" class="dropzone" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf
             <div class="fallback">
                 <input id="file" name="file" type="file" multiple="multiple">
@@ -26,12 +21,12 @@
     <div class="row">
         <div class="col-6">
             <div class="text-left mt-4">
-                <a href="{{route('project.show',$project->id)}}" class="btn btn-secondary waves-effect waves-light"><i class="bx bx-arrow-back"></i>Back to project</a>
+                <a href="{{$back_url}}" class="btn btn-secondary waves-effect waves-light"><i class="bx bx-arrow-back"></i>Back to{{$entity}}</a>
             </div>
         </div>
         <div class="col-6">
             <div class="text-right mt-4">
-                <a href="{{route('resource.index',$project->id)}}" class="btn btn-primary waves-effect waves-light">Browse Files</a>
+                <a href="{{$browse_url}}" class="btn btn-primary waves-effect waves-light">Browse Files</a>
             </div>
         </div>
     </div>
@@ -46,7 +41,7 @@
         Dropzone.options.dropzone = {
             addRemoveLinks: true,
             removedfile: function(file) {
-                let url = '{{route('ajax.delete.resource.by_name',$project->id)}}';
+                let url = '{{$delete_url}}';
                 let file_name = file.upload.filename;
                 $.ajax({
                     dataType: 'json',

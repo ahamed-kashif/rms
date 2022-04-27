@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="/" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('landing_page/img/logo.png')}}" alt="" height="22">
+                        <img src="{{asset('images/logo.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('landing_page/img/logo.png')}}" alt="" height="17">
+                        <img src="{{asset('images/logo.png')}}" alt="" height="17">
                     </span>
                 </a>
 
                 <a href="/" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{asset('landing_page/img/logo.png')}}" alt="" style="height: 26px">
+                        <img src="{{asset('images/logo.png')}}" alt="" style="height: 26px">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('landing_page/img/logo.png')}}" alt="" style="height: 55px">
+                        <img src="{{asset('images/logo.png')}}" alt="" style="height: 55px">
                     </span>
                 </a>
             </div>
@@ -25,12 +25,12 @@
                 <i class="fa fa-fw fa-bars"></i>
             </button>
             <!-- App Search-->
-            <form class="app-search d-none d-lg-block">
-                <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="bx bx-search-alt"></span>
-                </div>
-            </form>
+{{--            <form class="app-search d-none d-lg-block">--}}
+{{--                <div class="position-relative">--}}
+{{--                    <input type="text" class="form-control" placeholder="Search...">--}}
+{{--                    <span class="bx bx-search-alt"></span>--}}
+{{--                </div>--}}
+{{--            </form>--}}
         </div>
 
         <div class="d-flex">

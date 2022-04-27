@@ -10,12 +10,12 @@
             <form action="{{route('invoice.initial')}}" method="post">
                 @csrf
                 <input type="hidden" name="is_checkin" value="1" />
-                <button type="submit" class="btn btn-outline-info btn-lg btn-block waves-effect waves-light mb-1">Check In</button>
+                <button type="submit" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Check In</button>
             </form>
             <form action="{{route('invoice.initial')}}" method="post">
                 @csrf
                 <input type="hidden" name="is_checkin" value="0" />
-                <button type="submit" class="btn btn-outline-secondary btn-lg btn-block waves-effect waves-light mb-1">Check Out</button>
+                <button type="submit" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Check Out</button>
             </form>
         </div>
 @endsection
