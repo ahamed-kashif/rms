@@ -122,7 +122,7 @@ class CustomerController extends Controller
                 $title = 'Show Customer';
                 $breadcrumbs['contact'] = "#";
                 $breadcrumbs['customers'] = route('customer.index');
-                $breadcrumbs[$customer->name] = 'javaScript:void();';
+                $breadcrumbs[$customer->full_name] = 'javaScript:void();';
                 if($customer == null){
                     return redirect()->back()->with('error','Customer not exists!');
                 }

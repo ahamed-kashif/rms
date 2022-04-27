@@ -84,9 +84,9 @@ class ResourceController extends Controller
         $user = Auth::user();
         $project = Customer::find($id);
         $medias = $project->getMedia();
-        $title = $project->name.'\'s Drive';
+        $title = $project->full_name.'\'s Drive';
         $breadcrumbs['Customers'] = route('customer.index');
-        $breadcrumbs[$project->name] = route('customer.show',$project->id);
+        $breadcrumbs[$project->full_name] = route('customer.show',$project->id);
         $breadcrumbs['uploads'] = 'javascript:void(0)';
         if ($user->can('index customer')){
             return view('project_resource.index')->with([
@@ -191,9 +191,9 @@ class ResourceController extends Controller
     {
         $user = Auth::user();
         $project = Customer::find($id);
-        $title = $project->name.'\'s Drive';
+        $title = $project->full_name.'\'s Drive';
         $breadcrumbs['Customers'] = route('customer.index');
-        $breadcrumbs[$project->name] = route('customer.show',$project->id);
+        $breadcrumbs[$project->full_name] = route('customer.show',$project->id);
         $breadcrumbs['upload'] = 'javascript:void(0)';
         if($user->can('update customer')){
             return view('project_resource.upload')->with([
