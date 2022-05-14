@@ -4569,7 +4569,7 @@
             @if ($invoice->project_id == 0)
                 <span>Office</span>
             @else
-                <span>{{$invoice->project->name}}</span>
+                <span>{{ucwords($invoice->project->name)}}</span>
             @endif
         </div>
         <div id="ID01771573442">
@@ -4581,7 +4581,7 @@
             <span>P</span><span style="letter-spacing:-0.09px;">a</span><span>y</span><span style="letter-spacing:0.05px;">m</span><span>ent Met</span><span style="letter-spacing:0.06px;">h</span><span>od</span>
         </div>
         <div id="CHEQUE">
-            <span>{{$invoice->PaymentMethod->title}}</span>
+            <span>{{ucfirst($invoice->PaymentMethod->title)}}</span>
         </div>
     </div>
     <div id="Taka_Received_by">
@@ -4591,10 +4591,9 @@
             @else
                 <span>Paid By - </span>
             @endif
-
         </div>
-        <div id="_test_user">
-            <span>{{$invoice->created_by}}</span>
+        <div id="_test_user" style="margin-left: -25px">
+            <span>{{ucfirst($invoice->created_by)}}</span>
         </div>
     </div>
     <div id="Signature">
@@ -4698,7 +4697,7 @@
                 @foreach($invoice->materials as $m)
                     <span>{{$m->title}} X {{$m->pivot->qty}}{{$m->unit}}</span>
                 @endforeach
-                {{$invoice->description}}
+                    <br><span>{{$invoice->description}}</span>
             @else
                 <span>{{$invoice->description}}</span>
             @endif

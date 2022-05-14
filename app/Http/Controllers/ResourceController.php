@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Models\Contractor;
 use App\Models\Customer;
 use App\Models\Engineer;
@@ -142,6 +143,27 @@ class ResourceController extends Controller
         return redirect()->route('home')->with('error', 'Unauthorized Access!');
     }
 
+    public function index_employee($id)
+    {
+        $user = Auth::user();
+        $project = Employee::find($id);
+        $medias = $project->getMedia();
+        $title = $project->name.'\'s Drive';
+        $breadcrumbs['Employees'] = route('employee.index');
+        $breadcrumbs[$project->name] = route('employee.show',$project->id);
+        $breadcrumbs['uploads'] = 'javascript:void(0)';
+        if ($user->can('index investor')){
+            return view('project_resource.index')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'medias' => $medias,
+                'project' => $project,
+                'new_upload_url' => route('resource.create.employee',$project->id)
+            ]);
+        }
+        return redirect()->route('home')->with('error', 'Unauthorized Access!');
+    }
+
 
 
     public function upload($id)
@@ -266,9 +288,31 @@ class ResourceController extends Controller
                 'project' => $project,
                 'upload_url' => route('ajax.upload.resource.investor',$project->id),
                 'delete_url' => route('ajax.delete.resource.investor',$project->id),
-                'entity' => ' supplier',
+                'entity' => ' investor',
                 'back_url' => route('investor.show',$project->id),
                 'browse_url' => route('resource.index.investor',$project->id)
+            ]);
+        }
+    }
+
+    public function upload_employee($id)
+    {
+        $user = Auth::user();
+        $project = Employee::find($id);
+        $title = $project->name.'\'s Drive';
+        $breadcrumbs['Employees'] = route('employee.index');
+        $breadcrumbs[$project->name] = route('employee.show',$project->id);
+        $breadcrumbs['upload'] = 'javascript:void(0)';
+        if($user->can('update investor')){
+            return view('project_resource.upload')->with([
+                'title' => $title,
+                'breadcrumbs' => $breadcrumbs,
+                'project' => $project,
+                'upload_url' => route('ajax.upload.resource.employee',$project->id),
+                'delete_url' => route('ajax.delete.resource.employee',$project->id),
+                'entity' => ' employee',
+                'back_url' => route('employee.show',$project->id),
+                'browse_url' => route('resource.index.employee',$project->id)
             ]);
         }
     }

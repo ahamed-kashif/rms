@@ -63,6 +63,9 @@
                 </li>
             </ol>
         </div>
+        <div class="col-md-7 col-lg-7">
+            @include('inc.drive')
+        </div>
     </div>
     @include('inc.account')
 @endsection

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes(['register' => false]);
@@ -149,3 +149,5 @@ Route::get('/supplier/{id}/resources','ResourceController@index_supplier')->midd
 Route::get('/supplier/{id}/resource/create','ResourceController@upload_supplier')->middleware('auth')->name('resource.create.supplier');
 Route::get('/investor/{id}/resources','ResourceController@index_investor')->middleware('auth')->name('resource.index.investor');
 Route::get('/investor/{id}/resource/create','ResourceController@upload_investor')->middleware('auth')->name('resource.create.investor');
+Route::get('/employee/{id}/resources','ResourceController@index_employee')->middleware('auth')->name('resource.index.employee');
+Route::get('/employee/{id}/resource/create','ResourceController@upload_employee')->middleware('auth')->name('resource.create.employee');

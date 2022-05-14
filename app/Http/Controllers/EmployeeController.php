@@ -83,7 +83,9 @@ class EmployeeController extends Controller
                     $employee->name => 'javascript:void(0)'
                 ],
                 'employee' => $employee,
-                'accounts' => $accounts
+                'accounts' => $accounts,
+                'project' => $employee,
+                'upload_url' => route('resource.create.employee',$employee->id)
             ]);
         }catch (\Exception $e){
             return redirect()->back()->with([

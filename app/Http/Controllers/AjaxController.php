@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Models\Contractor;
 use App\Models\Customer;
 use App\Models\Engineer;
@@ -158,6 +159,28 @@ class AjaxController extends Controller
 
        return $response;
     }
+
+    public function upload_employee_file_to_server(Request $request, $id)
+    {
+
+        $project = Employee::find($id);
+        try{
+            $project->addMultipleMediaFromRequest(['file'])
+                ->each(function ($fileAdder) use ($project) {
+                    $fileAdder->toMediaCollection();
+                });
+            $media = $project->getMedia();
+            $response['code'] = 200;
+            $response['data'] = $media;
+            $response['message'] = 'successfully uploaded!';
+        }catch (\Exception $e){
+            $response['code'] = $e->getCode();
+            $response['data'] = null;
+            $response['message'] = $e->getMessage();
+        }
+
+       return $response;
+    }
     public function delete_project_resource_by_name(Request $request, $id){
         $media = Project::find($id)->getMediaByName($request->input('file'));
         $user = Auth::user();
@@ -271,6 +294,29 @@ class AjaxController extends Controller
     }
     public function delete_investor_resource_by_name(Request $request, $id){
         $media = Investor::find($id)->getMediaByName($request->input('file'));
+        $user = Auth::user();
+        $response = [];
+        if($user->can('update investor')){
+            try{
+                $media->delete();
+                $response['code'] = 200;
+                $response['data'] = $media;
+                $response['message'] = 'Deleted '.$media->file_name.' successfully!';
+            }catch (\Exception $e){
+                $response['code'] = $e->getCode();
+                $response['data'] = $media;
+                $response['message'] = $e->getMessage();
+            }
+        }else{
+            $response['code'] = 401;
+            $response['data'] = null;
+            $response['message'] = 'Unauthorized Access!';
+        }
+        return $response;
+    }
+
+    public function delete_employee_resource_by_name(Request $request, $id){
+        $media = Employee::find($id)->getMediaByName($request->input('file'));
         $user = Auth::user();
         $response = [];
         if($user->can('update investor')){
