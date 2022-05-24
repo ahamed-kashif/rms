@@ -37,7 +37,7 @@
             line-height: 14.752079963684082px;
             margin-top: -1.376039981842041px;
             text-align: left;
-            font-family: Montserrat-Bold;
+            font-family: Montserrat-Bold, sans-serif;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
