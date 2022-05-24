@@ -40,28 +40,8 @@
                 <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>
-                            <th>Father/Husband's Number</th>
-                            <td>{{$customer->father_or_husband_name}}</td>
-                        </tr>
-                        <tr>
-                            <th>Mother's Number</th>
-                            <td>{{$customer->mother_name}}</td>
-                        </tr>
-                        <tr>
-                            <th>Occupation</th>
-                            <td>{{$customer->occupation}}</td>
-                        </tr>
-                        <tr>
-                            <th>NID</th>
-                            <td>{{$customer->nid}}</td>
-                        </tr>
-                        <tr>
                             <th>Contact Number</th>
                             <td><a href="tel:{{$customer->phone_number}}">{{$customer->phone_number}}</a></td>
-                        </tr>
-                        <tr>
-                            <th>Car Parking NO.</th>
-                            <td>{{$customer->flats->car_parking_no}}</td>
                         </tr>
                         <tr>
                             <th>Project Name</th>
@@ -76,38 +56,15 @@
                             <td>{{$customer->flats->flat_title}}</td>
                         </tr>
                         <tr>
-                            <th>Floor</th>
-                            <td>{{$customer->flats->first()->floor_number}}</td>
-                        </tr>
-                        <tr>
-                            <th>Loan</th>
-                            <td>{{$customer->flats->first()->is_avail_loan ? 'YES' : 'NO'}}</td>
-                        </tr>
-                        <tr>
-                            <th>Total Payable</th>
+                            <th>Total Amount</th>
                             <td>{{$customer->flats->flat_amount}}</td>
                         </tr>
-                        <tr>
-                            <th>Booking Amount</th>
-                            <td>{{$customer->flats->first()->flat_booking}}</td>
-                        </tr>
-                        <tr>
-                            <th>Downpayment</th>
-                            <td>{{$customer->flats->flat_downpayment}}</td>
-                        </tr>
-                        <tr>
-                            <th>Installment</th>
-                            <td>{{$customer->flats->is_installable ? 'YES' : 'NO'}}</td>
-                        </tr>
-                        @if($customer->flats->is_installable)
-                        <tr>
-                            <th>Installment Amount</th>
-                            <td>{{$customer->flats->installment_amount}}</td>
-                        </tr>
-                        @endif
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="col-md-7 col-lg-7">
+            @include('inc.drive')
         </div>
     </div>
     <h4 class="text-center">Accounts</h4>

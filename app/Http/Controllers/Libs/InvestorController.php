@@ -126,7 +126,9 @@ class InvestorController extends Controller
                     'investor' => $investor,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs,
-                    'accounts' => $accounts
+                    'accounts' => $accounts,
+                    'project' => $investor,
+                    'upload_url' => route('resource.create.investor',$investor->id)
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');

@@ -14,15 +14,15 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit supplier']);
-        Permission::create(['name' => 'delete supplier']);
-        Permission::create(['name' => 'create supplier']);
-        Permission::create(['name' => 'index supplier']);
-        Permission::create(['name' => 'show supplier']);
-        Permission::create(['name' => 'update supplier']);
-        Permission::create(['name' => 'api_get supplier']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show supplier');
+        Spatie\Permission\Models\Permission::create(['name' => 'edit supplier']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete supplier']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create supplier']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index supplier']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show supplier']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update supplier']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get supplier']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo('show supplier');
         //factory(supplier::class, 10)->create();
     }
 }

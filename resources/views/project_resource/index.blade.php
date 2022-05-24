@@ -14,7 +14,7 @@
         </div>
         <div class="col-sm-2 col-lg-2 col-md-2">
             <div class="row">
-                <a href="{{route('resource.create',$project->id)}}" class="ml-auto btn btn-secondary px-4" title="Add material"><i class="fas fa-plus font-size-16"></i></a>
+                <a href="{{$new_upload_url}}" class="ml-auto btn btn-secondary px-4" title="Add material"><i class="fas fa-plus font-size-16"></i></a>
             </div>
         </div>
     </div>

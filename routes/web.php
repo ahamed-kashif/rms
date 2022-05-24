@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes(['register' => false]);
@@ -59,7 +61,15 @@ Route::prefix('project/{id}')->group(function (){
    Route::post('/investors','ProjectContactsController@add_investor')->name('project.investor.add');
    Route::post('/investors/new','ProjectContactsController@add_new_investor')->name('project.investor.add.new');
    Route::put('/investors/{investor}/remove','ProjectContactsController@remove_investor')->name('project.investor.remove');
+
+
 });
+Route::get('/employees','EmployeeController@index')->name('employee.index');
+Route::get('/employee/{id}','EmployeeController@show')->name('employee.show');
+Route::post('/employee/store','EmployeeController@store')->name('employee.store');
+Route::get('/employee/edit/{id}','EmployeeController@edit')->name('employee.edit');
+Route::put('/employee/update/{id}','EmployeeController@update')->name('employee.update');
+Route::delete('/employee/delete/{id}','EmployeeController@delete')->name('employee.destroy');
 /****Invoice Routes****/
 Route::prefix('invoice')->group(function(){
     Route::get('/','InvoiceController@index')->name('invoice.index');
@@ -72,12 +82,19 @@ Route::prefix('invoice')->group(function(){
     Route::post('/account-head/update','InvoiceController@account_head_update')->name('invoice.account-head.update');
     Route::get('/person/add','InvoiceController@add_person')->name('invoice.person.add');
     Route::post('/person/update','InvoiceController@person_update')->name('invoice.person.update');
+    Route::get('/material/add/{id}','InvoiceController@add_material')->name('invoice.material.add');
+    Route::post('/material/update/{id}','InvoiceController@material_update')->name('invoice.material.update');
     Route::get('/amount/add/{id}','InvoiceController@add_amount')->name('invoice.amount.add');
     Route::post('/amount/update/{id}','InvoiceController@amount_update')->name('invoice.amount.update');
+    Route::get('/salary/create','InvoiceController@createSalary')->name('invoice.salary.create');
+    Route::post('/salary/update','InvoiceController@updateSalary')->name('invoice.salary.update');
 });
 Route::get('/accounts','AccountController@index')->name('account.index');
 Route::get('contacts/customer/{id}/print','Libs\CustomerController@print_customer')->name('customer.print');
-
+Route::prefix('project-materials')->group(function(){
+    Route::get('/','ProjectMaterialController@index')->name('project-material.index');
+    Route::get('/{id}/materials','ProjectMaterialController@materialIndex')->name('project-material.material.index');
+});
 /*** sani **/
 Route::get('/customers/{customer_id}/flat/create','Libs\FlatController@create')->name('flat.create');
 Route::post('/customers/{customer_id}/flat/store','Libs\FlatController@store')->name('flat.store');
@@ -86,3 +103,51 @@ Route::get('/flat/{id}','Libs\FlatController@show')->name('flat.show');
 Route::get('/flat/edit/{id}','Libs\FlatController@edit')->name('flat.edit');
 Route::post('/{id}','Libs\FlatController@update')->name('flat.update');
 Route::delete('/{id}','Libs\FlatController@destroy')->name('flat.destroy');
+Route::get('/forward/project/{id}', function(Request $request, $id){
+   try{
+       $project = App\Models\Project::findorfail($id);
+       if(session()->has('forward_url')){
+           session()->forget('forward_url');
+       }
+       switch ($request->tag) {
+           case 'contractor':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.contractor.add',$project->id);
+           case 'supplier':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.supplier.add',$project->id);
+           case 'engineer':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.engineer.add',$project->id);
+           case 'investor':
+               session(['forward_url' => url()->previous()]);
+               //dd(session('forward_url'));
+               return redirect()->route('project.investor.add',$project->id);
+           default:
+               break;
+       }
+       return redirect();
+   }catch (\Exception $e){
+       return redirect()->back()->with(['error' => $e->getMessage()]);
+   }
+
+})->name('forward');
+
+Route::get('/t', function (){
+   dd(url()->full());
+});
+Route::get('/contractor/{id}/resources','ResourceController@index_contractor')->middleware('auth')->name('resource.index.contractor');
+Route::get('/contractor/{id}/resource/create','ResourceController@upload_contractor')->middleware('auth')->name('resource.create.contractor');
+Route::get('/customer/{id}/resources','ResourceController@index_customer')->middleware('auth')->name('resource.index.customer');
+Route::get('/customer/{id}/resource/create','ResourceController@upload_customer')->middleware('auth')->name('resource.create.customer');
+Route::get('/engineer/{id}/resources','ResourceController@index_engineer')->middleware('auth')->name('resource.index.engineer');
+Route::get('/engineer/{id}/resource/create','ResourceController@upload_engineer')->middleware('auth')->name('resource.create.engineer');
+Route::get('/supplier/{id}/resources','ResourceController@index_supplier')->middleware('auth')->name('resource.index.supplier');
+Route::get('/supplier/{id}/resource/create','ResourceController@upload_supplier')->middleware('auth')->name('resource.create.supplier');
+Route::get('/investor/{id}/resources','ResourceController@index_investor')->middleware('auth')->name('resource.index.investor');
+Route::get('/investor/{id}/resource/create','ResourceController@upload_investor')->middleware('auth')->name('resource.create.investor');
+Route::get('/employee/{id}/resources','ResourceController@index_employee')->middleware('auth')->name('resource.index.employee');
+Route::get('/employee/{id}/resource/create','ResourceController@upload_employee')->middleware('auth')->name('resource.create.employee');

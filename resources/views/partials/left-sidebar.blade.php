@@ -8,15 +8,12 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" key="t-menu">Menu</li>
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="{{route('home')}}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
-                        <span key="t-dashboards">Dashboards</span>
+                        <span key="t-dashboards">Dashboard</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('home')}}" key="t-default">Default</a></li>
-                    </ul>
                 </li>
-                <li class="menu-title" key="t-apps">Apps</li>
+{{--                <li class="menu-title" key="t-apps">Apps</li>--}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-building-house"></i>
@@ -63,12 +60,28 @@
                 </li>
                 <li>
                     <a href="javascript:void(0)" class="has-arrow waves-effect">
-                        <i class="fas fa-table"></i>
+                        <i class="bx bxs-wallet-alt"></i>
                         <span key="t-projects">Accounts</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('account.index')}}" key="t-contractor">Projects</a></li>
                         <li><a href="{{route('project.investor.account.list')}}" key="t-contractor">Investor Projects</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{route('project-material.index')}}" class="waves-effect">
+                        <i class="dripicons-clipboard"></i>
+                        <span key="t-projects">Material Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="has-arrow waves-effect">
+                        <i class="fas fa-user-friends"></i>
+                        <span key="t-projects">HR Issues</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('employee.index')}}" key="t-contractor">Employees</a></li>
+                        <li><a href="{{route('invoice.salary.create')}}" key="t-contractor">Create Salary</a></li>
                     </ul>
                 </li>
             </ul>

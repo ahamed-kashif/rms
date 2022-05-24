@@ -16,15 +16,15 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit customer']);
-        Permission::create(['name' => 'delete customer']);
-        Permission::create(['name' => 'create customer']);
-        Permission::create(['name' => 'index customer']);
-        Permission::create(['name' => 'show customer']);
-        Permission::create(['name' => 'update customer']);
-        Permission::create(['name' => 'api_get customer']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit customer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete customer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create customer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index customer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show customer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update customer']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get customer']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
 //        factory(Customer::class, 10)->create();
     }
 }

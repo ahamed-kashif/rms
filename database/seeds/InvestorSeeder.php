@@ -15,15 +15,15 @@ class InvestorSeeder extends Seeder
     public function run()
     {
 
-        Permission::create(['name' => 'edit investor']);
-        Permission::create(['name' => 'delete investor']);
-        Permission::create(['name' => 'create investor']);
-        Permission::create(['name' => 'index investor']);
-        Permission::create(['name' => 'show investor']);
-        Permission::create(['name' => 'update investor']);
-        Permission::create(['name' => 'api_get investor']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit investor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete investor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create investor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index investor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show investor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update investor']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get investor']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
         //factory(Investor::class, 10)->create();
     }
 }

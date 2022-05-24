@@ -6,41 +6,21 @@
     <div class="invoice-title">
         <h4 class="float-right font-size-16">Invoice No. # {{$invoice->invoice_no}}</h4>
         <div class="mb-4">
-            <img src="{{asset('images/rms.svg')}}" alt="fsrel" height="50"/>
+            <img src="{{asset('images/logo.png')}}" alt="shrel" height="50"/>
         </div>
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 mt-3 font-size-18">
             <address>
-                <h4 style="margin-bottom: -10px"><u>Account Head</u></h4><br>
-                <span class="font-size-18 font-weight-bold">{{$invoice->project->name}}</span><br>
-                {{$invoice->project->address}}
-            </address>
-        </div>
-        <div class="col-sm-6 text-sm-right">
-            <address>
-                @if($invoice->is_checkin)
-                    <h4 style="margin-bottom: -10px"><u>Received From</u></h4><br>
-                @else
-                    <h4 style="margin-bottom: -10px"><u>Pay To</u></h4><br>
-                @endif
-                <span class="font-size-18 font-weight-bold">{{ $invoice->person_name}}</span><br>
-                    {{$invoice->person_phone}}<br>
-            </address>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 mt-3">
-            <address>
-                <strong>Payment Method:</strong><br>
+                <strong>Payment Method</strong><br>
                 {{$invoice->PaymentMethod->title}}<br>
             </address>
         </div>
-        <div class="col-sm-6 mt-3 text-sm-right">
+        <div class="col-sm-6 mt-3 text-sm-right font-size-18">
             <address>
-                <strong>Invoice Date:</strong><br>
-                {{$invoice->created_at}}<br><br>
+                <strong>Transaction Date</strong><br>
+                {{date_format(date_create($invoice->created_at), 'd M, Y')}}<br><br>
             </address>
         </div>
     </div>
@@ -64,7 +44,7 @@
         <div class="d-print-none">
             <div class="float-right mt-3">
                 {{--            <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light mr-1"><i class="fa fa-print"></i></a>--}}
-                <button type="submit" class="btn btn-primary w-md waves-effect waves-light">UPDATE</button>
+                <button type="submit" class="btn btn-primary btn-lg w-md waves-effect waves-light">UPDATE</button>
             </div>
         </div>
     </form>

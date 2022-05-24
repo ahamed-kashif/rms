@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Helpers\InvoiceSession;
 use App\Models\Contractor;
 use App\Models\Customer;
 use App\Models\Engineer;
+use App\Models\Material;
 use App\Models\Supplier;
 use App\Models\Investor;
 use App\Models\Invoice;
@@ -40,6 +42,7 @@ class InvoiceController extends Controller
                 'App\Models\Engineer' => 'engineer',
                 'App\Models\Investor' => 'investor',
                 'App\Models\Customer' => 'customer',
+                'App\Employee' => 'employee'
                 ];
             return view('invoice.index')->with([
                 'title' => $title,
@@ -92,6 +95,7 @@ class InvoiceController extends Controller
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
         $invoice->serial = $serial;
         $invoice->is_checkin = $request->input('is_checkin');
+        $invoice->created_by = Auth::user()->name;
         if(session()->has('invoice')){
             session()->forget('invoice');
         }
@@ -222,11 +226,12 @@ class InvoiceController extends Controller
             if(session()->has('invoice')){
                 $record = session()->get('invoice');
                 $invoice = $record['invoice'];
-                $contractors = Project::find($invoice->project_id)->contractors()->get();
-                $suppliers = Project::find($invoice->project_id)->suppliers()->get();
-                $engineers = Project::find($invoice->project_id)->engineers()->get();
+                $project = Project::find($invoice->project_id);
+                $contractors = $project->contractors()->get();
+                $suppliers = $project->suppliers()->get();
+                $engineers = $project->engineers()->get();
                 $customers = Customer::has('flats')->where('project_id',$invoice->project_id)->get();
-                $investors = Project::find($invoice->project_id)->investors()->get();
+                $investors = $project->investors()->get();
                 if($record['invoice']->is_checkin != null && $record['invoice']->payment_method_id != null && $record['invoice']->project_id != null && $record['state'] == 'acchead'){
                     $title = 'Invoice NO:   '.session()->get('invoice')['invoice']->invoice_no;
                     $breadcrumbs['invoices'] = '#';
@@ -239,7 +244,8 @@ class InvoiceController extends Controller
                         'suppliers' => $suppliers,
                         'engineers' => $engineers,
                         'customers' => $customers,
-                        'investors' => $investors
+                        'investors' => $investors,
+                        'project' => $project
                     ]);
                 }
                 return redirect()->route('invoice.create')->with('error','Create an Invoice First');
@@ -283,7 +289,7 @@ class InvoiceController extends Controller
                     $invoice->person_phone = $supplier->phone_number;
                     $supplier->Invoice()->save($invoice);
                     session()->forget('invoice');
-                    return redirect()->route('invoice.amount.add',$invoice->id);
+                    return redirect()->route('invoice.material.add',$invoice->id);
                 }
                 elseif($request->has('customer_id')){
                     $customer = Customer::find($request->input('customer_id'));
@@ -324,6 +330,28 @@ class InvoiceController extends Controller
 
         }
 
+    }
+    public function add_material($id){
+        $invoice = Invoice::find($id);
+        $title = 'Invoice No.   '.$invoice->invoice_no;
+        $breadcrumbs['invoices'] = "#";
+        $breadcrumbs[$invoice->invoice_no] = "#";
+        $breadcrumbs['Add Material'] = '#';
+        return view('invoice.material')->with([
+            'invoice' => $invoice,
+            'title' => $title,
+            'breadcrumbs' => $breadcrumbs,
+            'materials' => Material::all()
+        ]);
+    }
+    public function material_update(Request $request, $id){
+        $request->validate([
+            'material_id' => 'required|numeric',
+            'qty' => 'required|numeric'
+        ]);
+        $invoice = Invoice::find($id);
+        $invoice->materials()->attach(Material::findOrFail($request->material_id),['qty' => $request->qty]);
+        return redirect()->route('invoice.amount.add',$invoice->id);
     }
     public function add_amount($id){
         $invoice = Invoice::find($id);
@@ -387,6 +415,56 @@ class InvoiceController extends Controller
             Invoice::findorfail($id)->delete();
         }catch(\Exception $e){
             return redirect()->route('invoice.index')->with('error',$e->getMessage());
+        }
+    }
+
+    public function createSalary(){
+        try{
+            return view('invoice.salary')->with([
+               'title' => 'Salary create',
+               'breadcrumbs' => [
+                   'Dashboard' => route('home'),
+                   'Employees' => route('employee.index'),
+               ],
+               'employees' => Employee::all(),
+               'pms' => PaymentMethod::all()
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+    public function updateSalary(Request $request){
+        try{
+            $request->validate([
+                'employee_id' => 'required',
+                'amount' => 'required'
+            ]);
+            $serial =0;
+            if(Invoice::all()->count() > 0){
+                $serial = Invoice::all()->count();
+            }
+            $serial++;
+            Employee::findOrFail($request->employee_id)->Invoice()->create([
+                'serial' => $serial,
+                'amount' => $request->amount,
+                'invoice_no' => (date('Ymd')).'-'.sprintf('%03d', $serial),
+                'is_checkin' => 0,
+                'project_id' => 0,
+                'person_name' => Employee::findOrFail($request->employee_id)->name,
+                'person_phone' => Employee::findOrFail($request->employee_id)->phone,
+                'payment_method_id' => $request->payment_method_id,
+                'created_by' => Auth::user()->name
+            ]);
+            Artisan::call('account:generate');
+            return redirect()->route('account.index')->with([
+                'success' => 'Invoice Created'
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

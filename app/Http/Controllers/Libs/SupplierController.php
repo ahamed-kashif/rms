@@ -107,7 +107,9 @@ class SupplierController extends Controller
                     'supplier' => $supplier,
                     'title' => $title,
                     'breadcrumbs'=> $breadcrumbs,
-                    'accounts' => $accounts
+                    'accounts' => $accounts,
+                    'project' => $supplier,
+                    'upload_url' => route('resource.create.supplier',$supplier->id)
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');

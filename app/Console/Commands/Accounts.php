@@ -45,6 +45,7 @@ class Accounts extends Command
             $balance = Balance::latest()->first()->balance;
         }
         $projects = Project::where('is_investor_project',0)->pluck('id')->toArray();
+        $projects[] = 0;
         //$otherProjects = Project::where('is_investor_project',1)->get();
         $invoices = Invoice::whereIn('project_id',$projects)->notChecked()->get();
         //dd($invoices);

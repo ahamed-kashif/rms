@@ -14,15 +14,15 @@ class MaterialTableSedder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'edit material']);
-        Permission::create(['name' => 'delete material']);
-        Permission::create(['name' => 'create material']);
-        Permission::create(['name' => 'index material']);
-        Permission::create(['name' => 'show material']);
-        Permission::create(['name' => 'update material']);
-        Permission::create(['name' => 'api_get material']);
-        Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo(Permission::all());
+        Spatie\Permission\Models\Permission::create(['name' => 'edit material']);
+        Spatie\Permission\Models\Permission::create(['name' => 'delete material']);
+        Spatie\Permission\Models\Permission::create(['name' => 'create material']);
+        Spatie\Permission\Models\Permission::create(['name' => 'index material']);
+        Spatie\Permission\Models\Permission::create(['name' => 'show material']);
+        Spatie\Permission\Models\Permission::create(['name' => 'update material']);
+        Spatie\Permission\Models\Permission::create(['name' => 'api_get material']);
+        Spatie\Permission\Models\Role::findByName('super-admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo(Spatie\Permission\Models\Permission::all());
         //factory(Material::class, 10)->create();
     }
 }

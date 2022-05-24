@@ -44,7 +44,7 @@
                     {{$invoice->person_name}}
                 </td>
                 <td>{{$invoice->is_office_expense == 0 ? $relations[$invoice->person_type] : 'Other'}}</td>
-                <td>{{$invoice->project->name}}</td>
+                <td>{{$invoice->project_id == 0 ? 'Employee Salary' : $invoice->project->name}}</td>
                 <td>{{$invoice->is_checkin ? 'Checkin' : 'Checkout'}}</td>
                 <td>{{$invoice->amount}}</td>
                 <td>

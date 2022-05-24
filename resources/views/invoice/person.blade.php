@@ -14,6 +14,7 @@
             @csrf
             <button type="button" id="contractor_btn" onclick="show_contractor()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Contractor</button>
             <div class="form-group contractor">
+                <a href="{{route('forward',['id' => $project->id,'tag' => 'contractor'])}}">Add new Contractor</a><br>
                 @if(count($contractors) > 0)
                     <label for="contractor_id" class="control-label">Select a Contractor...</label>
                     <select class="form-control select2" name="contractor_id" id="contractor_id">
@@ -33,6 +34,7 @@
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="supplier_btn" onclick="show_supplier()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Supplier</button>
             <div class="form-group supplier">
+                <a href="{{route('forward',['id' => $project->id,'tag' => 'supplier'])}}">Add new Supplier</a><br>
                 @if(count($suppliers) > 0)
                     <label for="supplier_id" class="control-label">Select an Supplier Project...</label>
                     <select class="form-control select2" name="supplier_id" id="supplier_id">
@@ -51,6 +53,7 @@
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="engineer_btn" onclick="show_engineer()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Engineer</button>
             <div class="form-group engineer">
+                <a href="{{route('forward',['id' => $project->id,'tag' => 'engineer'])}}">Add new Engineer</a><br>
                 @if(count($engineers) > 0)
                     <label for="project_id" class="control-label">Select an Engineer Project...</label>
                     <select class="form-control select2" name="engineer_id" id="engineer_id">
@@ -87,6 +90,7 @@
             {{--            <input type="hidden" name="is_project" value="0" />--}}
             <button type="button" id="investor_btn" onclick="show_investor()" class="btn btn-outline-dark btn-lg btn-block waves-effect waves-light mb-1">Investor</button>
             <div class="form-group investors">
+                <a href="{{route('forward',['id' => $project->id,'tag' => 'investor'])}}">Add new Investor</a><br>
                 @if(count($investors) > 0)
                     <label for="investor_id" class="control-label">Select an Investor Project...</label>
                     <select class="form-control select2" name="investor_id" id="investor_id">

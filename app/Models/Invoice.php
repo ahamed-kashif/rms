@@ -8,6 +8,7 @@ class Invoice extends Model
 {
     public $timestamps = true;
 //    protected $dateFormat = 'd-m-Y';
+    protected $guarded = ['id','created_at','updated_at'];
     protected $casts = [
       'created_at' => 'datetime:d-m-Y',
       'updated_at' => 'datetime:d-m-Y'
@@ -26,5 +27,9 @@ class Invoice extends Model
     }
     public function balance(){
         return $this->belongsTo(Balance::class,'balance_id','id');
+    }
+
+    public function materials(){
+        return $this->belongsToMany(Material::class,'invoices_materials','invoice_id','material_id','id')->withPivot(['qty']);
     }
 }

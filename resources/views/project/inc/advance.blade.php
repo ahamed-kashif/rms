@@ -8,7 +8,7 @@
                 <h6>Attached Files</h6>
             </div>
             <div class="col-5 col-md-5 col-sm-5">
-                <a target="_blank" href="{{route('resource.create',$project->id)}}" class="mb-1 btn btn-sm btn-light waves-effect btn-label waves-light"><i class="mdi mdi-upload label-icon "></i> Upload</a>
+                <a href="{{route('resource.create',$project->id)}}" class="mb-1 btn btn-sm btn-light waves-effect btn-label waves-light"><i class="mdi mdi-upload label-icon "></i> Upload</a>
             </div>
         </div>
         <div class="row">
