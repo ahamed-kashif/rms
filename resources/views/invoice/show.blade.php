@@ -78,7 +78,7 @@
             overflow: visible;
             width: 591px;
             height: 837px;
-            left: 0px;
+            left: 0;
             top: 0px;
         }
         #Billing_From {
