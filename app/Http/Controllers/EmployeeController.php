@@ -66,9 +66,16 @@ class EmployeeController extends Controller
         }
     }
     public function delete($id){
-        return redirect()->back()->with([
-            'error' => 'Service not available'
-        ]);
+        try{
+            Employee::findOrFail($id)->delete();
+            return redirect()->back()->with([
+                'success' => 'Employee Deleted'
+            ]);
+        }catch (\Exception $e){
+            return redirect()->back()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 
     public function show($id){

@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="media">
                         <div class="media-body">
-                            <p class="text-muted fw-medium mb-0">FSREL</p>
+                            <p class="text-muted fw-medium mb-0">{{config('app.name')}}</p>
                             <a href="{{route('account.index')}}">
                                 <h4 class="mb-0 text-primary">ACCOUNTS</h4>
                             </a>

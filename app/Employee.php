@@ -4,12 +4,13 @@ namespace App;
 
 use App\Traits\Invoiceable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Employee extends Model implements HasMedia
 {
-    use Invoiceable, InteractsWithMedia;
+    use Invoiceable, InteractsWithMedia, SoftDeletes;
     protected $guarded = ['id','created_at','update_at'];
 
     public function scopeActive($q){
