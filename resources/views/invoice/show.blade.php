@@ -90,7 +90,7 @@
             overflow: visible;
         }
         #Billing_From_i {
-            left: 0px;
+            left: 0;
             top: 0px;
             position: absolute;
             overflow: visible;
