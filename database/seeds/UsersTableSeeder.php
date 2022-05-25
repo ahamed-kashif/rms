@@ -19,8 +19,8 @@ class UsersTableSeeder extends Seeder
         $user = User::create(
             [
                 'id' 		=> 	1,
-                'name'	=>	'Reaz',
-                'email'		=>	'admin@fsrel.com',
+                'name'	=>	'Dev',
+                'email'		=>	'sahkashif@gmail.com',
                 'phone_number' => '01989091217',
                 'password'	=>	Hash::make('12345678')
             ]
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         $user = User::create(
             [
                 'id' 		=> 	2,
-                'name'	=>	'dev_user',
+                'name'	=>	'Ariful Islam',
                 'email'		=>	'account@fsrel.com',
                 'phone_number' => '01989091218',
                 'password'	=>	Hash::make('12345678')
