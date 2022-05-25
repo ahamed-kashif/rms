@@ -175,9 +175,8 @@ class SupplierController extends Controller
                     'name' => 'required',
                     'phone' => 'required',
                     'email' => 'email|unique:suppliers|nullable',
-                    'address' => 'nullable|max:25',
-                    'nid' => 'nullable|max:25',
-
+                    'address' => 'nullable',
+                    'nid' => 'nullable'
                 ]);
 
 

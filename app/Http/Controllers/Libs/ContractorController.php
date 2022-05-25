@@ -194,8 +194,8 @@ class ContractorController extends Controller
                     return redirect()->back()->with('error','contractor not exists!');
                 }
                 $request->validate([
-                    'name' => 'required|max:20',
-                    'phone_number' => 'required|max:20',
+                    'name' => 'required',
+                    'phone_number' => 'required',
                     'email' => 'email|unique:contractors|nullable',
                     'nid' => 'max:30|nullable'
 

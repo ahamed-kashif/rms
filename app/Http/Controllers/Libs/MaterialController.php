@@ -64,8 +64,8 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'title' => 'required|max:30',
-           'unit' => 'nullable|max:20'
+           'title' => 'required',
+           'unit' => 'nullable'
         ]);
         $material = new Material;
         $material->title = $request->title;

@@ -76,7 +76,7 @@ class InvestorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'phone_number' => 'required|max:20',
+            'phone_number' => 'required',
             'email' => 'email|unique:investors|nullable',
             'nid' => 'max:30|nullable'
 
@@ -197,8 +197,8 @@ class InvestorController extends Controller
                     return redirect()->back()->with('error','investor not exists!');
                 }
                 $request->validate([
-                    'name' => 'required|max:20',
-                    'phone_number' => 'required|max:20',
+                    'name' => 'required',
+                    'phone_number' => 'required',
                     'email' => 'email|unique:investors|nullable',
                     'nid' => 'max:30|nullable'
 
