@@ -4481,7 +4481,7 @@
             @endif
         </div>
         <div id="n_test_user">
-            <span style="margin-left: -45px;">{{ucfirst($invoice->created_by)}}</span>
+            <span style="margin-left: -25px;">{{ucfirst($invoice->created_by)}}</span>
         </div>
     </div>
     <div id="Signature">
