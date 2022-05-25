@@ -306,12 +306,16 @@ class ProjectController extends Controller
         $balance = (float)$project->contractor_budget;
 
         foreach ($contractors as $contractor){
-            $invoices = $contractor->Invoice()->where('is_checkin',0)->get();
+            $invoices = $contractor->Invoice()->get();
             if(count($invoices) == 0){
                 continue;
             }
             foreach($invoices as $invoice) {
-                $balance = $balance - (float)$invoice->amount;
+                if($invoice->is_checkin){
+                    $balance = $balance + (float)$invoice->amount;
+                }else{
+                    $balance = $balance - (float)$invoice->amount;
+                }
             }
         }
 
