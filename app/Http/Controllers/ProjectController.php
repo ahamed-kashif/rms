@@ -288,7 +288,7 @@ class ProjectController extends Controller
 
     public function project_balance($id){
         $project = Project::find($id);
-        $invoices = $project->invoices()->where('is_checkin',0)->get();
+        $invoices = $project->invoices()->get();
         $balance = $project->budget;
         if(count($invoices) == 0){
             return -1;
