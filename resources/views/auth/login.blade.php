@@ -43,5 +43,5 @@
     </div>
 @endsection
 @section('auth-js')
-    hello
+
 @endsection
