@@ -333,7 +333,11 @@ class ProjectController extends Controller
                 continue;
             }
             foreach($invoices as $invoice) {
-                $balance = $balance - $invoice->amount;
+                if($invoice->is_checkin){
+                    $balance = $balance + (float)$invoice->amount;
+                }else{
+                    $balance = $balance - (float)$invoice->amount;
+                }
             }
         }
 
@@ -350,7 +354,11 @@ class ProjectController extends Controller
                 continue;
             }
             foreach($invoices as $invoice) {
-                $balance = $balance - $invoice->amount;
+                if($invoice->is_checkin){
+                    $balance = $balance + (float)$invoice->amount;
+                }else{
+                    $balance = $balance - (float)$invoice->amount;
+                }
             }
         }
 
