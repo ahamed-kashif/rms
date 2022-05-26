@@ -37,8 +37,8 @@
             <tr>
                 <td>{{$loop->index+1}}</td>
                 <td><a href="{{route('project.show',$project->id)}}">{{$project->name}}</a></td>
-                <td>{{date_format(date_create($project->start_date),'d M, yy')}}</td>
-                <td>{{date_format(date_create($project->end_date),'d M, yy')}}</td>
+                <td>{{date_format(date_create($project->start_date),'d M, Y')}}</td>
+                <td>{{date_format(date_create($project->end_date),'d M, Y')}}</td>
                 <td>{{$project->status}}</td>
                 <td>
                     <div class="dropdown align-content-center">
