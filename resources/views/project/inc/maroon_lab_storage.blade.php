@@ -32,7 +32,7 @@
                 </div>
             </td>
             <td>
-                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{$project->name}}'s drive is Empty!</a></h5>
+                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">Drive is Empty!</a></h5>
             </td>
         </tr>
         @endif
