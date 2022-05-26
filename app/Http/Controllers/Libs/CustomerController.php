@@ -174,7 +174,7 @@ class CustomerController extends Controller
                     'customer' => $customer,
                     'title' => $title,
                     'breadcrumbs' => $breadcrumbs,
-
+                    'projects' => Project::isActive()->get()
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
