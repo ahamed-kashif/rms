@@ -41,7 +41,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © SHREL.
+                            <script>document.write(new Date().getFullYear())</script> © {{strtoupper(config('app.name'))}}.
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-right d-none d-sm-block">
