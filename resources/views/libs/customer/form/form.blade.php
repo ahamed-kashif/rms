@@ -25,7 +25,7 @@
 </div>
 <div class="mt-3">
     <label for="title">Flat Title</label>
-    <input type="text" name="title" id="title" class="form-control" value="{{isset($customer) && isset($customer->flats) ? $customer->flats->title : ''}}">
+    <input type="text" name="flat_title" id="title" class="form-control" value="{{isset($customer) && isset($customer->flats) ? $customer->flats->flat_title : ''}}">
 </div>
 <div class="mt-3">
     <label for="flat_amount">Total Amount (BDT)</label>
