@@ -18,7 +18,7 @@
                     <div class="mt-5 text-center">
                         <div>
                             {{--                        <p>Don't have an account ? <a href="auth-register.html" class="font-weight-medium text-primary"> Signup now </a> </p>--}}
-                            <p>© 2022 SHREL. Crafted with <i class="mdi mdi-heart text-danger"></i> by maroon.lab</p>
+                            <p>© 2022 {{config('app.name')}}. Crafted with <i class="mdi mdi-heart text-danger"></i> by maroon.lab</p>
                         </div>
                     </div>
                 </div>
