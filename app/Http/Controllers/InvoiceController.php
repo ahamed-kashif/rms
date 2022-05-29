@@ -88,7 +88,9 @@ class InvoiceController extends Controller
         $latestInvoice = Invoice::latest()->first();
         $serial =0;
         $invoice = new Invoice;
-        $serial = Invoice::orderBy('created_at','desc')->first()->serial;
+        if(Invoice::all()->count() > 0){
+            $serial = Invoice::all()->count();
+        }
         $serial++;
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
         $invoice->serial = $serial;
