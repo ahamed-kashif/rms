@@ -41,7 +41,7 @@
                     <b>Name</b><p><a href="tel:{{$supplier->name}}">{{$supplier->name}}</a></p>
                 </li>
                 <li>
-                    <b>Contact Number</b><p><a href="tel:{{$supplier->phone}}">{{$supplier->phone}}</a></p>
+                    <b>Contact Number</b><p><a href="tel:{{$supplier->phone_number}}">{{$supplier->phone_number}}</a></p>
                 </li>
                 <li>
                     <b>Email Address</b><p><a href="email:{{$supplier->email}}">{{$supplier->email}}</a></p>
