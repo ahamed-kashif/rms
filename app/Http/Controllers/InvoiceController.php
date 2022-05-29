@@ -88,9 +88,7 @@ class InvoiceController extends Controller
         $latestInvoice = Invoice::latest()->first();
         $serial =0;
         $invoice = new Invoice;
-        if(Invoice::all()->count() > 0){
-            $serial = Invoice::all()->count();
-        }
+        $serial = Invoice::orderBy('created_at','desc')->first()->serial;
         $serial++;
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
         $invoice->serial = $serial;
@@ -269,14 +267,14 @@ class InvoiceController extends Controller
             $invoice = $record['invoice'];
             try{
                 if($request->has('contractor_id')){
-                    $contractor = Contractor::findorfail($request->input('contractor_id'));
+                    $contractor = Contractor::findOrFail($request->input('contractor_id'));
                     $invoice->person_name = $contractor->name;
                     $invoice->person_phone = $contractor->phone_number;
                     $contractor->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }elseif($request->has('engineer_id')){
-                    $engineer = Engineer::find($request->input('engineer_id'));
+                    $engineer = Engineer::findOrFail($request->input('engineer_id'));
                     $invoice->person_name = $engineer->name;
                     $invoice->person_phone = $engineer->phone_number;
                     $engineer->Invoice()->save($invoice);
@@ -284,7 +282,7 @@ class InvoiceController extends Controller
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('supplier_id')){
-                    $supplier = Supplier::find($request->input('supplier_id'));
+                    $supplier = Supplier::findOrFail($request->input('supplier_id'));
                     $invoice->person_name = $supplier->name;
                     $invoice->person_phone = $supplier->phone_number;
                     $supplier->Invoice()->save($invoice);
@@ -292,7 +290,7 @@ class InvoiceController extends Controller
                     return redirect()->route('invoice.material.add',$invoice->id);
                 }
                 elseif($request->has('customer_id')){
-                    $customer = Customer::find($request->input('customer_id'));
+                    $customer = Customer::findOrFail($request->input('customer_id'));
                     $invoice->person_name = $customer->full_name;
                     $invoice->person_phone = $customer->phone_number;
                     $customer->Invoice()->save($invoice);
@@ -300,18 +298,10 @@ class InvoiceController extends Controller
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
                 elseif($request->has('investor_id')){
-                    $investor = Investor::find($request->input('investor_id'));
+                    $investor = Investor::findOrFail($request->input('investor_id'));
                     $invoice->person_name = $investor->name;
                     $invoice->person_phone = $investor->phone_number;
                     $investor->Invoice()->save($invoice);
-                    session()->forget('invoice');
-                    return redirect()->route('invoice.amount.add',$invoice->id);
-                }
-                elseif($request->has('engineer_id')){
-                    $engineer = Engineer::find($request->input('engineer_id'));
-                    $invoice->person_name = $engineer->name;
-                    $invoice->person_phone = $engineer->phone_number;
-                    $engineer->Invoice()->save($invoice);
                     session()->forget('invoice');
                     return redirect()->route('invoice.amount.add',$invoice->id);
                 }
