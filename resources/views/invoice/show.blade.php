@@ -4415,10 +4415,10 @@
             <span>Mobile: +88</span><span style="letter-spacing:-0.01px;">0</span><span>1312</span><span style="letter-spacing:-0.14px;">5</span><span style="letter-spacing:-0.19px;">7</span><span>0561  |  +88</span><span style="letter-spacing:-0.02px;">0</span><span>1312</span><span style="letter-spacing:-0.13px;">5</span><span style="letter-spacing:-0.19px;">7</span><span>0565  </span>
         </div>
         <div id="Email_skyheightsltdgmailcom">
-            <span>Email: s</span><span style="letter-spacing:-0.26px;">k</span><span>y</span><span style="letter-spacing:0.01px;">h</span><span>eights</span><span style="letter-spacing:0.01px;">l</span><span style="letter-spacing:-0.19px;">t</span><span>d@gmail</span><span style="letter-spacing:-0.14px;">.</span><span style="letter-spacing:-0.08px;">c</span><span>om</span>
+            <span>Email: <span>skyheightsltd@outlook.com</span>
         </div>
         <div id="Website_www_xyzcom">
-            <span>W</span><span>ebsi</span><span style="letter-spacing:-0.18px;">t</span><span>e: </span><span>www.shrel.com</span>
+            <span>W</span><span>ebsi</span><span style="letter-spacing:-0.18px;">t</span><span>e: </span><span>skyheightsrealestate.com.bd</span>
         </div>
     </div>
     <div id="Invoice_No">
