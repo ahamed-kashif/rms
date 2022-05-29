@@ -104,7 +104,7 @@
         <tr>
             <th>Name</th>
             <th>Phone</th>
-            <th>Email</th>
+            <th>Flat</th>
             <th>Balance</th>
         </tr>
 
@@ -115,7 +115,7 @@
             <tr>
                 <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->full_name}}</a></td>
                 <td>{{$customer->phone_number}}</td>
-                <td>{{$customer->email}}</td>
+                <td>{{$customer->flats->flat_title}}</td>
                 <td>{{$customer->flats->flat_amount-$customer->total()}}</td>
             </tr>
 
