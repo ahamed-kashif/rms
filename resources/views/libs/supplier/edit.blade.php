@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="phone">Contact Number<code>*</code></label>
-                    <input type="text" class="form-control" id="phone" name="phone_number" placeholder="Ex: 01xxxxxxxxxx" required value="{{(isset($supplier)? $supplier->phone : '')}}">
+                    <input type="text" class="form-control" id="phone" name="phone_number" placeholder="Ex: 01xxxxxxxxxx" required value="{{(isset($supplier)? $supplier->phone_number : '')}}">
                 </div>
             </div>
             <div class="col-md-6">
