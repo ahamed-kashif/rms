@@ -19,16 +19,34 @@
                     <td>{{isset($project) ? $project->description : ''}}</td>
                 </tr>
                 <tr>
-                    <th>Project Budget:</th>
-                    <td>{{isset($project) ? $project->budget : ''}}</td>
+                    <th>Total Received:</th>
+                    <td>{{$receivedAmount}}</td>
                 </tr>
                 <tr>
-                    <th>Remaining Budget:</th>
-                    <td>{{isset($project) && $projectBalance > 0 ? $projectBalance : $project->budget}}</td>
+                    <th>Total Expense:</th>
+                    <td>{{$expenseAmount}}</td>
+                </tr>
+                <tr>
+                    <th>Remaining Amount:</th>
+                    <td>{{$receiveAmount}}</td>
                 </tr>
                 </tbody>
             </table>
             <br>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Project Budget:</th>
+                        <td class="font-weight-bold">{{isset($project) ? $project->budget : ''}}</td>
+                    </tr>
+                    <tr>
+                        <th>Remaining Budget:</th>
+                        <td class="font-weight-bold">{{isset($project) && $projectBalance > 0 ? $projectBalance : $project->budget}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <br>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">

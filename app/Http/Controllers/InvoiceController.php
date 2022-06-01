@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\Helpers\InvoiceSession;
+use App\Models\Balance;
 use App\Models\Contractor;
 use App\Models\Customer;
 use App\Models\Engineer;
@@ -404,7 +405,22 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         try{
-            Invoice::findorfail($id)->delete();
+            $user = Auth::user();
+            if($user->can('delete invoice')){
+                $invoice = Invoice::findOrFail($id);
+                $invoice->balance->delete();
+                $currentBalance = Balance::orderBy('created_at','desc')->first();
+                $currentBalance->update([
+                    'balance' => $invoice->is_checkin ? $currentBalance->balance - $invoice->amount : $currentBalance->balance + $invoice->amount
+                ]);
+                $invoice->delete();
+                return redirect()->back()->with([
+                    'success' => 'Invoice deleted!'
+                ]);
+            }
+            return redirect()->back()->with([
+                'error' => 'Unauthorized'
+            ]);
         }catch(\Exception $e){
             return redirect()->route('invoice.index')->with('error',$e->getMessage());
         }

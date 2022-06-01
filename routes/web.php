@@ -73,6 +73,7 @@ Route::delete('/employee/delete/{id}','EmployeeController@delete')->name('employ
 /****Invoice Routes****/
 Route::prefix('invoice')->group(function(){
     Route::get('/','InvoiceController@index')->name('invoice.index');
+    Route::delete('/delete/{id}','InvoiceController@destroy')->name('invoice.delete');
     Route::get('create','InvoiceController@create')->name('invoice.create');
     Route::get('show/{id}','InvoiceController@show')->name('invoice.show');
     Route::post('initial-stage','InvoiceController@initial_stage')->name('invoice.initial');

@@ -52,17 +52,14 @@
                         <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>
                         <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton8">
                             <a class="dropdown-item" href="{{route('invoice.show',$invoice->id)}}"><i class="fas fa-file-invoice font-size-16"></i><span class="text-alias"> Print</span></a>
-                            @can('edit invoice')
-                                <a class="dropdown-item" href="{{route('invoice.show',$invoice->id)}}"><i class="fas fa-file-invoice font-size-16"></i><span class="text-alias"> Edit</span></a>
-                            @endcan
-{{--                            <form action="{{route('contractor.destroy',$contractor->id)}}" method="POST">--}}
-{{--                                @csrf--}}
-{{--                                @method('DELETE')--}}
-{{--                                <button  class="dropdown-item text-danger" type="submit" onclick="return confirm('Are you sure you want to Delete?')">--}}
-{{--                                    <i class="fas fa-trash-alt"></i>--}}
-{{--                                    <span class="text-alias"> Delete</span>--}}
-{{--                                </button>--}}
-{{--                            </form>--}}
+                            <form action="{{route('invoice.delete',$invoice->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button  class="dropdown-item text-danger" type="submit" onclick="return confirm('Are you sure you want to Delete?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <span class="text-alias"> Delete</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </td>

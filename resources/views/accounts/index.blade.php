@@ -52,8 +52,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
-
+    <div class="row px-3">
+        <div class="clo-12">
+            <h6>Balance: </h6> <input type="text" disabled readonly value="{{$balance->balance}}" class="form-control text-white font-size-16 bg-secondary">
+        </div>
     </div>
     <hr>
     <table id="account" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -64,7 +66,7 @@
             <th>Invoice NO.</th>
             <th>Received</th>
             <th>Expense</th>
-            <th>Total(&#2547)</th>
+{{--            <th>Total(&#2547)</th>--}}
             <th>Project</th>
             <th>Person</th>
             <th>Payment Method</th>
@@ -79,7 +81,7 @@
                 <td>{{$invoice->invoice_no}}</td>
                 <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
                 <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
-                <td>{{$invoice->balance->balance}}</td>
+{{--                <td>{{$invoice->balance->balance}}</td>--}}
                 <td>{{$invoice->project_id == 0 ? 'Employee Salary' : $invoice->project->name}}</td>
                 <td>{{$invoice->person_name}}</td>
                 <td>{{$invoice->PaymentMethod->title}}</td>

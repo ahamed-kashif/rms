@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,6 +147,8 @@ class ProjectController extends Controller
         }
         $breadcrumbs[$project->name] = '#';
         $accounts = $this->project_account($project->id);
+        $r = Invoice::where('is_checkin',1)->sum('amount');
+        $e = Invoice::where('is_checkin',0)->sum('amount');
         if($user->can('show project')){
             return view('project.show')->with([
                 'title' => $title,
@@ -156,7 +159,10 @@ class ProjectController extends Controller
                 'projectBalance' => $this->project_balance($project->id),
                 'supplierBalance' => $this->supplier_balance($project->id),
                 'engineerBalance' => $this->engineer_balance($project->id),
-                'upload_url' => route('resource.create',$project->id)
+                'upload_url' => route('resource.create',$project->id),
+                'receivedAmount' => $r,
+                'expenseAmount' => $e,
+                'receiveAmount' => $r - $e,
             ]);
         }
         return redirect()->route('home')->with([
@@ -294,9 +300,7 @@ class ProjectController extends Controller
             return -1;
         }
         foreach($invoices as $invoice) {
-            if($invoice->is_checkin){
-                $balance = $balance + (float)$invoice->amount;
-            }else{
+            if(!$invoice->is_checkin){
                 $balance = $balance - (float)$invoice->amount;
             }
         }
@@ -315,9 +319,7 @@ class ProjectController extends Controller
                 continue;
             }
             foreach($invoices as $invoice) {
-                if($invoice->is_checkin){
-                    $balance = $balance + (float)$invoice->amount;
-                }else{
+                if(!$invoice->is_checkin){
                     $balance = $balance - (float)$invoice->amount;
                 }
             }
@@ -337,9 +339,7 @@ class ProjectController extends Controller
                 continue;
             }
             foreach($invoices as $invoice) {
-                if($invoice->is_checkin){
-                    $balance = $balance + (float)$invoice->amount;
-                }else{
+                if(!$invoice->is_checkin){
                     $balance = $balance - (float)$invoice->amount;
                 }
             }
@@ -358,9 +358,7 @@ class ProjectController extends Controller
                 continue;
             }
             foreach($invoices as $invoice) {
-                if($invoice->is_checkin){
-                    $balance = $balance + (float)$invoice->amount;
-                }else{
+                if(!$invoice->is_checkin){
                     $balance = $balance - (float)$invoice->amount;
                 }
             }

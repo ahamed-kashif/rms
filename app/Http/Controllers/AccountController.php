@@ -32,7 +32,7 @@ class AccountController extends Controller
         $accounts = [];
         //dd($invoices->first()->balance);
 
-        Artisan::call('account:generate');
+//        Artisan::call('account:generate');
 
 
         $contractors = Contractor::all();
@@ -47,7 +47,7 @@ class AccountController extends Controller
             $invoices = Invoice::whereIn('project_id',$projects)->where('is_checked',1)->orderBy('created_at','desc')->get();
         }
 //        dd($invoices);
-        $balances = Balance::with('invoices')->get();
+//        $balances = Balance::with('invoices')->get();
         $title = 'Accounts';
         $breadcrumbs['accounts'] = '#';
         return view('accounts.index')->with([
@@ -57,10 +57,11 @@ class AccountController extends Controller
             'expense' => 0,
             'title' => $title,
             'breadcrumbs' => $breadcrumbs,
-            'balances' => $balances,
+//            'balances' => $balances,
             'contractors' => $contractors,
             'payment_methods' => $payment_methods,
-            'projects' => $projects
+            'projects' => $projects,
+            'balance' => Balance::orderBy('created_at','desc')->first()
         ]);
     }
     /**
