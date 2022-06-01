@@ -79,8 +79,8 @@
             <tr>
                 <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
                 <td>{{$invoice->invoice_no}}</td>
-                <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
-                <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
+                <td>{{$invoice->is_checkin ? number_format($invoice->amount) : '-'}}</td>
+                <td>{{$invoice->is_checkin ?  '-' : number_format($invoice->amount)}}</td>
 {{--                <td>{{$invoice->balance->balance}}</td>--}}
                 <td>{{$invoice->project_id == 0 ? 'Employee Salary' : $invoice->project->name}}</td>
                 <td>{{$invoice->person_name}}</td>
