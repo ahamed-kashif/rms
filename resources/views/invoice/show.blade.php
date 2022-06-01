@@ -4595,7 +4595,7 @@
             @endif
         </div>
         <div id="AmountP">
-            <span>{{$invoice->amount}}</span>
+            <span>{{number_format($invoice->amount)}}</span>
         </div>
         <svg class="Rectangle_2">
             <rect id="Rectangle_2" rx="0" ry="0" x="0" y="0" width="502.339" height="26.696">
@@ -4795,7 +4795,7 @@
             <span>Total:</span>
         </div>
         <div id="n_332342343">
-            <span style="color: #0f0f0f">{{$invoice->amount}} BDT</span>
+            <span style="color: #0f0f0f">{{number_format($invoice->amount)}} BDT</span>
         </div>
     </div>
     <svg class="Footer">
