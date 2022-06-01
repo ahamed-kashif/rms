@@ -46,7 +46,7 @@
                 <td>{{$invoice->is_office_expense == 0 ? $relations[$invoice->person_type] : 'Other'}}</td>
                 <td>{{$invoice->project_id == 0 ? 'Employee Salary' : $invoice->project->name}}</td>
                 <td>{{$invoice->is_checkin ? 'Checkin' : 'Checkout'}}</td>
-                <td>{{$invoice->amount}}</td>
+                <td>{{number_format($invoice->amount)}}</td>
                 <td>
                     <div class="dropdown align-content-center">
                         <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>
