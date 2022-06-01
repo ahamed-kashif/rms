@@ -408,11 +408,11 @@ class InvoiceController extends Controller
             $user = Auth::user();
             if($user->can('delete invoice')){
                 $invoice = Invoice::findOrFail($id);
-                $invoice->balance->delete();
                 $currentBalance = Balance::orderBy('created_at','desc')->first();
                 $currentBalance->update([
                     'balance' => $invoice->is_checkin ? $currentBalance->balance - $invoice->amount : $currentBalance->balance + $invoice->amount
                 ]);
+                $invoice->balance->delete();
                 $invoice->delete();
                 return redirect()->back()->with([
                     'success' => 'Invoice deleted!'
