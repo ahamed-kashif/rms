@@ -116,7 +116,7 @@
                 <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->full_name}}</a></td>
                 <td>{{$customer->phone_number}}</td>
                 <td>{{$customer->flats->flat_title}}</td>
-                <td>{{$customer->flats->flat_amount-$customer->total()}}</td>
+                <td>{{number_format($customer->flats->flat_amount-$customer->total())}}</td>
             </tr>
 
         @endforeach

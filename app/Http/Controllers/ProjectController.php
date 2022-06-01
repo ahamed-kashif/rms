@@ -162,7 +162,7 @@ class ProjectController extends Controller
                 'upload_url' => route('resource.create',$project->id),
                 'receivedAmount' => $r,
                 'expenseAmount' => $e,
-                'receiveAmount' => $r - $e,
+                'remainingAmount' => $r - $e,
             ]);
         }
         return redirect()->route('home')->with([

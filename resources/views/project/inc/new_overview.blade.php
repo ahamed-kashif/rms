@@ -20,15 +20,15 @@
                 </tr>
                 <tr>
                     <th>Total Received:</th>
-                    <td>{{$receivedAmount}}</td>
+                    <td>{{number_format($receivedAmount)}}</td>
                 </tr>
                 <tr>
                     <th>Total Expense:</th>
-                    <td>{{$expenseAmount}}</td>
+                    <td>{{number_format($expenseAmount)}}</td>
                 </tr>
                 <tr>
                     <th>Remaining Amount:</th>
-                    <td>{{$receiveAmount}}</td>
+                    <td>{{number_format($remainingAmount)}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -38,11 +38,11 @@
                     <tbody>
                     <tr>
                         <th>Project Budget:</th>
-                        <td class="font-weight-bold">{{isset($project) ? $project->budget : ''}}</td>
+                        <td class="font-weight-bold">{{isset($project) ? number_format($project->budget) : ''}}</td>
                     </tr>
                     <tr>
                         <th>Remaining Budget:</th>
-                        <td class="font-weight-bold">{{isset($project) && $projectBalance > 0 ? $projectBalance : $project->budget}}</td>
+                        <td class="font-weight-bold">{{isset($project) && $projectBalance > 0 ? number_format($projectBalance) : number_format($project->budget)}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -61,17 +61,17 @@
                     <tr>
                         <th>Contractors Budget</th>
                         <td>{{isset($project) ? $project->contractor_budget : ''}}</td>
-                        <td>{{isset($contractorBalance) && $contractorBalance > 0 ? $contractorBalance : $project->contractor_budget}}</td>
+                        <td>{{isset($contractorBalance) && $contractorBalance > 0 ? number_format($contractorBalance) :number_format( $project->contractor_budget)}}</td>
                     </tr>
                     <tr>
                         <th>Suppliers Budget:</th>
                         <td>{{isset($project) ? $project->supplier_budget : ''}}</td>
-                        <td>{{isset($supplierBalance) && $supplierBalance > 0 ? $supplierBalance : $project->supplier_budget}}</td>
+                        <td>{{isset($supplierBalance) && $supplierBalance > 0 ? number_format($supplierBalance) : number_format($project->supplier_budget)}}</td>
                     </tr>
                     <tr>
                         <th>Engineers Budget:</th>
                         <td>{{isset($project) ? $project->engineer_budget : ''}}</td>
-                        <td>{{isset($engineerBalance) && $engineerBalance > 0 ? $engineerBalance : $project->engineer_budget}}</td>
+                        <td>{{isset($engineerBalance) && $engineerBalance > 0 ? number_format($engineerBalance) : number_format($project->engineer_budget)}}</td>
                     </tr>
                     </tbody>
                 </table>

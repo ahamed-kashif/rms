@@ -54,7 +54,7 @@
     </div>
     <div class="row px-3">
         <div class="clo-12">
-            <h6>Balance: </h6> <input type="text" disabled readonly value="{{$balance->balance}}" class="form-control text-white font-size-16 bg-secondary">
+            <h6>Balance: </h6> <input type="text" disabled readonly value="{{number_format($balance->balance)}}" class="form-control text-white font-size-16 bg-secondary">
         </div>
     </div>
     <hr>

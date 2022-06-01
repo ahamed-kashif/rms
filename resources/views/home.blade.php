@@ -34,7 +34,7 @@
                     <div class="media">
                         <div class="media-body">
                             <p class="text-muted fw-medium mb-0">BALANCE</p>
-                            <h3 class="mb-0 text-primary"><small>৳</small> {{$balance != null ? $balance : 0}}</h3>
+                            <h3 class="mb-0 text-primary"><small>৳</small> {{$balance != null ? number_format($balance) : 0}}</h3>
                         </div>
                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
                             <span class="avatar-title">

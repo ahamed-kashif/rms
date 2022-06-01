@@ -57,7 +57,7 @@
                         </tr>
                         <tr>
                             <th>Total Amount</th>
-                            <td>{{$customer->flats->flat_amount}}</td>
+                            <td>{{number_format($customer->flats->flat_amount)}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,9 +88,9 @@
                 <tr>
                     <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
                     <td><a href="{{route('invoice.show',$invoice->id)}}">{{$invoice->invoice_no}}</a></td>
-                    <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
-                    <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
-                    <td>{{$accounts['balance'][$invoice->id]}}</td>
+                    <td>{{$invoice->is_checkin ? number_format($invoice->amount) : '-'}}</td>
+                    <td>{{$invoice->is_checkin ?  '-' : number_format($invoice->amount)}}</td>
+                    <td>{{number_format($accounts['balance'][$invoice->id])}}</td>
                     <td>{{$invoice->is_office_expense == 1 ? $invoice->person_name : ($invoice->person->name == null ? $invoice->person->full_name : $invoice->person->name)}}</td>
                     <td>{{$invoice->PaymentMethod->title}}</td>
                     <td>{{$invoice->description}}</td>

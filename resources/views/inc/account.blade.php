@@ -22,8 +22,8 @@
             <tr>
                 <td>{{date_format(date_create($invoice->created_at),'d-m-Y')}}</td>
                 <td><a href="{{route('invoice.show',$invoice->id)}}">{{$invoice->invoice_no}}</a></td>
-                <td>{{$invoice->is_checkin ? $invoice->amount : '-'}}</td>
-                <td>{{$invoice->is_checkin ?  '-' : $invoice->amount}}</td>
+                <td>{{$invoice->is_checkin ? number_format($invoice->amount) : '-'}}</td>
+                <td>{{$invoice->is_checkin ?  '-' : number_format($invoice->amount)}}</td>
 {{--                <td>{{$accounts['balance'][$invoice->id]}}</td>--}}
                 <td>{{$invoice->person_name}}</td>
                 <td>{{$invoice->PaymentMethod->title}}</td>
