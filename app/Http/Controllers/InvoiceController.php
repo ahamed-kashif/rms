@@ -87,11 +87,8 @@ class InvoiceController extends Controller
             return redirect()->route('home')->with(['error', 'Unauthorized Access!']);
         }
         $latestInvoice = Invoice::latest()->first();
-        $serial =0;
         $invoice = new Invoice;
-        if(Invoice::all()->count() > 0){
-            $serial = Invoice::all()->count();
-        }
+        $serial = Invoice::all()->count() > 0 ? $latestInvoice->serial : 0;
         $serial++;
         $invoice->invoice_no = (date('Ymd')).'-'.sprintf('%03d', $serial);
         $invoice->serial = $serial;
