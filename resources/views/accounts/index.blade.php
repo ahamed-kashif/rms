@@ -66,7 +66,6 @@
             <th>Invoice NO.</th>
             <th>Received</th>
             <th>Expense</th>
-{{--            <th>Total(&#2547)</th>--}}
             <th>Project</th>
             <th>Person</th>
             <th>Payment Method</th>
@@ -81,7 +80,6 @@
                 <td>{{$invoice->invoice_no}}</td>
                 <td>{{$invoice->is_checkin ? number_format($invoice->amount) : '-'}}</td>
                 <td>{{$invoice->is_checkin ?  '-' : number_format($invoice->amount)}}</td>
-{{--                <td>{{$invoice->balance->balance}}</td>--}}
                 <td>{{$invoice->project_id == 0 ? 'Employee Salary' : $invoice->project->name}}</td>
                 <td>{{$invoice->person_name}}</td>
                 <td>{{$invoice->PaymentMethod->title}}</td>
@@ -105,7 +103,7 @@
                 "buttons":["copy","excel","pdf","colvis"],
                 "columnDefs": [
                     // { "visible": false, "targets": groupColumn,},
-                    {'orderable' : false, "targets": [0,2,3,4,5,6,7,8]}
+                    {'orderable' : false, "targets": [0,1,2,3,4,5,6,7]}
                 ],
                 "fixedHeader": {
                     header: true,
@@ -128,7 +126,7 @@
                 //     } );
                 // }
                 initComplete: function () {
-                        let person = this.api().column(6)
+                        let person = this.api().column(5)
                         let personSelect = $('#person')
                         .on( 'change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
@@ -141,7 +139,7 @@
                         person.data().unique().sort().each( function ( d, j ) {
                                 personSelect.append( '<option value="'+d+'">'+d+'</option>' )
                             } );
-                        let paymentMethod = this.api().column(7)
+                        let paymentMethod = this.api().column(6)
                         let paymentMethodSelect = $('#payment_method')
                         .on( 'change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
@@ -155,7 +153,7 @@
                                 paymentMethodSelect.append( '<option value="'+d+'">'+d+'</option>' )
                             } );
 
-                        let project = this.api().column(5)
+                        let project = this.api().column(4)
                         let projectSelect = $('#project')
                         .on( 'change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
