@@ -446,10 +446,8 @@ class InvoiceController extends Controller
                 'employee_id' => 'required',
                 'amount' => 'required'
             ]);
-            $serial =0;
-            if(Invoice::all()->count() > 0){
-                $serial = Invoice::all()->count();
-            }
+            $latestInvoice = Invoice::latest()->first();
+            $serial = Invoice::all()->count() > 0 ? $latestInvoice->serial : 0;
             $serial++;
             Employee::findOrFail($request->employee_id)->Invoice()->create([
                 'serial' => $serial,
