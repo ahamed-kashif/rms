@@ -147,8 +147,8 @@ class ProjectController extends Controller
         }
         $breadcrumbs[$project->name] = '#';
         $accounts = $this->project_account($project->id);
-        $r = Invoice::where('is_checkin',1)->sum('amount');
-        $e = Invoice::where('is_checkin',0)->sum('amount');
+        $r = Invoice::where('project_id',$project->id)->where('is_checkin',1)->sum('amount');
+        $e = Invoice::where('project_id',$project->id)->where('is_checkin',0)->sum('amount');
         if($user->can('show project')){
             return view('project.show')->with([
                 'title' => $title,
