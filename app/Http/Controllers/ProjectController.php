@@ -248,11 +248,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        return redirect()->route('project.show',$id)->with('error','Not Possible');
         try{
-            $project = Project::findorfail($id);
-            $project->contractors()->detach();
-            $project->suppliers()->detach();
+            Project::findOrFail($id)->delete();
+            return redirect()->back()->with([
+                'success' => 'Project deleted.'
+            ]);
         }catch (\Exception $e){
             return redirect()->route('project.index',$e->getMessage());
         }

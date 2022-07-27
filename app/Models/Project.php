@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Project extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, softDeletes;
     protected $dates = ['start_date','end_date'];
 
     public function getMediaByName($file_name){
