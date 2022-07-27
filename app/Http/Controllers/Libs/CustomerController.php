@@ -228,22 +228,11 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         if(auth()->user()->can('delete customer')){
-            if(is_numeric($id)){
-                $customer = Customer::find($id);
-                if($customer == null){
-                    return redirect()->back()->with('error','customer not exists!');
-                }
-                try{
-                    if($customer->Invoice()->count() > 0){
-                        return redirect()->route('customer.show', $customer->id)->with('error','There are'.$customer->invoices()->count().' invoices generated against this customer!');
-                    }
-                    $customer->delete();
-                    return redirect()->route('customer.index')->with('success','successfully deleted!');
-                }catch (\Exception $e){
-                    return redirect()->back()->withErrors($e->getmessage());
-                }
-            }else{
-                return redirect()->back()->with('error','wrong url!');
+            try{
+                Customer::findOrFail($id)->delete();
+                return redirect()->route('customer.index')->with('success','successfully deleted!');
+            }catch (\Exception $e){
+                return redirect()->back()->withErrors($e->getmessage());
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');

@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Traits\IsContactable;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Invoiceable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Customer extends Model implements HasMedia
 {
-    use Invoiceable,InteractsWithMedia;
+    use Invoiceable,InteractsWithMedia, softDeletes;
 //    protected $fillable = [ 'name', 'email', 'nid', 'phone','project_id'];
 
     protected $guarded = ['id','created_at','update_at'];
