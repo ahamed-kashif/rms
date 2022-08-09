@@ -51,7 +51,6 @@
                                 <button  class="dropdown-item text-danger" type="submit" onclick="return confirm('Are you sure you want to Delete?')">
                                     <i class="fas fa-trash-alt"></i>
                                     <span class="text-alias"> Delete</span>
-
                                 </button>
                             </form>
                         </div>
