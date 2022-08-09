@@ -39,7 +39,7 @@
                 <td><a href="{{route('project.show',$project->id)}}">{{$project->name}}</a></td>
                 <td>{{date_format(date_create($project->start_date),'d M, Y')}}</td>
                 <td>{{date_format(date_create($project->end_date),'d M, Y')}}</td>
-                <td>{{$project->status}}</td>
+                <td>{{$project->is_active ? 'Active' : 'Inactive'}}</td>
                 <td>
                     <div class="dropdown align-content-center">
                         <button class="btn" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench font-size-15 text-primary"></i></button>
