@@ -27,7 +27,7 @@
     <div class="form-group row mb-4">
         <label class="col-form-label col-lg-2">Project Date<code>*</code></label>
         <div class="col-lg-10">
-            <div class="input-daterange input-group" data-provide="datepicker" data-date-format="dd M, Y" data-date-autoclose="true">
+            <div class="input-daterange input-group" data-provide="datepicker" data-date-format="dd M, yyyy" data-date-autoclose="true">
                 <input type="text" class="form-control" placeholder="Start Date" name="start_date" value="{{isset($project) ? date_format(date_create($project->start_date),'d M, Y') : ''}}" autocomplete="off"/>
                 <input type="text" class="form-control" placeholder="End Date" name="end_date" value="{{isset($project) ? date_format(date_create($project->end_date),'d M, Y') : ''}}" autocomplete="off"/>
             </div>
