@@ -27,6 +27,6 @@ class UsersTableSeeder extends Seeder
         $user = User::findOrFail(1)->assignRole('super-admin');
         $user = User::findOrFail(2)->assignRole('admin');
         $user = User::findOrFail(3)->assignRole('manager');
-        //Add root user
+
     }
 }
