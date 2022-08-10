@@ -15,6 +15,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $role = Spatie\Permission\Models\Role::create(['name' => 'super-admin']);
+        $role->givePermissionTo(Spatie\Permission\Models\Permission::all());
+
+        $role = Spatie\Permission\Models\Role::create(['name' => 'admin']);
+        $role->givePermissionTo(Spatie\Permission\Models\Permission::all());
+
+        $role = Spatie\Permission\Models\Role::create(['name' => 'manager']);
+        $role->givePermissionTo(Spatie\Permission\Models\Permission::whereNotIn('name',['delete project','delete invoice','delete customer','create salary','delete employee','create employee','index employee','show employee','update employee','api_get employee'])->get());
         //Add root user
         $user = User::create(
             [
@@ -24,7 +32,7 @@ class UsersTableSeeder extends Seeder
                 'phone_number' => '01989091217',
                 'password'	=>	Hash::make('12345678')
             ]
-        );
+        )->assignRole('super-admin');
         //Add root user
         $user = User::create(
             [
@@ -34,17 +42,16 @@ class UsersTableSeeder extends Seeder
                 'phone_number' => '01989091218',
                 'password'	=>	Hash::make('12345678')
             ]
-        );
-        $role = Spatie\Permission\Models\Role::create(['name' => 'super-admin']);
-        $role->givePermissionTo(Spatie\Permission\Models\Permission::all());
+        )->assignRole('admin');
 
-        $role = Spatie\Permission\Models\Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Spatie\Permission\Models\Permission::all());
-
-        $root_user = User::find(1);
-        $root_user->assignRole('super-admin');
-
-        $admin_user = User::find(2);
-        $admin_user->assignRole('admin');
+        $user = User::create(
+            [
+                'id' 		=> 	3,
+                'name'	=>	'Ariful Islam',
+                'email'		=>	'account@fsrel.com',
+                'phone_number' => '019890912188',
+                'password'	=>	Hash::make('12345678')
+            ]
+        )->assignRole('manager');
     }
 }

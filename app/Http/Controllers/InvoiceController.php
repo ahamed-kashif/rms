@@ -401,6 +401,12 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
+
+        if(!Auth::user()->can('delete invoice')){
+            return redirect()->back()->with([
+                'error' => 'Unauthorized'
+            ]);
+        }
         try{
             $user = Auth::user();
             if($user->can('delete invoice')){
@@ -424,6 +430,11 @@ class InvoiceController extends Controller
     }
 
     public function createSalary(){
+        if(!Auth::user()->can('create salary')){
+            return redirect()->back()->with([
+                'error' => 'Unauthorized'
+            ]);
+        }
         try{
             return view('invoice.salary')->with([
                'title' => 'Salary create',
@@ -441,6 +452,11 @@ class InvoiceController extends Controller
         }
     }
     public function updateSalary(Request $request){
+        if(!Auth::user()->can('update salary')){
+            return redirect()->back()->with([
+                'error' => 'Unauthorized'
+            ]);
+        }
         try{
             $request->validate([
                 'employee_id' => 'required',

@@ -29,6 +29,6 @@ class CreateInvoicesMetarialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices_metarials');
+        Schema::dropIfExists('invoices_materials');
     }
 }
