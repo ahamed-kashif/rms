@@ -409,7 +409,9 @@ class InvoiceController extends Controller
                 $currentBalance->update([
                     'balance' => $invoice->is_checkin ? $currentBalance->balance - $invoice->amount : $currentBalance->balance + $invoice->amount
                 ]);
-                $invoice->balance->delete();
+                if($invoice->has('balance')){
+                    $invoice->balance->delete();
+                }
                 $invoice->delete();
                 return redirect()->back()->with([
                     'success' => 'Invoice deleted!'
