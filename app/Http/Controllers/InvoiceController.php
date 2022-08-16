@@ -405,7 +405,7 @@ class InvoiceController extends Controller
             $user = Auth::user();
             if($user->can('delete invoice')){
                 $invoice = Invoice::findOrFail($id);
-                if($invoice->balance->count() > 0){
+                if($invoice->balance()->count() > 0){
                     $currentBalance = Balance::orderBy('created_at','desc')->first();
                     $currentBalance->update([
                         'balance' => $invoice->is_checkin ? $currentBalance->balance - $invoice->amount : $currentBalance->balance + $invoice->amount
