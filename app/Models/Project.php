@@ -53,5 +53,14 @@ class Project extends Model implements HasMedia
     public function scopeisActive($q){
         return $q->where('is_active',1);
     }
+
+    public function scopeInvestorProjects($q)
+    {
+        return $q->where('is_investor_project',1);
+    }
+    public function scopeGeneralProjects($q)
+    {
+        return $q->where('is_investor_project',0);
+    }
 }
 
