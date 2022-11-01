@@ -41,10 +41,10 @@ class AccountController extends Controller
         $payment_methods = PaymentMethod::all();
 
         if($request->has('start') && $request->has('end')){
-            $invoices = Invoice::where('is_checked',1)->whereBetween('created_at',[$request->input('start'),$request->input('end')])->whereIn('project_id',$projects)->orderBy('created_at','desc')->get();
+            $invoices = Invoice::whereBetween('created_at',[$request->input('start'),$request->input('end')])->whereIn('project_id',$projects)->orderBy('created_at','desc')->get();
             //dd($invoices->first()->created_at);
         }else{
-            $invoices = Invoice::whereIn('project_id',$projects)->where('is_checked',1)->orderBy('created_at','desc')->get();
+            $invoices = Invoice::whereIn('project_id',$projects)->orderBy('created_at','desc')->get();
         }
 //        dd($invoices);
 //        $balances = Balance::with('invoices')->get();
