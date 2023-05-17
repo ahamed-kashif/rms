@@ -15,9 +15,8 @@
             z-index: 99;
             top: 42.937px;
             position: absolute;
-            overflow: visible;
-            width: 74px;
-            white-space: nowrap;
+            overflow: hidden;
+            max-width: 325px;
             line-height: 14.752079963684082px;
             margin-top: -1.376039981842041px;
             text-align: left;
@@ -26,6 +25,7 @@
             font-weight: normal;
             font-size: 12px;
             color: #000000;
+            height:auto;
         }
         #AmountP {
             left: 363.314px;
@@ -403,6 +403,7 @@
             letter-spacing: -0.01px;
         }
         #Payment_Method {
+            margin-top: 4px;
             position: absolute;
             width: 109px;
             height: 33px;
@@ -444,6 +445,8 @@
             color: rgba(26,24,24,1);
         }
         #Taka_Received_by {
+            margin-top: 6px;
+            margin-bottom: 6px;
             position: absolute;
             width: 147.003px;
             height: 14px;
@@ -1417,6 +1420,7 @@
             transform: matrix(1,0,0,1,0,0);
         }
         #Total {
+            margin-top: 6px;
             position: absolute;
             width: 203.103px;
             height: 27.625px;
@@ -4581,17 +4585,17 @@
             </rect>
         </svg>
         <svg class="Rectangle_1">
-            <rect id="Rectangle_1" rx="0" ry="0" x="0" y="0" width="502.339" height="84.916">
+            <rect id="Rectangle_1" rx="0" ry="0" x="0" y="0" width="502.339" height="100">
             </rect>
         </svg>
-        <div id="Description_p">
+        <div id="Description_p" class="position">
             @if ($invoice->has('materials'))
                 @foreach($invoice->materials as $m)
-                    <span>{{$m->title}} X {{$m->pivot->qty}}{{$m->unit}}</span>
+                    {{$m->title}} X {{$m->pivot->qty}}{{$m->unit}}
                 @endforeach
-                <br><span>{{$invoice->description}}</span>
+                <br>{{$invoice->description}}
             @else
-                <span>{{$invoice->description}}</span>
+                {{$invoice->description}}
             @endif
         </div>
         <div id="AmountP">
@@ -4605,7 +4609,7 @@
             <span>Desc</span><span style="letter-spacing:-0.03px;">r</span><span>iption</span>
         </div>
         <svg class="Rectangle_20">
-            <rect id="Rectangle_20" rx="0" ry="0" x="0" y="0" width="1.019" height="84.742">
+            <rect id="Rectangle_20" rx="0" ry="0" x="0" y="0" width="1.019" height="100">
             </rect>
         </svg>
         <div id="Amount">
@@ -4810,6 +4814,13 @@
         <a href="{{route('invoice.index')}}" class="btn btn-primary w-md waves-effect waves-light">Invoices</a>
     </div>
 </div>
+
+<style>
+    .position{
+        word-wrap: break-word;
+    }
+
+</style>
 <script src="{{asset('libs/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </body>
